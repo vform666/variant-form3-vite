@@ -40,18 +40,21 @@
 
     <template v-if="!!this.designer">
       <div class="field-action" v-if="designer.selectedId === field.id">
-        <i class="el-icon-back" :title="i18nt('designer.hint.selectParentWidget')" @click.stop="selectParentWidget(field)"></i>
-        <i class="el-icon-top" v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveUpWidget')"
-           @click.stop="moveUpWidget(field)"></i>
-        <i class="el-icon-bottom" v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveDownWidget')"
-           @click.stop="moveDownWidget(field)"></i>
-        <i class="el-icon-delete" :title="i18nt('designer.hint.remove')" @click.stop="removeFieldWidget"></i>
+        <i :title="i18nt('designer.hint.selectParentWidget')"
+           @click.stop="selectParentWidget(field)"><svg-icon icon-class="el-back" /></i>
+        <i v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveUpWidget')"
+           @click.stop="moveUpWidget(field)"><svg-icon icon-class="el-move-up" /></i>
+        <i v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveDownWidget')"
+           @click.stop="moveDownWidget(field)"><svg-icon icon-class="el-move-down" /></i>
+        <i :title="i18nt('designer.hint.remove')" @click.stop="removeFieldWidget">
+          <svg-icon icon-class="el-delete" />
+        </i>
       </div>
 
       <div class="drag-handler background-opacity" v-if="designer.selectedId === field.id">
-        <i class="el-icon-rank" :title="i18nt('designer.hint.dragHandler')"></i>
+        <i :title="i18nt('designer.hint.dragHandler')"><svg-icon icon-class="el-drag-move" /></i>
         <i>{{i18n2t(`designer.widgetLabel.${field.type}`, `extension.widgetLabel.${field.type}`)}}</i>
-        <i v-if="field.options.hidden === true" class="iconfont icon-hide"></i>
+        <i v-if="field.options.hidden === true"><svg-icon icon-class="el-hide" /></i>
       </div>
     </template>
   </div>
@@ -235,7 +238,7 @@
       i {
         font-size: 14px;
         color: #fff;
-        margin: 0 5px;
+        margin: 0 3px;
         cursor: pointer;
       }
     }
@@ -262,6 +265,13 @@
         //opacity: 1;
         background: $--color-primary;
       }
+    }
+  }
+
+  .field-action, .drag-handler {
+    :deep(.svg-icon) {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 

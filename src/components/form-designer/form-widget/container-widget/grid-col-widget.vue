@@ -22,14 +22,18 @@
     </draggable>
 
     <div class="grid-col-action" v-if="designer.selectedId === widget.id && widget.type === 'grid-col'">
-      <i class="el-icon-back" :title="i18nt('designer.hint.selectParentWidget')"
-         @click.stop="selectParentWidget(widget)"></i>
-      <i class="el-icon-top" v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveUpWidget')"
-         @click.stop="moveUpWidget()"></i>
-      <i class="el-icon-bottom" v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveDownWidget')"
-         @click.stop="moveDownWidget()"></i>
-      <i class="el-icon-copy-document" :title="i18nt('designer.hint.cloneWidget')" @click.stop="cloneGridCol(widget)"></i>
-      <i class="el-icon-delete" :title="i18nt('designer.hint.remove')" @click.stop="removeWidget"></i>
+      <i :title="i18nt('designer.hint.selectParentWidget')"
+         @click.stop="selectParentWidget(widget)"><svg-icon icon-class="el-back" /></i>
+      <i v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveUpWidget')"
+         @click.stop="moveUpWidget()"><svg-icon icon-class="el-move-up" /></i>
+      <i v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveDownWidget')"
+         @click.stop="moveDownWidget()"><svg-icon icon-class="el-move-down" /></i>
+      <i :title="i18nt('designer.hint.cloneWidget')" @click.stop="cloneGridCol(widget)">
+        <svg-icon icon-class="el-clone" />
+      </i>
+      <i :title="i18nt('designer.hint.remove')" @click.stop="removeWidget">
+        <svg-icon icon-class="el-delete" />
+      </i>
     </div>
 
     <div class="grid-col-handler" v-if="designer.selectedId === widget.id && widget.type === 'grid-col'">
@@ -308,4 +312,12 @@
       }
     }
   }
+
+  .grid-col-action, .grid-col-handler {
+    :deep(.svg-icon) {
+      margin-left: 0.1em;
+      margin-right: 0.1em;
+    }
+  }
+
 </style>

@@ -3,7 +3,7 @@
     <template #label>
       <span>{{i18nt('designer.setting.uniqueName')}}
         <el-tooltip effect="light" :content="i18nt('designer.setting.editNameHelp')">
-          <i class="el-icon-info"></i></el-tooltip>
+          <svg-icon icon-class="el-info" /></el-tooltip>
       </span>
     </template>
     <template v-if="!!selectedWidget.category || noFieldList">

@@ -16,23 +16,25 @@
       <i :title="i18nt('designer.hint.selectParentWidget')" @click.stop="selectParentWidget(widget)">
         <svg-icon icon-class="el-back" />
       </i>
-      <i class="el-icon-top" v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveUpWidget')"
-         @click.stop="moveUpWidget()"></i>
-      <i class="el-icon-bottom" v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveDownWidget')"
-         @click.stop="moveDownWidget()"></i>
-      <i v-if="widget.type === 'table'" class="iconfont icon-insertrow" :title="i18nt('designer.hint.insertRow')"
-         @click.stop="appendTableRow(widget)"></i>
-      <i v-if="widget.type === 'table'" class="iconfont icon-insertcolumn" :title="i18nt('designer.hint.insertColumn')"
-         @click.stop="appendTableCol(widget)"></i>
-      <i class="el-icon-copy-document" v-if="(widget.type === 'grid') || (widget.type === 'table')"
-         :title="i18nt('designer.hint.cloneWidget')" @click.stop="cloneContainer(widget)"></i>
-      <i class="el-icon-delete" :title="i18nt('designer.hint.remove')" @click.stop="removeWidget"></i>
+      <i v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveUpWidget')"
+         @click.stop="moveUpWidget()"><svg-icon icon-class="el-move-up" /></i>
+      <i v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveDownWidget')"
+         @click.stop="moveDownWidget()"><svg-icon icon-class="el-move-down" /></i>
+      <i v-if="widget.type === 'table'" :title="i18nt('designer.hint.insertRow')"
+         @click.stop="appendTableRow(widget)"><svg-icon icon-class="el-insert-row" /></i>
+      <i v-if="widget.type === 'table'" :title="i18nt('designer.hint.insertColumn')"
+         @click.stop="appendTableCol(widget)"><svg-icon icon-class="el-insert-column" /></i>
+      <i v-if="(widget.type === 'grid') || (widget.type === 'table')" :title="i18nt('designer.hint.cloneWidget')"
+         @click.stop="cloneContainer(widget)"><svg-icon icon-class="el-clone" /></i>
+      <i :title="i18nt('designer.hint.remove')" @click.stop="removeWidget">
+        <svg-icon icon-class="el-delete" />
+      </i>
     </div>
 
     <div class="drag-handler" v-if="designer.selectedId === widget.id && !widget.internal">
-      <i class="el-icon-rank" :title="i18nt('designer.hint.dragHandler')"></i>
+      <i :title="i18nt('designer.hint.dragHandler')"><svg-icon icon-class="el-drag-move" /></i>
       <i>{{i18n2t(`designer.widgetLabel.${widget.type}`, `extension.widgetLabel.${widget.type}`)}}</i>
-      <i v-if="widget.options.hidden === true" class="iconfont icon-hide"></i>
+      <i v-if="widget.options.hidden === true"><svg-icon icon-class="el-hide" /></i>
     </div>
   </div>
 </template>
@@ -104,5 +106,11 @@
 
   }
 
+  .container-action, .drag-handler {
+    :deep(.svg-icon) {
+      margin-left: 0.1em;
+      margin-right: 0.1em;
+    }
+  }
 
 </style>

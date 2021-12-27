@@ -3,7 +3,7 @@
     <template #label>
       <span>{{i18nt('designer.setting.validation')}}
         <el-tooltip effect="light" :content="i18nt('designer.setting.validationHelp')">
-          <i class="el-icon-info"></i></el-tooltip>
+          <svg-icon icon-class="el-info" /></el-tooltip>
       </span>
     </template>
     <el-select v-model="optionModel.validation" filterable allow-create default-first-option>

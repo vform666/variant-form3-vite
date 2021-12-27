@@ -3,7 +3,7 @@
       :style="{width: widget.options.cellWidth + '!important' || '', height: widget.options.cellHeight + '!important' || ''}"
       :colspan="widget.options.colspan || 1" :rowspan="widget.options.rowspan || 1"
       @click.stop="selectWidget(widget)">
-    <draggable :list="widget.widgetList" item-key="id" class="draggable-div" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
+    <draggable :list="widget.widgetList" item-key="id" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
                tag="transition-group" :component-data="{name: 'fade'}"
                handle=".drag-handler" @end="(evt) => onTableDragEnd(evt, widget.widgetList)"
                @add="(evt) => onTableDragAdd(evt, widget.widgetList)"
@@ -23,10 +23,10 @@
     </draggable>
 
     <div class="table-cell-action" v-if="designer.selectedId === widget.id && widget.type === 'table-cell'">
-      <i class="el-icon-back" :title="i18nt('designer.hint.selectParentWidget')"
-         @click.stop="selectParentWidget()"></i>
+      <i :title="i18nt('designer.hint.selectParentWidget')"
+         @click.stop="selectParentWidget()"><svg-icon icon-class="el-back" /></i>
       <el-dropdown trigger="click" @command="handleTableCellCommand" size="small">
-        <i class="el-icon-menu" :title="i18nt('designer.hint.cellSetting')"></i>
+        <i :title="i18nt('designer.hint.cellSetting')"><svg-icon icon-class="el-menu" /></i>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item command="insertLeftCol">{{i18nt('designer.setting.insertColumnToLeft')}}</el-dropdown-item>
@@ -336,6 +336,13 @@
       }
     }
 
+  }
+
+  .table-cell-action, .table-cell-handler {
+    :deep(.svg-icon) {
+      margin-left: 0.1em;
+      margin-right: 0.1em;
+    }
   }
 
   .table-cell.selected {
