@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import Draggable from 'vuedraggable'
+  //import Draggable from 'vuedraggable'
   import i18n from "@/utils/i18n";
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
 
@@ -52,7 +52,7 @@
     componentName: "GridColWidget",
     mixins: [i18n],
     components: {
-      Draggable,
+      //Draggable,
       ...FieldComponents,
     },
     props: {

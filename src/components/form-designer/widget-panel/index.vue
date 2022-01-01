@@ -88,7 +88,7 @@
 </template>
 
 <script>
-  import Draggable from 'vuedraggable'
+  //import Draggable from 'vuedraggable'
   import {containers as CONS, basicFields as BFS, advancedFields as AFS, customFields as CFS} from "./widgetsConfig"
   import {formTemplates} from './templatesConfig'
   import {addWindowResizeHandler} from "@/utils/util"
@@ -109,7 +109,7 @@ import { generateId } from '../../../utils/util'
     name: "FieldPanel",
     mixins: [i18n],
     components: {
-      Draggable,
+      //Draggable,
     },
     props: {
       designer: Object,

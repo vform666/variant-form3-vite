@@ -54,7 +54,8 @@
       </el-container>
 
       <el-aside>
-        <setting-panel :designer="designer" :selected-widget="designer.selectedWidget" :form-config="designer.formConfig" />
+        <setting-panel :designer="designer" :selected-widget="designer.selectedWidget"
+                       :form-config="designer.formConfig" @edit-event-handler="testEEH" />
       </el-aside>
     </el-container>
 
@@ -161,6 +162,11 @@
       this.loadFieldListFromServer()
     },
     methods: {
+      testEEH(eventName, eventParams) {
+        console.log('test', eventName)
+        console.log('test222222', eventParams)
+      },
+
       showLink(configName) {
         if (this.designerConfig[configName] === undefined) {
           return true

@@ -177,8 +177,14 @@
 
     },
     created() {
-      eventBus.$on('editEventHandler', function (eventName, eventParams) {
-        this.editEventHandler(eventName, eventParams)
+      // eventBus.$on('editEventHandler', (eventName, eventParams) => {
+      //   //debugger
+      //   this.editEventHandler(eventName, eventParams)
+      // })
+
+      eventBus.$on('editEventHandler', (eventParams) => {
+        //debugger
+        this.editEventHandler(eventParams[0], eventParams[1])
       })
 
       this.designer.handleEvent('form-css-updated', (cssClassList) => {
@@ -247,6 +253,8 @@
       },
 
       editEventHandler(eventName, eventParams) {
+        debugger
+
         this.curEventName = eventName
         this.eventHeader = `${this.optionModel.name}.${eventName}(${eventParams.join(', ')}) {`
         this.eventHandlerCode = this.selectedWidget.options[eventName] || ''

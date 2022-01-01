@@ -192,7 +192,7 @@
           return
         }
 
-        eventBus.$on('setFormData', function (newFormData) {
+        eventBus.$on('setFormData', (newFormData) => {
           this.initRowIdData(false)
           this.initFieldSchemaData()
 

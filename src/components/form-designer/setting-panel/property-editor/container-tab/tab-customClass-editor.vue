@@ -35,7 +35,7 @@
 
 <script>
   import i18n from "@/utils/i18n"
-  import Draggable from 'vuedraggable'
+  //import Draggable from 'vuedraggable'
   import {deepClone} from "@/utils/util";
 
   export default {
@@ -43,7 +43,7 @@
     componentName: 'PropertyEditor',
     mixins: [i18n],
     components: {
-      Draggable,
+      //Draggable,
     },
     props: {
       designer: Object,

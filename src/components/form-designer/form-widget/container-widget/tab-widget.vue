@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import Draggable from 'vuedraggable'
+  //import Draggable from 'vuedraggable'
   import i18n from "@/utils/i18n"
   import containerMixin from "@/components/form-designer/form-widget/container-widget/containerMixin"
   import ContainerWrapper from "@/components/form-designer/form-widget/container-widget/container-wrapper"
@@ -56,7 +56,7 @@
     mixins: [i18n, containerMixin],
     components: {
       ContainerWrapper,
-      Draggable,
+      //Draggable,
 
       ...FieldComponents,
     },

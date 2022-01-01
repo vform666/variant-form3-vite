@@ -14,6 +14,7 @@ function _broadcast(componentName, eventName, params) {
 export default {
   methods: {
     dispatch: function dispatch(componentName, eventName, params) {
+      debugger
       var parent = this.$parent || this.$root;
       var name = parent.$options.componentName;
 

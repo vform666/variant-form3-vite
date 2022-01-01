@@ -6,6 +6,10 @@ export default {
   inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel', 'getOptionData'],
 
   computed: {
+    widgetSize() {
+      return this.field.options.size || 'medium'
+    },
+
     subFormName() {
       return !!this.parentWidget ? this.parentWidget.options.name : ''
     },
@@ -84,14 +88,14 @@ export default {
     },
 
     initEventHandler() {
-      eventBus.$on('setFormData', function (newFormData) {
+      eventBus.$on('setFormData', (newFormData) => {
         console.log('formModel of globalModel----------', this.globalModel.formModel)
         if (!this.subFormItemFlag) {
           this.setValue(newFormData[this.field.options.name])
         }
       })
 
-      eventBus.$on('field-value-changed', function (values) {
+      eventBus.$on('field-value-changed', (values) => {
         if (!!this.subFormItemFlag) {
           let subFormData = this.formModel[this.subFormName]
           this.handleOnChangeForSubForm(values[0], values[1], subFormData, this.subFormRowId)
@@ -101,7 +105,7 @@ export default {
       })
 
       /* 监听重新加载选项事件 */
-      eventBus.$on('reloadOptionItems', function (widgetNames) {
+      eventBus.$on('reloadOptionItems', (widgetNames) => {
         if ((widgetNames.length === 0) || (widgetNames.indexOf(this.field.options.name) > -1)) {
           this.initOptionItems(true)
         }
@@ -284,11 +288,14 @@ export default {
     //--------------------- 事件处理 begin ------------------//
 
     emitFieldDataChange(newValue, oldValue) {
-      this.$emit('field-value-changed', [newValue, oldValue])
+      //this.$emit('field-value-changed', [newValue, oldValue])
+      eventBus.$emit('field-value-changed', [newValue, oldValue])
+      console.log('test', 'ccccccccc')
 
-      /* 必须用dispatch向指定父组件派发消息！！ */
-      this.dispatch('VFormRender', 'fieldChange',
-          [this.field.options.name, newValue, oldValue, this.subFormName, this.subFormRowIndex])
+      // /* 必须用dispatch向指定父组件派发消息！！ */
+      // this.dispatch('VFormRender', 'fieldChange',
+      //     [this.field.options.name, newValue, oldValue, this.subFormName, this.subFormRowIndex])
+      eventBus.$emit('fieldChange', [this.field.options.name, newValue, oldValue, this.subFormName, this.subFormRowIndex])
     },
 
     syncUpdateFormModel(value) {
@@ -312,8 +319,9 @@ export default {
       //number组件一般不会触发focus事件，故此处需要手工赋值oldFieldValue！！
       this.oldFieldValue = deepClone(value)  /* oldFieldValue需要在initFieldModel()方法中赋初值!! */
 
-      /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
-      this.dispatch('VFormRender', 'fieldValidation', [this.field.options.name])
+      // /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
+      // this.dispatch('VFormRender', 'fieldValidation', [this.field.options.name])
+      eventBus.$emit('fieldValidation', [this.field.options.name])
     },
 
     handleFocusCustomEvent(event) {
@@ -347,6 +355,9 @@ export default {
     },
 
     handleOnChange(val, oldVal) {  //自定义onChange事件
+      console.log('test', 'aaaaaaaaa')
+      debugger
+
       if (!!this.field.options.onChange) {
         let changeFn = new Function('value', 'oldValue', this.field.options.onChange)
         changeFn.call(this, val, oldVal)
@@ -415,6 +426,9 @@ export default {
 
         this.syncUpdateFormModel(newValue)
         this.emitFieldDataChange(newValue, oldValue)
+
+        //debugger
+        console.log('test', 'dddddddd')
       }
     },
 

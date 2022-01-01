@@ -4,9 +4,10 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import '@/styles/index.scss'
-import SvgIcon from '@/components/svg-icon/index'  //svg组件
+import Draggable from '@/../lib/vuedraggable/dist/vuedraggable.umd.js'
+//import Draggable from 'vuedraggable'
+import SvgIcon from '@/components/svg-icon'  //svg组件
 import 'virtual:svg-icons-register'
-
 
 import ContainerWidgets from '@/components/form-designer/form-widget/container-widget/index'
 import ContainerItems from '@/components/form-render/container-item/index'
@@ -22,6 +23,7 @@ if (typeof window !== 'undefined') {
 const vfApp = createApp(App)
 
 vfApp.use(ElementPlus)
+vfApp.component('draggable', Draggable)
 vfApp.component('svg-icon', SvgIcon)
 addDirective(vfApp)
 installI18n(vfApp)

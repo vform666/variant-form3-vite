@@ -6,9 +6,6 @@
 
       <template v-if="designer.widgetList.length === 0">
         <div class="no-widget-hint">{{i18nt('designer.noWidgetHint')}}</div>
-        <!-- 下面的div用于把父容器高度撑开！！
-        <div class="form-widget-list"></div>
-        -->
       </template>
 
       <div class="form-widget-list">
@@ -34,7 +31,6 @@
 </template>
 
 <script>
-  import Draggable from 'vuedraggable'
   import '@/components/form-designer/form-widget/container-widget/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
   import i18n from "@/utils/i18n"
@@ -44,8 +40,6 @@
     componentName: "VFormWidget",
     mixins: [i18n],
     components: {
-      Draggable,
-
       ...FieldComponents,
     },
     props: {

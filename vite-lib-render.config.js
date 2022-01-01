@@ -33,7 +33,7 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js']
+    //include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js']
   },
 
   css: {
@@ -46,6 +46,11 @@ export default defineConfig({
   },
 
   build: {
+    lib: {
+      entry: resolve(__dirname, 'install-render.js'),
+      name: 'VFormRender',
+      fileName: (format) => `VFormRender.${format}.js`
+    },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: ['vue', 'element-plus'],

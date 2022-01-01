@@ -1,0 +1,126 @@
+{
+  "_from": "vuedraggable@^4.1.0",
+  "_id": "vuedraggable@4.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww==",
+  "_location": "/vuedraggable",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "vuedraggable@^4.1.0",
+    "name": "vuedraggable",
+    "escapedName": "vuedraggable",
+    "rawSpec": "^4.1.0",
+    "saveSpec": null,
+    "fetchSpec": "^4.1.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vuedraggable/-/vuedraggable-4.1.0.tgz",
+  "_shasum": "edece68adb8a4d9e06accff9dfc9040e66852270",
+  "_spec": "vuedraggable@^4.1.0",
+  "_where": "D:\\dev2021\\vform-next\\variant-form3-vite",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "bugs": {
+    "url": "https://github.com/SortableJS/Vue.Draggable/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "sortablejs": "1.14.0"
+  },
+  "deprecated": false,
+  "description": "draggable component for vue",
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.4",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "6.0.0",
+    "@vue/server-renderer": "^3.0.0",
+    "@vue/test-utils": "^2.0.0-beta.6",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.6.0",
+    "bootstrap": "^4.3.1",
+    "codecov": "^3.2.0",
+    "element-plus": "^1.0.1-alpha.12",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^7.0.0-0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "typescript": "^4.0.3",
+    "vue": "^3.0.1",
+    "vue-jest": "^5.0.0-alpha.5",
+    "vue-router": "^4.0.0-beta.13",
+    "vuex": "4.0.0-beta.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/prettier"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "files": [
+    "dist/*.css",
+    "dist/*.map",
+    "dist/*.js",
+    "src/*"
+  ],
+  "homepage": "https://github.com/SortableJS/Vue.Draggable#readme",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "drag",
+    "and",
+    "drop",
+    "list",
+    "Sortable.js",
+    "component",
+    "nested"
+  ],
+  "license": "MIT",
+  "main": "dist/vuedraggable.umd.min.js",
+  "module": "dist/vuedraggable.umd.js",
+  "name": "vuedraggable",
+  "peerDependencies": {
+    "vue": "^3.0.1"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SortableJS/Vue.Draggable.git"
+  },
+  "scripts": {
+    "build": "vue-cli-service build --name vuedraggable --entry ./src/vuedraggable.js --target lib",
+    "build:doc": "vue-cli-service build ./example/main.js --dest docs --mode development",
+    "lint": "vue-cli-service lint src example",
+    "prepublishOnly": "npm run lint && npm run test:unit && npm run build:doc && npm run build",
+    "serve": "vue-cli-service serve ./example/main.js --open --mode local",
+    "test:coverage": "vue-cli-service test:unit --coverage --verbose && codecov",
+    "test:unit": "vue-cli-service test:unit --coverage"
+  },
+  "types": "src/vuedraggable.d.ts",
+  "version": "4.1.0"
+}

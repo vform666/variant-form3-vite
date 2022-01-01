@@ -2,7 +2,7 @@
   <div class="option-items-pane">
     <el-radio-group v-if="(selectedWidget.type === 'radio') || ((selectedWidget.type === 'select') && !selectedWidget.options.multiple)"
                     v-model="optionModel.defaultValue" @change="emitDefaultValueChange">
-      <draggable tag="ul" :list="optionModel.optionItems"
+      <draggable tag="ul" :list="optionModel.optionItems" item-key="value"
                  v-bind="{group:'optionsGroup', ghostClass: 'ghost', handle: '.drag-option'}">
         <template #item="{ element: option, index: idx }">
           <li>
@@ -19,7 +19,7 @@
     </el-radio-group>
     <el-checkbox-group v-else-if="(selectedWidget.type === 'checkbox') || ((selectedWidget.type === 'select') && selectedWidget.options.multiple)"
                     v-model="optionModel.defaultValue" @change="emitDefaultValueChange">
-      <draggable tag="ul" :list="optionModel.optionItems"
+      <draggable tag="ul" :list="optionModel.optionItems" item-key="value"
                  v-bind="{group:'optionsGroup', ghostClass: 'ghost', handle: '.drag-option'}">
         <template #item="{ element: option, index: idx }">
           <li>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-  import Draggable from 'vuedraggable'
+  //import Draggable from 'vuedraggable'
   import CodeEditor from '@/components/code-editor/index'
   import i18n from "@/utils/i18n";
 
@@ -87,8 +87,7 @@
     name: "OptionItemsSetting",
     mixins: [i18n],
     components: {
-      Draggable,
-      //CodeEditor: () => import('@/components/code-editor/index'),
+      //Draggable,
       CodeEditor,
     },
     props: {
