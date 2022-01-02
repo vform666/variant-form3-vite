@@ -9,6 +9,16 @@
                 @focus="handleRichEditorFocusEvent" @blur="handleRichEditorBlurEvent">
     </vue-editor>
     -->
+
+    <quill-editor
+            v-model:value="fieldModel"
+            :options="editorOption"
+            :disabled="field.options.disabled"
+            @blur="handleRichEditorBlurEvent"
+            @focus="handleRichEditorFocusEvent"
+            @change="handleRichEditorChangeEvent"
+    />
+
   </form-item-wrapper>
 </template>
 
@@ -18,6 +28,8 @@
   import i18n, {translate} from "@/utils/i18n";
   import {deepClone} from "@/utils/util";
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
+
+  import { Quill, quillEditor } from 'vue3-quill'
 
   export default {
     name: "rich-editor-widget",
@@ -55,6 +67,7 @@
       // VueEditor: resolve => { //懒加载！！
       //   require(['vue2-editor'], ({VueEditor}) => resolve(VueEditor))
       // }
+      quillEditor,
     },
     inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],
     data() {
@@ -68,6 +81,14 @@
       }
     },
     computed: {
+      editorOption() {
+        return {
+          placeholder: this.field.options.placeholder,
+          modules: {
+            //toolbar: this.customToolbar
+          }
+        }
+      },
 
     },
     beforeCreate() {

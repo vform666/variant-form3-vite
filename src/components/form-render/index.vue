@@ -259,16 +259,20 @@
       },
 
       addFieldChangeEventHandler() {
-        eventBus.$off('fieldChange')  //移除原有事件监听
-        eventBus.$on('fieldChange', (fieldName, newValue, oldValue, subFormName, subFormRowIndex) => {
+        //eventBus.$off('fieldChange')  //移除原有事件监听
+        this.off$('fieldChange')  //移除原有事件监听
+        //eventBus.$on('fieldChange', (fieldName, newValue, oldValue, subFormName, subFormRowIndex) => {
+        this.on$('fieldChange', (fieldName, newValue, oldValue, subFormName, subFormRowIndex) => {
           this.handleFieldDataChange(fieldName, newValue, oldValue, subFormName, subFormRowIndex)
           this.$emit('formChange', fieldName, newValue, oldValue, this.formDataModel, subFormName, subFormRowIndex)
         })
       },
 
       addFieldValidateEventHandler() {
-        eventBus.$off('fieldValidation')  //移除原有事件监听
-        eventBus.$on('fieldValidation', (fieldName) => {
+        //eventBus.$off('fieldValidation')  //移除原有事件监听
+        this.off$('fieldValidation')  //移除原有事件监听
+        //eventBus.$on('fieldValidation', (fieldName) => {
+        this.on$('fieldValidation', (fieldName) => {
           this.$refs.renderForm.validateField(fieldName)
         })
       },

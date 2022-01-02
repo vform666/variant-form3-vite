@@ -6,9 +6,8 @@ export default {
   created() {},
   methods: {
     editEventHandler(eventName, eventParams) {
-      //this.dispatch('SettingPanel', 'editEventHandler', [eventName, [...eventParams]])
-
-      eventBus.$emit('editEventHandler', [eventName, [...eventParams]])
+      this.dispatch('SettingPanel', 'editEventHandler', [eventName, [...eventParams]])
+      // eventBus.$emit('editEventHandler', [eventName, [...eventParams]])
     },
 
   }

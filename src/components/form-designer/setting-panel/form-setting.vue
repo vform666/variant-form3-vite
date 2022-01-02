@@ -80,49 +80,55 @@
       </el-collapse>
     </el-form>
 
-    <el-dialog :title="i18nt('designer.setting.editFormEventHandler')" v-model="showFormEventDialogFlag"
-               v-if="showFormEventDialogFlag" :show-close="true" custom-class="small-padding-dialog"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <el-alert type="info" :closable="false" :title="'form.' + eventParamsMap[curEventName]"></el-alert>
-      <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode"></code-editor>
-      <el-alert type="info" :closable="false" title="}"></el-alert>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button @click="showFormEventDialogFlag = false">
-            {{i18nt('designer.hint.cancel')}}</el-button>
-          <el-button type="primary" @click="saveFormEventHandler">
-            {{i18nt('designer.hint.confirm')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showFormEventDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.setting.editFormEventHandler')" v-model="showFormEventDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <el-alert type="info" :closable="false" :title="'form.' + eventParamsMap[curEventName]"></el-alert>
+        <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode"></code-editor>
+        <el-alert type="info" :closable="false" title="}"></el-alert>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button @click="showFormEventDialogFlag = false">
+              {{i18nt('designer.hint.cancel')}}</el-button>
+            <el-button type="primary" @click="saveFormEventHandler">
+              {{i18nt('designer.hint.confirm')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
-    <el-dialog :title="i18nt('designer.setting.formCss')" v-model="showEditFormCssDialogFlag"
-               v-if="showEditFormCssDialogFlag" :show-close="true" custom-class="small-padding-dialog"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <code-editor :mode="'css'" :readonly="false" v-model="formCssCode"></code-editor>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button @click="showEditFormCssDialogFlag = false">
-            {{i18nt('designer.hint.cancel')}}</el-button>
-          <el-button type="primary" @click="saveFormCss">
-            {{i18nt('designer.hint.confirm')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showEditFormCssDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.setting.formCss')" v-model="showEditFormCssDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <code-editor :mode="'css'" :readonly="false" v-model="formCssCode"></code-editor>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button @click="showEditFormCssDialogFlag = false">
+              {{i18nt('designer.hint.cancel')}}</el-button>
+            <el-button type="primary" @click="saveFormCss">
+              {{i18nt('designer.hint.confirm')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
-    <el-dialog :title="i18nt('designer.setting.globalFunctions')" v-model="showEditFunctionsDialogFlag"
-               v-if="showEditFunctionsDialogFlag" :show-close="true" custom-class="small-padding-dialog"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode"></code-editor>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button @click="showEditFunctionsDialogFlag = false">
-            {{i18nt('designer.hint.cancel')}}</el-button>
-          <el-button type="primary" @click="saveGlobalFunctions">
-            {{i18nt('designer.hint.confirm')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showEditFunctionsDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.setting.globalFunctions')" v-model="showEditFunctionsDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode"></code-editor>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button @click="showEditFunctionsDialogFlag = false">
+              {{i18nt('designer.hint.cancel')}}</el-button>
+            <el-button type="primary" @click="saveGlobalFunctions">
+              {{i18nt('designer.hint.confirm')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
   </div>
 </template>

@@ -4,6 +4,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteSvgIcons from 'vite-plugin-svg-icons'
 import { resolve } from 'path'
 import commonjs from '@rollup/plugin-commonjs'
+import visualizer from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,9 @@ export default defineConfig({
 
     //解决引入commonjs模块后打包出现的{'default' is not exported by XXX}错误!!
     commonjs(),
+
+    //可视化Bundle
+    visualizer(),
 
     viteSvgIcons({
       // Specify the icon folder to be cached
@@ -33,7 +37,8 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    //include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js']
+    include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js', 'quill']
+    //include: ['quill']
   },
 
   css: {

@@ -33,7 +33,8 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    //include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js']
+    include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js', 'quill']
+    //include: ['quill']
   },
 
   css: {

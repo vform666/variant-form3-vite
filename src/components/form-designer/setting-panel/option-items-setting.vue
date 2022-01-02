@@ -50,31 +50,36 @@
       <el-button type="text" @click="resetDefault">{{i18nt('designer.setting.resetDefault')}}</el-button>
     </div>
 
-    <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportDialogFlag"
-               v-if="showImportDialogFlag" :show-close="true" custom-class="small-padding-dialog"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <el-form-item>
-        <el-input type="textarea" rows="10" v-model="optionLines"></el-input>
-      </el-form-item>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button size="large" type="primary" @click="saveOptions">{{i18nt('designer.hint.confirm')}}</el-button>
-          <el-button size="large" type="" @click="showImportDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showImportDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <el-form-item>
+          <el-input type="textarea" rows="10" v-model="optionLines"></el-input>
+        </el-form-item>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button size="large" type="primary" @click="saveOptions">{{i18nt('designer.hint.confirm')}}</el-button>
+            <el-button size="large" type="" @click="showImportDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
-    <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportCascaderDialogFlag"
-               v-if="showImportCascaderDialogFlag" :show-close="true" custom-class="small-padding-dialog"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <code-editor v-model="cascaderOptions" mode="json" :readonly="false"></code-editor>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button size="large" type="primary" @click="saveCascaderOptions">{{i18nt('designer.hint.confirm')}}</el-button>
-          <el-button size="large" type="" @click="showImportCascaderDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showImportCascaderDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportCascaderDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <code-editor v-model="cascaderOptions" mode="json" :readonly="false"></code-editor>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button size="large" type="primary" @click="saveCascaderOptions">{{i18nt('designer.hint.confirm')}}</el-button>
+            <el-button size="large" type="" @click="showImportCascaderDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
+
   </div>
 </template>
 

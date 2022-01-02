@@ -14,8 +14,8 @@
               :prefix-icon="field.options.prefixIcon" :suffix-icon="field.options.suffixIcon"
               @focus="handleFocusCustomEvent" @blur="handleBlurCustomEvent" @input="handleInputCustomEvent"
               @change="handleChangeEvent">
-      <template #append>
-        <el-button v-if="field.options.appendButton" :disabled="field.options.disabled || field.options.appendButtonDisabled"
+      <template #append v-if="field.options.appendButton">
+        <el-button :disabled="field.options.disabled || field.options.appendButtonDisabled"
                    :class="field.options.buttonIcon" @click="emitAppendButtonClick"></el-button>
       </template>
     </el-input>

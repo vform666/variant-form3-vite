@@ -71,21 +71,23 @@
       </el-tab-pane>
     </el-tabs>
 
-    <el-dialog :title="i18nt('designer.setting.editWidgetEventHandler')" v-model="showWidgetEventDialogFlag"
-               v-if="showWidgetEventDialogFlag" :show-close="true" custom-class="small-padding-dialog"
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <el-alert type="info" :closable="false" :title="eventHeader"></el-alert>
-      <code-editor :mode="'javascript'" :readonly="false" v-model="eventHandlerCode"></code-editor>
-      <el-alert type="info" :closable="false" title="}"></el-alert>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button @click="showWidgetEventDialogFlag = false">
-            {{i18nt('designer.hint.cancel')}}</el-button>
-          <el-button type="primary" @click="saveEventHandler">
-            {{i18nt('designer.hint.confirm')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showWidgetEventDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.setting.editWidgetEventHandler')" v-model="showWidgetEventDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <el-alert type="info" :closable="false" :title="eventHeader"></el-alert>
+        <code-editor :mode="'javascript'" :readonly="false" v-model="eventHandlerCode"></code-editor>
+        <el-alert type="info" :closable="false" title="}"></el-alert>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button @click="showWidgetEventDialogFlag = false">
+              {{i18nt('designer.hint.cancel')}}</el-button>
+            <el-button type="primary" @click="saveEventHandler">
+              {{i18nt('designer.hint.confirm')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
   </el-container>
 </template>
@@ -100,13 +102,14 @@
   } from "@/utils/util"
   import i18n from "@/utils/i18n"
   import eventBus from "@/utils/event-bus"
+  import emitter from "@/utils/emitter";
 
   const {COMMON_PROPERTIES, ADVANCED_PROPERTIES, EVENT_PROPERTIES} = WidgetProperties
 
   export default {
     name: "SettingPanel",
     componentName: "SettingPanel",
-    mixins: [i18n],
+    mixins: [i18n, emitter],
     components: {
       CodeEditor,
       FormSetting,
@@ -178,11 +181,14 @@
     },
     created() {
       // eventBus.$on('editEventHandler', (eventName, eventParams) => {
-      //   //debugger
       //   this.editEventHandler(eventName, eventParams)
       // })
 
-      eventBus.$on('editEventHandler', (eventParams) => {
+      // eventBus.$on('editEventHandler', (eventParams) => {
+      //   this.editEventHandler(eventParams[0], eventParams[1])
+      // })
+
+      this.on$('editEventHandler', (eventParams) => {
         //debugger
         this.editEventHandler(eventParams[0], eventParams[1])
       })
@@ -253,7 +259,7 @@
       },
 
       editEventHandler(eventName, eventParams) {
-        debugger
+        //debugger
 
         this.curEventName = eventName
         this.eventHeader = `${this.optionModel.name}.${eventName}(${eventParams.join(', ')}) {`

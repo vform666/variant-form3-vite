@@ -2,7 +2,8 @@
   <form-item-wrapper :designer="designer" :field="field" :rules="rules" :design-state="designState"
                      :parent-widget="parentWidget" :parent-list="parentList" :index-of-parent-list="indexOfParentList"
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
-    <el-cascader ref="fieldEditor" :options="field.options.optionItems" v-model="fieldModel" class="full-width-input"
+    <el-cascader ref="fieldEditor" :options="field.options.optionItems" v-model="fieldModel"
+                 style="width: 100%" class="full-width-input"
                  :disabled="field.options.disabled"
                  :size="field.options.size"
                  :clearable="field.options.clearable"
@@ -98,7 +99,7 @@
   @import "../../../../styles/global.scss"; /* form-item-wrapper已引入，还需要重复引入吗？ */
 
   .full-width-input {
-    width: 100% !important;
+    width: 100% !important;  /* 没生效？？改用内联样式style */
   }
 
 </style>

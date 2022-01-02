@@ -41,28 +41,30 @@
       </template>
     </div>
 
-    <el-dialog :title="i18nt('designer.toolbar.preview')" v-model="showPreviewDialogFlag" v-if="showPreviewDialogFlag"
-               :show-close="true" :close-on-click-modal="false" :close-on-press-escape="false" center
-               :destroy-on-close="true" custom-class="small-padding-dialog" width="75%" :fullscreen="layoutType === 'H5'">
-      <div>
-        <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : '']">
-          <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData" :preview-state="true"
-                       :option-data="testOptionData"
-                       @appendButtonClick="testOnAppendButtonClick" @buttonClick="testOnButtonClick"
-                       @formChange="handleFormChange">
-          </VFormRender>
+    <div v-if="showPreviewDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.toolbar.preview')" v-model="showPreviewDialogFlag"
+                 :show-close="true" :close-on-click-modal="false" :close-on-press-escape="false" center
+                 :destroy-on-close="true" custom-class="drag-dialog small-padding-dialog" width="75%" :fullscreen="layoutType === 'H5'">
+        <div>
+          <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : '']">
+            <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData" :preview-state="true"
+                         :option-data="testOptionData"
+                         @appendButtonClick="testOnAppendButtonClick" @buttonClick="testOnButtonClick"
+                         @formChange="handleFormChange">
+            </VFormRender>
+          </div>
         </div>
-      </div>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="getFormData">{{i18nt('designer.hint.getFormData')}}</el-button>
-          <el-button type="primary" @click="resetForm">{{i18nt('designer.hint.resetForm')}}</el-button>
-          <el-button type="primary" @click="setFormDisabled">{{i18nt('designer.hint.disableForm')}}</el-button>
-          <el-button type="primary" @click="setFormEnabled">{{i18nt('designer.hint.enableForm')}}</el-button>
-          <el-button type="" @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button type="primary" @click="getFormData">{{i18nt('designer.hint.getFormData')}}</el-button>
+            <el-button type="primary" @click="resetForm">{{i18nt('designer.hint.resetForm')}}</el-button>
+            <el-button type="primary" @click="setFormDisabled">{{i18nt('designer.hint.disableForm')}}</el-button>
+            <el-button type="primary" @click="setFormEnabled">{{i18nt('designer.hint.enableForm')}}</el-button>
+            <el-button type="" @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
     <div v-if="showImportJsonDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.importJson')" v-model="showImportJsonDialogFlag"
@@ -81,88 +83,97 @@
       </el-dialog>
     </div>
 
-    <el-dialog :title="i18nt('designer.toolbar.exportJson')" v-model="showExportJsonDialogFlag"
-               v-if="showExportJsonDialogFlag" :show-close="true" custom-class="small-padding-dialog" center
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <code-editor :mode="'json'" :readonly="true" v-model="jsonContent"></code-editor>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" class="copy-json-btn" :data-clipboard-text="jsonRawContent" @click="copyFormJson">
-            {{i18nt('designer.hint.copyJson')}}</el-button>
-          <el-button @click="saveFormJson">{{i18nt('designer.hint.saveFormJson')}}</el-button>
-          <el-button type="" @click="showExportJsonDialogFlag = false">
-            {{i18nt('designer.hint.closePreview')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showExportJsonDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.toolbar.exportJson')" v-model="showExportJsonDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog" center
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <code-editor :mode="'json'" :readonly="true" v-model="jsonContent"></code-editor>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button type="primary" class="copy-json-btn" :data-clipboard-text="jsonRawContent" @click="copyFormJson">
+              {{i18nt('designer.hint.copyJson')}}</el-button>
+            <el-button @click="saveFormJson">{{i18nt('designer.hint.saveFormJson')}}</el-button>
+            <el-button type="" @click="showExportJsonDialogFlag = false">
+              {{i18nt('designer.hint.closePreview')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
-    <el-dialog :title="i18nt('designer.toolbar.exportCode')" v-model="showExportCodeDialogFlag"
-               v-if="showExportCodeDialogFlag" :show-close="true" custom-class="small-padding-dialog" center
-               width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeCodeTab">
-        <el-tab-pane label="Vue" name="vue">
-          <code-editor :mode="'html'" :readonly="true" v-model="vueCode" :user-worker="false"></code-editor>
-        </el-tab-pane>
-        <el-tab-pane label="HTML" name="html">
-          <code-editor :mode="'html'" :readonly="true" v-model="htmlCode" :user-worker="false"></code-editor>
-        </el-tab-pane>
-      </el-tabs>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" class="copy-vue-btn" :data-clipboard-text="vueCode" @click="copyVueCode">
-            {{i18nt('designer.hint.copyVueCode')}}</el-button>
-          <el-button type="primary" class="copy-html-btn" :data-clipboard-text="htmlCode" @click="copyHtmlCode">
-            {{i18nt('designer.hint.copyHtmlCode')}}</el-button>
-          <el-button @click="saveVueCode">{{i18nt('designer.hint.saveVueCode')}}</el-button>
-          <el-button @click="saveHtmlCode">{{i18nt('designer.hint.saveHtmlCode')}}</el-button>
-          <el-button type="" @click="showExportCodeDialogFlag = false">
-            {{i18nt('designer.hint.closePreview')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showExportCodeDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.toolbar.exportCode')" v-model="showExportCodeDialogFlag"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog" center
+                 width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeCodeTab">
+          <el-tab-pane label="Vue" name="vue">
+            <code-editor :mode="'html'" :readonly="true" v-model="vueCode" :user-worker="false"></code-editor>
+          </el-tab-pane>
+          <el-tab-pane label="HTML" name="html">
+            <code-editor :mode="'html'" :readonly="true" v-model="htmlCode" :user-worker="false"></code-editor>
+          </el-tab-pane>
+        </el-tabs>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button type="primary" class="copy-vue-btn" :data-clipboard-text="vueCode" @click="copyVueCode">
+              {{i18nt('designer.hint.copyVueCode')}}</el-button>
+            <el-button type="primary" class="copy-html-btn" :data-clipboard-text="htmlCode" @click="copyHtmlCode">
+              {{i18nt('designer.hint.copyHtmlCode')}}</el-button>
+            <el-button @click="saveVueCode">{{i18nt('designer.hint.saveVueCode')}}</el-button>
+            <el-button @click="saveHtmlCode">{{i18nt('designer.hint.saveHtmlCode')}}</el-button>
+            <el-button type="" @click="showExportCodeDialogFlag = false">
+              {{i18nt('designer.hint.closePreview')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
-    <el-dialog :title="i18nt('designer.hint.exportFormData')" v-model="showFormDataDialogFlag"
-               v-if="showFormDataDialogFlag" :show-close="true" custom-class="dialog-title-light-bg" center
-               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true"
-               :append-to-body="true">
-      <div style="border: 1px solid #DCDFE6">
-        <code-editor :mode="'json'" :readonly="true" v-model="formDataJson"></code-editor>
-      </div>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" class="copy-form-data-json-btn" :data-clipboard-text="formDataRawJson" @click="copyFormDataJson">
-            {{i18nt('designer.hint.copyFormData')}}</el-button>
-          <el-button @click="saveFormData">{{i18nt('designer.hint.saveFormData')}}</el-button>
-          <el-button type="" @click="showFormDataDialogFlag = false">
-            {{i18nt('designer.hint.closePreview')}}</el-button>
+    <div v-if="showFormDataDialogFlag" class="" v-drag="['.nested-drag-dialog.el-dialog', '.nested-drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.hint.exportFormData')" v-model="showFormDataDialogFlag"
+                 :show-close="true" custom-class="nested-drag-dialog dialog-title-light-bg" center
+                 :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true"
+                 :append-to-body="true">
+        <div style="border: 1px solid #DCDFE6">
+          <code-editor :mode="'json'" :readonly="true" v-model="formDataJson"></code-editor>
         </div>
-      </template>
-    </el-dialog>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button type="primary" class="copy-form-data-json-btn" :data-clipboard-text="formDataRawJson" @click="copyFormDataJson">
+              {{i18nt('designer.hint.copyFormData')}}</el-button>
+            <el-button @click="saveFormData">{{i18nt('designer.hint.saveFormData')}}</el-button>
+            <el-button type="" @click="showFormDataDialogFlag = false">
+              {{i18nt('designer.hint.closePreview')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
 
-    <el-dialog :title="i18nt('designer.toolbar.generateSFC')" v-model="showExportSFCDialogFlag"
-               v-if="showExportSFCDialogFlag" :show-close="true" custom-class="small-padding-dialog" center
-               width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeSFCTab">
-        <el-tab-pane label="Vue2" name="vue2">
-          <code-editor :mode="'html'" :readonly="true" v-model="sfcCode" :user-worker="false"></code-editor>
-        </el-tab-pane>
-        <el-tab-pane label="Vue3" name="vue3">
-          <code-editor :mode="'html'" :readonly="true" v-model="sfcCodeV3" :user-worker="false"></code-editor>
-        </el-tab-pane>
-      </el-tabs>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" class="copy-vue2-sfc-btn" :data-clipboard-text="sfcCode" @click="copyV2SFC">
-            {{i18nt('designer.hint.copyVue2SFC')}}</el-button>
-          <el-button type="primary" class="copy-vue3-sfc-btn" :data-clipboard-text="sfcCodeV3" @click="copyV3SFC">
-            {{i18nt('designer.hint.copyVue3SFC')}}</el-button>
-          <el-button @click="saveV2SFC">{{i18nt('designer.hint.saveVue2SFC')}}</el-button>
-          <el-button @click="saveV3SFC">{{i18nt('designer.hint.saveVue3SFC')}}</el-button>
-          <el-button type="" @click="showExportSFCDialogFlag = false">
-            {{i18nt('designer.hint.closePreview')}}</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <div v-if="showExportSFCDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog :title="i18nt('designer.toolbar.generateSFC')" v-model="showExportSFCDialogFlag"
+                 v-if="showExportSFCDialogFlag" :show-close="true" custom-class="drag-dialog small-padding-dialog" center
+                 width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
+        <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeSFCTab">
+          <el-tab-pane label="Vue2" name="vue2">
+            <code-editor :mode="'html'" :readonly="true" v-model="sfcCode" :user-worker="false"></code-editor>
+          </el-tab-pane>
+          <el-tab-pane label="Vue3" name="vue3">
+            <code-editor :mode="'html'" :readonly="true" v-model="sfcCodeV3" :user-worker="false"></code-editor>
+          </el-tab-pane>
+        </el-tabs>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button type="primary" class="copy-vue2-sfc-btn" :data-clipboard-text="sfcCode" @click="copyV2SFC">
+              {{i18nt('designer.hint.copyVue2SFC')}}</el-button>
+            <el-button type="primary" class="copy-vue3-sfc-btn" :data-clipboard-text="sfcCodeV3" @click="copyV3SFC">
+              {{i18nt('designer.hint.copyVue3SFC')}}</el-button>
+            <el-button @click="saveV2SFC">{{i18nt('designer.hint.saveVue2SFC')}}</el-button>
+            <el-button @click="saveV3SFC">{{i18nt('designer.hint.saveVue3SFC')}}</el-button>
+            <el-button type="" @click="showExportSFCDialogFlag = false">
+              {{i18nt('designer.hint.closePreview')}}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
+
   </div>
 </template>
 
@@ -442,7 +453,7 @@
       doJsonImport() {
         try {
           let importObj = JSON.parse(this.importTemplate)
-          console.log('test import', this.importTemplate)
+          //console.log('test import', this.importTemplate)
           this.designer.loadFormJson(importObj)
 
           this.showImportJsonDialogFlag = false
