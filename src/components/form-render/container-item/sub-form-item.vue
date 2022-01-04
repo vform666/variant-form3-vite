@@ -121,7 +121,7 @@
           let subFormModel = this.formModel[this.widget.options.name]
           if (!!subFormModel && (subFormModel.length > 0)) {
             subFormModel.forEach(() => {
-              this.rowIdData.push('r' + generateId())
+              this.rowIdData.push('id' + generateId())
             })
 
             if (!!initFlag) {
@@ -135,11 +135,11 @@
       },
 
       addToRowIdData() {
-        this.rowIdData.push('rowId' + generateId())
+        this.rowIdData.push('id' + generateId())
       },
 
       insertToRowIdData(rowIndex) {
-        this.rowIdData.splice(rowIndex, 0, 'rowId' + generateId())
+        this.rowIdData.splice(rowIndex, 0, 'id' + generateId())
       },
 
       deleteFromRowIdData(rowIndex) {
