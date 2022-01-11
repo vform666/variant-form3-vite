@@ -37,7 +37,8 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js', 'quill']
+    include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js', 'quill'],
+    exclude: ['axios'],
     //include: ['quill']
   },
 
@@ -51,6 +52,7 @@ export default defineConfig({
   },
 
   build: {
+    //minify: false,
     lib: {
       entry: resolve(__dirname, 'install.js'),
       name: 'VFormDesigner',
