@@ -71,6 +71,7 @@
   import {addWindowResizeHandler, deepClone, getQueryParam} from "@/utils/util"
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config"
   import i18n, { changeLocale } from "@/utils/i18n"
+  import axios from "axios"
 
   export default {
     name: "VFormDesigner",
