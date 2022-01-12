@@ -82,7 +82,7 @@
           return this.designer.formConfig.size
         }
 
-        return 'medium'
+        return 'default'
       },
 
       customClass() {

@@ -21,7 +21,7 @@
                          style="margin-right: 8px">{{i18nt('designer.setting.paneActive')}}</el-checkbox>
             <el-input type="text" v-model="tpItem.options.label" style="width: 155px"></el-input>
             <i class="iconfont icon-drag drag-option"></i>
-            <el-button circle plain size="mini" type="danger" @click="deleteTabPane(selectedWidget, tpIdx)"
+            <el-button circle plain size="small" type="danger" @click="deleteTabPane(selectedWidget, tpIdx)"
                        icon="el-icon-minus" class="col-delete-button"></el-button>
           </li>
         </template>

@@ -5,7 +5,7 @@
         <el-scrollbar class="setting-scrollbar" :style="{height: scrollerHeight}">
 
           <template v-if="!!designer.selectedWidget && !designer.selectedWidget.category">
-            <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form"
+            <el-form :model="optionModel" size="small" label-position="left" label-width="120px" class="setting-form"
                      @submit.prevent>
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
                 <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">
@@ -34,7 +34,7 @@
           </template>
 
           <template v-if="(!!designer.selectedWidget && !!designer.selectedWidget.category)">
-            <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form"
+            <el-form :model="optionModel" size="small" label-position="left" label-width="120px" class="setting-form"
                      @submit.prevent>
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
                 <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">

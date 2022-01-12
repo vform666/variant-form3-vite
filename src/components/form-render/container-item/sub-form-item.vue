@@ -6,7 +6,7 @@
       <el-row class="header-row">
         <div class="action-header-column">
           <span class="action-label">{{i18nt('render.hint.subFormAction')}}</span>
-          <el-button :disabled="actionDisabled" round type="primary" size="mini" class="action-button" @click="addSubFormRow"
+          <el-button :disabled="actionDisabled" round type="primary" size="small" class="action-button" @click="addSubFormRow"
                      :title="i18nt('render.hint.subFormAddActionHint')">
             {{i18nt('render.hint.subFormAddAction')}}<i class="el-icon-plus el-icon-right"></i></el-button>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :model="formConfig" size="mini" label-position="left" label-width="120px"
+    <el-form :model="formConfig" size="small" label-position="left" label-width="120px"
              class="setting-form" @submit.prevent>
       <el-collapse v-model="formActiveCollapseNames" class="setting-collapse">
         <el-collapse-item name="1" :title="i18nt('designer.setting.basicSetting')">
@@ -158,9 +158,9 @@
         formSizes: [
           {label: 'default', value: ''},
           {label: 'large', value: 'large'},
-          {label: 'medium', value: 'medium'},
+          //{label: 'medium', value: 'medium'},
           {label: 'small', value: 'small'},
-          {label: 'mini', value: 'mini'},
+          //{label: 'mini', value: 'mini'},
         ],
 
         showEditFormCssDialogFlag: false,

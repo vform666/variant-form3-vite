@@ -123,7 +123,7 @@
           return this.formConfig.size
         }
 
-        return 'medium'
+        return 'default'
       },
 
       customClass() {

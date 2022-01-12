@@ -193,7 +193,7 @@
   import {genSFC} from "@/utils/sfc-generator";
   import loadBeautifier from "@/utils/beautifierLoader";
   import { saveAs } from 'file-saver'
-  import axios from "axios"
+  import axios from 'axios'
 
   export default {
     name: "ToolbarPanel",

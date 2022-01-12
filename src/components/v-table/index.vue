@@ -62,7 +62,7 @@
       },
       tableSize: {
         type: String,
-        default: 'medium'
+        default: 'default'
       },
     },
     methods: {

@@ -13,7 +13,7 @@
         <el-input-number v-model.number="colItem.options.span" :min="1" :max="24"
                          @change="(newValue, oldValue) => spanChanged(selectedWidget, colItem, colIdx, newValue, oldValue)"
                          class="cell-span-input"></el-input-number>
-        <el-button circle plain size="mini" type="danger" @click="deleteCol(selectedWidget, colIdx)"
+        <el-button circle plain size="small" type="danger" @click="deleteCol(selectedWidget, colIdx)"
                    icon="el-icon-minus" class="col-delete-button"></el-button>
       </li>
       <div>
