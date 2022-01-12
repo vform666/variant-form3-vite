@@ -459,8 +459,8 @@ export const basicFields = [
       hidden: false,
       clearable: true,
       editable: false,
-      format: 'yyyy-MM-dd',  //日期显示格式
-      valueFormat: 'yyyy-MM-dd',  //日期对象格式
+      format: 'YYYY-MM-DD',  //日期显示格式
+      valueFormat: 'YYYY-MM-DD',  //日期对象格式
       required: false,
       validation: '',
       validationHint: '',
@@ -500,8 +500,8 @@ export const basicFields = [
       hidden: false,
       clearable: true,
       editable: false,
-      format: 'yyyy-MM-dd',  //日期显示格式
-      valueFormat: 'yyyy-MM-dd',  //日期对象格式
+      format: 'YYYY-MM-DD',  //日期显示格式
+      valueFormat: 'YYYY-MM-DD',  //日期对象格式
       required: false,
       validation: '',
       validationHint: '',
