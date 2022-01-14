@@ -58,6 +58,10 @@ input[type="password"]::-ms-reveal {  /* 隐藏IE/Edge原生的密码查看按�
   display: none;
 }
 
+.auto-full-width.el-date-editor.el-input, .auto-full-width.el-date-editor.el-input__inner {
+  width: 100% !important;
+}
+
 /* 滚动条样式 begin */
 ::-webkit-scrollbar {
   width: 8px;

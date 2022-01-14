@@ -177,6 +177,7 @@ export default {
       endPlaceholder: '截止占位内容',
       widgetColumnWidth: '组件列宽',
       widgetSize: '组件大小',
+      autoFullWidth: '自动拉伸宽度',
       showStops: '显示间断点',
       displayStyle: '显示样式',
       inlineLayout: '行内',
@@ -278,6 +279,7 @@ export default {
       vertical: '是否竖向显示',
       showBlankRow: '默认显示新行',
       showRowNumber: '显示行号',
+      contentHeight: '内容区高度',
 
       insertColumnToLeft: '插入左侧列',
       insertColumnToRight: '插入右侧列',

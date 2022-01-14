@@ -177,6 +177,7 @@ export default {
       endPlaceholder: 'End Placeholder',
       widgetColumnWidth: 'Width',
       widgetSize: 'Size',
+      autoFullWidth: 'Auto Full Width',
       showStops: 'Show Stops',
       displayStyle: 'Display Style',
       inlineLayout: 'inline',
@@ -278,6 +279,7 @@ export default {
       vertical: 'Vertical',
       showBlankRow: 'Show Blank Row',
       showRowNumber: 'Show Row Number',
+      contentHeight: 'Content Area Height',
 
       insertColumnToLeft: 'insert column to left',
       insertColumnToRight: 'insert column to right',

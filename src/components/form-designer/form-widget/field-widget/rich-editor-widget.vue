@@ -18,7 +18,7 @@
               @blur="handleRichEditorBlurEvent"
               @focus="handleRichEditorFocusEvent"
               @change="handleRichEditorChangeEvent"
-              style="height: 200px;"></quill-editor>
+              :style="!!field.options.contentHeight ? `height: ${field.options.contentHeight};`: ''"></quill-editor>
     </div>
 
   </form-item-wrapper>
@@ -32,11 +32,6 @@
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
 
   import { Quill, quillEditor } from 'vue3-quill'
-  //const modules = import.meta.glob('../../../../../node_modules/vue3-quill/src/index.js')
-  //console.log('test=====', modules)
-
-  // import { QuillEditor } from '@vueup/vue-quill'
-  // import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
   export default {
     name: "rich-editor-widget",
@@ -75,8 +70,6 @@
       //   require(['vue2-editor'], ({VueEditor}) => resolve(VueEditor))
       // }
       quillEditor,
-
-      // QuillEditor,
     },
     inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],
     data() {

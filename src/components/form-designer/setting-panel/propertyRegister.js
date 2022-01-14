@@ -14,6 +14,7 @@ const COMMON_PROPERTIES = {
   'startPlaceholder'  :            'startPlaceholder-editor',
   'endPlaceholder'    :            'endPlaceholder-editor',
   'columnWidth'       :            'columnWidth-editor',
+  'autoFullWidth'     :            'autoFullWidth-editor',
   'size'              :            'size-editor',
   'showStops'         :            'showStops-editor',
   'displayStyle'      :            'displayStyle-editor',
@@ -50,6 +51,7 @@ const COMMON_PROPERTIES = {
   'limit'             :            'limit-editor',
   'fileMaxSize'       :            'fileMaxSize-editor',
   'fileTypes'         :            'fileTypes-editor',
+  'contentHeight'     :            'contentHeight-editor',
   'customClass'       :            'customClass-editor',
 
   //容器
