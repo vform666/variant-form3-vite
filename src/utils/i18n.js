@@ -37,7 +37,11 @@ const langResources = {
 //locale.i18n((key, value) => i18n.t(key, value))
 
 export const changeLocale = function(langName) {
-  i18n.locale = langName
+  //console.log('11111', i18n.locale )
+  //i18n.locale = langName
+
+  i18n.global.locale = langName
+  //console.log('22222', i18n.locale )
   localStorage.setItem('v_form_locale', langName)
 }
 

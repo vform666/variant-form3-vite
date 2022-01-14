@@ -832,6 +832,7 @@ export const advancedFields = [
       placeholder: '',
       labelWidth: null,
       labelHidden: false,
+      contentHeight: '200px',
       disabled: false,
       hidden: false,
       required: false,

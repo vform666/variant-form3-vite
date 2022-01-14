@@ -10,15 +10,16 @@
     </vue-editor>
     -->
 
-    <quill-editor
-            v-model:value="fieldModel"
-            :options="editorOption"
-            :disabled="field.options.disabled"
-            @blur="handleRichEditorBlurEvent"
-            @focus="handleRichEditorFocusEvent"
-            @change="handleRichEditorChangeEvent"
-            style="height: 200px;"
-    />
+    <div>
+      <quill-editor
+              v-model:value="fieldModel"
+              :options="editorOption"
+              :disabled="field.options.disabled"
+              @blur="handleRichEditorBlurEvent"
+              @focus="handleRichEditorFocusEvent"
+              @change="handleRichEditorChangeEvent"
+              style="height: 200px;"></quill-editor>
+    </div>
 
   </form-item-wrapper>
 </template>
@@ -30,12 +31,12 @@
   import {deepClone} from "@/utils/util";
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
 
-  //import { Quill, quillEditor } from 'vue3-quill'
+  import { Quill, quillEditor } from 'vue3-quill'
   //const modules = import.meta.glob('../../../../../node_modules/vue3-quill/src/index.js')
   //console.log('test=====', modules)
 
-  import { QuillEditor } from '@vueup/vue-quill'
-  import '@vueup/vue-quill/dist/vue-quill.snow.css'
+  // import { QuillEditor } from '@vueup/vue-quill'
+  // import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
   export default {
     name: "rich-editor-widget",
@@ -73,9 +74,9 @@
       // VueEditor: resolve => { //懒加载！！
       //   require(['vue2-editor'], ({VueEditor}) => resolve(VueEditor))
       // }
-      //quillEditor,
+      quillEditor,
 
-      QuillEditor,
+      // QuillEditor,
     },
     inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],
     data() {
