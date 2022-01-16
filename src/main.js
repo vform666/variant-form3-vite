@@ -4,8 +4,10 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import '@/styles/index.scss'
+import '@/iconfont/iconfont.css'
 import Draggable from '@/../lib/vuedraggable/dist/vuedraggable.umd.js'
 //import Draggable from 'vuedraggable'
+import {registerIcon} from '@/utils/el-icons'
 import SvgIcon from '@/components/svg-icon'  //svg组件
 import 'virtual:svg-icons-register'
 
@@ -23,6 +25,7 @@ if (typeof window !== 'undefined') {
 const vfApp = createApp(App)
 
 vfApp.use(ElementPlus)
+registerIcon(vfApp)
 vfApp.component('draggable', Draggable)
 vfApp.component('svg-icon', SvgIcon)
 addDirective(vfApp)

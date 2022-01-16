@@ -454,6 +454,15 @@
         try {
           let importObj = JSON.parse(this.importTemplate)
           //console.log('test import', this.importTemplate)
+          if (!importObj || !importObj.formConfig) {
+            throw new Error( this.i18nt('designer.hint.invalidJsonFormat') )
+          }
+
+          let fJsonVer = importObj.formConfig.jsonVersion
+          if (!fJsonVer || (fJsonVer !== 3)) {
+            throw new Error( this.i18nt('designer.hint.jsonVersionMismatch') )
+          }
+
           this.designer.loadFormJson(importObj)
 
           this.showImportJsonDialogFlag = false

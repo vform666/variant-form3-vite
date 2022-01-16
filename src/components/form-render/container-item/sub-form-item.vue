@@ -8,7 +8,7 @@
           <span class="action-label">{{i18nt('render.hint.subFormAction')}}</span>
           <el-button :disabled="actionDisabled" round type="primary" size="small" class="action-button" @click="addSubFormRow"
                      :title="i18nt('render.hint.subFormAddActionHint')">
-            {{i18nt('render.hint.subFormAddAction')}}<i class="el-icon-plus el-icon-right"></i></el-button>
+            {{i18nt('render.hint.subFormAddAction')}}<svg-icon icon-class="el-plus" /></el-button>
         </div>
         <template v-for="(subWidget) in widget.widgetList" :key="subWidget.id + 'thc'">
           <div class="field-header-column"
@@ -18,16 +18,16 @@
               <template v-if="subWidget.options.labelIconPosition === 'front'">
                 <template v-if="!!subWidget.options.labelTooltip">
                   <el-tooltip :content="subWidget.options.labelTooltip" effect="light">
-                    <i :class="subWidget.options.labelIconClass"></i></el-tooltip>{{subWidget.options.label}}</template>
+                    <svg-icon :icon-class="subWidget.options.labelIconClass" /></el-tooltip>{{subWidget.options.label}}</template>
                 <template v-else>
-                  <i :class="subWidget.options.labelIconClass"></i>{{subWidget.options.label}}</template>
+                  <svg-icon :icon-class="subWidget.options.labelIconClass" />{{subWidget.options.label}}</template>
               </template>
               <template v-else-if="subWidget.options.labelIconPosition === 'rear'">
                 <template v-if="!!subWidget.options.labelTooltip">
                   {{subWidget.options.label}}<el-tooltip :content="subWidget.options.labelTooltip" effect="light">
-                  <i :class="subWidget.options.labelIconClass"></i></el-tooltip></template>
+                  <svg-icon :icon-class="subWidget.options.labelIconClass" /></el-tooltip></template>
                 <template v-else>
-                  {{subWidget.options.label}}<i :class="subWidget.options.labelIconClass"></i></template>
+                  {{subWidget.options.label}}<svg-icon :icon-class="subWidget.options.labelIconClass" /></template>
               </template>
             </span>
             <template v-else>

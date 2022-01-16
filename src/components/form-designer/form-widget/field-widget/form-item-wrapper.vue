@@ -22,16 +22,16 @@
           <template v-if="field.options.labelIconPosition === 'front'">
             <template v-if="!!field.options.labelTooltip">
               <el-tooltip :content="field.options.labelTooltip" effect="light">
-                <i :class="field.options.labelIconClass"></i></el-tooltip>{{label}}</template>
+                <svg-icon :icon-class="field.options.labelIconClass" /></el-tooltip>{{label}}</template>
             <template v-else>
-              <i :class="field.options.labelIconClass"></i>{{label}}</template>
+              <svg-icon :icon-class="field.options.labelIconClass" />{{label}}</template>
           </template>
           <template v-else-if="field.options.labelIconPosition === 'rear'">
             <template v-if="!!field.options.labelTooltip">
               {{label}}<el-tooltip :content="field.options.labelTooltip" effect="light">
-              <i :class="field.options.labelIconClass"></i></el-tooltip></template>
+              <svg-icon :icon-class="field.options.labelIconClass" /></el-tooltip></template>
             <template v-else>
-              {{label}}<i :class="field.options.labelIconClass"></i></template>
+              {{label}}<svg-icon :icon-class="field.options.labelIconClass" /></template>
           </template>
         </span>
       </template>

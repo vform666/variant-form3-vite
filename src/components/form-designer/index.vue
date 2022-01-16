@@ -13,10 +13,10 @@
     <el-header class="main-header">
       <div class="float-left main-title">
         <img src="../../assets/vform-logo.png" @click="openHome">
-        <span class="bold">VForm</span> {{i18nt('application.productTitle')}} <span class="version-span">Ver {{vFormVersion}}</span></div>
+        <span class="bold">VForm 3</span> {{i18nt('application.productTitle')}} <span class="version-span">Ver {{vFormVersion}}</span></div>
       <div class="float-right external-link">
         <el-dropdown v-if="showLink('languageMenu')" @command="handleLanguageChanged">
-          <span class="el-dropdown-link">{{curLangName}}<i class="el-icon-arrow-down el-icon--right"></i></span>
+          <span class="el-dropdown-link">{{curLangName}}<svg-icon icon-class="el-arrow-down" /></span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="zh-CN">{{i18nt('application.zh-CN')}}</el-dropdown-item>
@@ -72,12 +72,14 @@
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config"
   import i18n, { changeLocale } from "@/utils/i18n"
   import axios from 'axios'
+  import SvgIcon from "@/components/svg-icon/index";
 
   export default {
     name: "VFormDesigner",
     componentName: "VFormDesigner",
     mixins: [i18n],
     components: {
+      SvgIcon,
       WidgetPanel,
       ToolbarPanel,
       SettingPanel,

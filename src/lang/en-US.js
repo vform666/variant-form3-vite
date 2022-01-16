@@ -83,6 +83,8 @@ export default {
       copyHtmlCode: 'Copy HTML Code',
       copyJsonSuccess: 'Copy succeed',
       importJsonSuccess: 'Import succeed',
+      invalidJsonFormat: 'Invalid JSON format',
+      jsonVersionMismatch: 'Version of JSON mismatch',
       copyJsonFail: 'Copy failed',
       copyVueCodeSuccess: 'Copy succeed',
       copyVueCodeFail: 'Copy failed',

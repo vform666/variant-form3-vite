@@ -1,13 +1,5 @@
-# Variant Form For Vue 3预览版
+# Variant Form 3 Beta For Vue 3.x
 #### 一款高效的Vue低代码表单，可视化设计，一键生成源码，享受更多摸鱼时间。
-
-### 说明
-这是一个开发预览版，仅供学习参考，请勿用于开发环境，下述问题亟待解决：
-```
-iconfont图标替换为svg未全部完成；
-多语言切换未完成；
-富文本组件修改未完成；
-```
 
 ### 友情链接
 [Fantastic-admin](https://hooray.gitee.io/fantastic-admin/) —— 一款开箱即用的 Vue 中后台管理系统框架（支持Vue2/Vue3）

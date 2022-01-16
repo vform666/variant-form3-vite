@@ -3,7 +3,7 @@
     <template #label>
       <span>{{i18nt('designer.setting.fileTypes')}}
         <el-tooltip effect="light" :content="i18nt('designer.setting.fileTypesHelp')">
-          <i class="el-icon-info"></i></el-tooltip>
+          <svg-icon icon-class="el-info" /></el-tooltip>
       </span>
     </template>
     <el-select multiple allow-create filterable default-first-option

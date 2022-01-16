@@ -4,8 +4,10 @@ import VFormDesigner from '@/components/form-designer/index.vue'
 import VFormRender from '@/components/form-render/index.vue'
 
 import Draggable from '@/../lib/vuedraggable/dist/vuedraggable.umd.js'
+import {registerIcon} from '@/utils/el-icons'
 import SvgIcon from '@/components/svg-icon'  //svg组件
 import 'virtual:svg-icons-register'
+import '@/iconfont/iconfont.css'
 
 import ContainerWidgets from '@/components/form-designer/form-widget/container-widget/index'
 import ContainerItems from '@/components/form-render/container-item/index'
@@ -23,6 +25,7 @@ VFormDesigner.install = function (app) {
   app.use(ContainerWidgets)
   app.use(ContainerItems)
 
+  registerIcon(app)
   app.component('draggable', Draggable)
   app.component('svg-icon', SvgIcon)
   app.component(VFormDesigner.name, VFormDesigner)

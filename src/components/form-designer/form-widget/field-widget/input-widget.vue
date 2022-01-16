@@ -16,7 +16,7 @@
               @change="handleChangeEvent">
       <template #append v-if="field.options.appendButton">
         <el-button :disabled="field.options.disabled || field.options.appendButtonDisabled"
-                   :class="field.options.buttonIcon" @click="emitAppendButtonClick"></el-button>
+                   @click="emitAppendButtonClick"><svg-icon :icon-class="field.options.buttonIcon" /></el-button>
       </template>
     </el-input>
   </form-item-wrapper>

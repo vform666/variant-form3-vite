@@ -16,15 +16,17 @@
              v-if="!!field.options.uploadTip">{{field.options.uploadTip}}</div>
       </template>
       <template #default>
-        <i class="el-icon-plus avatar-uploader-icon"></i>
+        <svg-icon icon-class="el-plus" /><i class="el-icon-plus avatar-uploader-icon"></i>
       </template>
       <template #file="{ file }">
         <div class="upload-file-list">
           <span class="upload-file-name" :title="file.name">{{file.name}}</span>
           <a :href="file.url" download="">
-            <i class="el-icon-download file-action" title="i18nt('render.hint.downloadFile')"></i></a>
-          <i class="el-icon-delete file-action" title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
-            @click="removeUploadFile(file.name)"></i>
+            <span class="el-icon-download file-action" title="i18nt('render.hint.downloadFile')">
+              <svg-icon icon-class="el-download" />
+            </span></a>
+          <span class="file-action" title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
+            @click="removeUploadFile(file.name)"><svg-icon icon-class="el-delete" /></span>
         </div>
       </template>
     </el-upload>
@@ -37,6 +39,7 @@
   import i18n, {translate} from "@/utils/i18n";
   import {deepClone} from "@/utils/util";
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
+  import SvgIcon from "@/components/svg-icon/index";
 
   let selectFileText = "'" + translate('render.hint.selectFile') + "'"
 
@@ -71,6 +74,7 @@
 
     },
     components: {
+      SvgIcon,
       FormItemWrapper,
     },
     inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],

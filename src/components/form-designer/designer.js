@@ -24,6 +24,7 @@ export function createDesigner(vueInstance) {
     customClass: '',
     functions: '',
     layoutType: 'PC',
+    jsonVersion: 3,
 
     onFormCreated: '',
     onFormMounted: '',

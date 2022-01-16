@@ -3,7 +3,7 @@
     <template #label>
       <span>{{i18nt('designer.setting.fileTypes')}}
         <el-tooltip effect="light" :content="i18nt('designer.setting.fileTypesHelp')">
-          <i class="el-icon-info"></i></el-tooltip>
+          <svg-icon icon-class="el-info" /></el-tooltip>
       </span>
     </template>
     <el-select multiple allow-create filterable default-first-option
@@ -31,9 +31,9 @@
     data() {
       return {
         uploadPictureTypes: [
-          {value: 'jpeg', label: 'JPG'},
-          {value: 'png', label: 'PNG'},
-          {value: 'gif', label: 'GIF'},
+          {value: 'jpeg', label: 'jpg'}, /* label如用大写字母，选择两个文件类型就会导致设置面板快速抖动、闪烁，非常奇怪！！ */
+          {value: 'png', label: 'png'},
+          {value: 'gif', label: 'gif'},
         ],
       }
     }

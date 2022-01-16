@@ -83,6 +83,8 @@ export default {
       copyHtmlCode: '复制HTML代码',
       copyJsonSuccess: '复制JSON成功',
       importJsonSuccess: '导入JSON成功',
+      invalidJsonFormat: '无效的表单JSON格式',
+      jsonVersionMismatch: '表单JSON版本号不匹配',
       copyJsonFail: '复制JSON失败',
       copyVueCodeSuccess: '复制Vue代码成功',
       copyVueCodeFail: '复制Vue代码失败',

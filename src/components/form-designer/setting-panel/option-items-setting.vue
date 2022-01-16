@@ -34,11 +34,12 @@
         </template>
       </draggable>
     </el-checkbox-group>
-    <el-cascader v-else-if="(selectedWidget.type === 'cascader')"
-                 v-model="optionModel.defaultValue" :options="optionModel.optionItems"
-                 @change="emitDefaultValueChange"
-                :placeholder="i18nt('render.hint.selectPlaceholder')" style="width: 100%">
-    </el-cascader>
+    <div v-else-if="(selectedWidget.type === 'cascader')" class="full-width-input">
+      <el-cascader v-model="optionModel.defaultValue" :options="optionModel.optionItems"
+                   @change="emitDefaultValueChange"
+                   :placeholder="i18nt('render.hint.selectPlaceholder')">
+      </el-cascader>
+    </div>
     <div v-if="(selectedWidget.type === 'cascader')">
       <el-button type="text" @click="importCascaderOptions">{{i18nt('designer.setting.importOptions')}}</el-button>
       <el-button type="text" @click="resetDefault">{{i18nt('designer.setting.resetDefault')}}</el-button>
@@ -222,9 +223,13 @@
 </script>
 
 <style lang="scss" scoped>
-  .option-items-pane ul {
-    padding-inline-start: 6px;
-    padding-left: 6px;  /* 重置IE11默认样式 */
+  .option-items-pane {
+    width: 100%;
+
+    ul {
+      padding-inline-start: 6px;
+      padding-left: 6px; /* 重置IE11默认样式 */
+    }
   }
 
   li.ghost{
@@ -243,4 +248,13 @@
   .dialog-footer .el-button {
     width: 100px;
   }
+
+  .full-width-input {
+    width: 100% !important;
+
+    :deep(.el-cascader) {
+      width: 100% !important;
+    }
+  }
+
 </style>

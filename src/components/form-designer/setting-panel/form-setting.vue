@@ -300,8 +300,8 @@
       white-space: nowrap;
     }
 
-    :deep(.el-form-item--mini.el-form-item) {
-      margin-bottom: 6px;
+    :deep(.el-form-item--small.el-form-item) {
+      margin-bottom: 10px;
     }
 
     .radio-group-custom {

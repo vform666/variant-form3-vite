@@ -146,7 +146,7 @@ export const basicFields = [
       suffixIcon: '',
       appendButton: false,
       appendButtonDisabled: false,
-      buttonIcon: 'el-icon-search',
+      buttonIcon: 'custom-search',
       //-------------------
       onCreated: '',
       onMounted: '',

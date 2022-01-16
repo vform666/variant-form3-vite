@@ -15,7 +15,7 @@
         <div class="el-upload__tip"
              v-if="!!field.options.uploadTip">{{field.options.uploadTip}}</div>
       </template>
-      <i class="el-icon-plus avatar-uploader-icon"></i>
+      <div class="uploader-icon"><svg-icon icon-class="el-plus" /></div>
     </el-upload>
   </form-item-wrapper>
 </template>
@@ -220,6 +220,15 @@
     :deep(div.el-upload__tip) { /* 隐藏最后的文件上传按钮提示 */
       display: none;
     }
+  }
+
+  .uploader-icon {
+    height: 100%;
+    display: flex;
+    color: #8c939d;
+    font-size: 28px;
+    justify-content: center;
+    align-items: center;
   }
 
 </style>

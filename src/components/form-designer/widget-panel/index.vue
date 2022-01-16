@@ -5,7 +5,7 @@
     <el-tabs v-model="firstTab" class="no-bottom-margin indent-left-margin">
       <el-tab-pane name="componentLib">
         <template #label>
-          <span><i class="el-icon-set-up"></i> {{i18nt('designer.componentLib')}}</span>
+          <span><svg-icon icon-class="el-set-up" /> {{i18nt('designer.componentLib')}}</span>
         </template>
 
       <el-collapse v-model="activeNames" class="widget-collapse">
@@ -61,7 +61,7 @@
 
       <el-tab-pane v-if="showFormTemplates()" name="formLib" style="padding: 8px">
         <template #label>
-          <span><i class="el-icon-c-scale-to-original"></i> {{i18nt('designer.formLib')}}</span>
+          <span><svg-icon icon-class="el-form-template" /> {{i18nt('designer.formLib')}}</span>
         </template>
 
         <template v-for="(ft, idx) in formTemplates">
