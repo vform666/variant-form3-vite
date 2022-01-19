@@ -238,7 +238,8 @@
           return ownPropEditorName
         }
 
-        return !!this.$root.$options.components[ownPropEditorName] ? ownPropEditorName : editorName  //全局注册的属性编辑器组件
+        //return !!this.$root.$options.components[ownPropEditorName] ? ownPropEditorName : editorName  //Vue2全局注册的属性编辑器组件
+        return !!this.$root.$.appContext.components[ownPropEditorName] ? ownPropEditorName : editorName  //Vue3全局注册的属性编辑器组件
       },
 
       showCollapse(propsObj) {
