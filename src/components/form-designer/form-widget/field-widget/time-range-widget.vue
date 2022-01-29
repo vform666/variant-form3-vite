@@ -6,7 +6,7 @@
       <el-time-picker ref="fieldEditor" is-range v-model="fieldModel"
                       :class="[!!field.options.autoFullWidth ? 'full-width-input' : '']"
                       :disabled="field.options.disabled" :readonly="field.options.readonly"
-                      :size="field.options.size"
+                      :size="widgetSize"
                       :clearable="field.options.clearable" :editable="field.options.editable"
                       :format="field.options.format" value-format="HH:mm:ss"
                       :start-placeholder="field.options.startPlaceholder || i18nt('render.hint.startTimePlaceholder')"

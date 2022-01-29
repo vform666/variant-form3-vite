@@ -312,7 +312,6 @@ export default {
       //eventBus.$emit('field-value-changed', [newValue, oldValue])  //此处应该加事件触发组件判断，非本组件（其他组件）触发的事件应该跳过，否则会出现事件无限循环！！
 
       this.emit$('field-value-changed', [newValue, oldValue])
-      console.log('test', 'ccccccccc')
 
       // /* 必须用dispatch向指定父组件派发消息！！ */
       this.dispatch('VFormRender', 'fieldChange',
@@ -377,9 +376,6 @@ export default {
     },
 
     handleOnChange(val, oldVal) {  //自定义onChange事件
-      console.log('test', 'aaaaaaaaa')
-      //debugger
-
       if (!!this.field.options.onChange) {
         let changeFn = new Function('value', 'oldValue', this.field.options.onChange)
         changeFn.call(this, val, oldVal)

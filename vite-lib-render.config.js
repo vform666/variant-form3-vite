@@ -14,7 +14,8 @@ export default defineConfig({
     vueJsx({}),
 
     //解决引入commonjs模块后打包出现的{'default' is not exported by XXX}错误!!
-    commonjs(),
+    commonjs({requireReturnsDefault: true}),  /* 配置requireReturnsDefault属性，
+    解决打包后引入VForm出现的"Axios is not a constructor"错！！ */
 
     viteSvgIcons({
       // Specify the icon folder to be cached
@@ -50,7 +51,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'install-render.js'),
       name: 'VFormRender',
-      fileName: (format) => `VFormRender.${format}.js`
+      fileName: (format) => `render.${format}.js`
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖

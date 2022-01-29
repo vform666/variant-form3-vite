@@ -4,7 +4,7 @@
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
     <el-select ref="fieldEditor" v-model="fieldModel" class="full-width-input"
                :disabled="field.options.disabled"
-               :size="field.options.size"
+               :size="widgetSize"
                :clearable="field.options.clearable"
                :filterable="field.options.filterable"
                :allow-create="field.options.allowCreate"

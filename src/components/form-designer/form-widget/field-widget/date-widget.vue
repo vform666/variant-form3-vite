@@ -5,7 +5,7 @@
     <el-date-picker ref="fieldEditor" :type="field.options.type" v-model="fieldModel"
                     :class="[!!field.options.autoFullWidth ? 'auto-full-width' : '']"
                     :readonly="field.options.readonly" :disabled="field.options.disabled"
-                    :size="field.options.size"
+                    :size="widgetSize"
                     :clearable="field.options.clearable" :editable="field.options.editable"
                     :format="field.options.format" :value-format="field.options.valueFormat"
                     :placeholder="field.options.placeholder || i18nt('render.hint.datePlaceholder')"

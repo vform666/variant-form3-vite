@@ -8,8 +8,8 @@ export const generateCode = function(formJson, codeType= 'vue') {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 	<title>VForm Demo</title>
-	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-	<link rel="stylesheet" href="https://ks3-cn-beijing.ksyun.com/vform2021/VFormRender.css?t=20210720">
+	<link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+	<link rel="stylesheet" href="https://ks3-cn-beijing.ksyun.com/vform3/render.style.css?t=20220129">
 	<style type="text/css">
 	</style>
 </head>
@@ -21,24 +21,18 @@ export const generateCode = function(formJson, codeType= 'vue') {
 	  <el-button type="primary" @click="submitForm">Submit</el-button>
   </div>
 
-<script type="text/javascript">
-  if (!!window.ActiveXObject || "ActiveXObject" in window) { //IE load polyfill.js for Promise
-    var scriptEle = document.createElement("script");
-    scriptEle.type = "text/javascript";
-    scriptEle.src = "https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.min.js"
-    document.body.appendChild(scriptEle)
-  }
-</script>
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script src="https://ks3-cn-beijing.ksyun.com/vform2021/VFormRender.umd.min.js?t=20210720"></script>
+<script src="//unpkg.com/vue@next"></script>
+<script src="//unpkg.com/element-plus"></script>
+<script src="https://ks3-cn-beijing.ksyun.com/vform3/render.umd.js?t=20220129"></script>
 <script>
-	new Vue({
-      el: '#app',
-      data: {
-        formJson: ${formJsonStr},
-        formData: {},
-        optionData: {}
+  const { createApp } = Vue;
+	const app = createApp({
+      data() {
+        return {
+          formJson: ${formJsonStr},
+          formData: {},
+          optionData: {}
+        }
       },
       methods: {
         submitForm: function() {
@@ -52,6 +46,9 @@ export const generateCode = function(formJson, codeType= 'vue') {
         }
       }
 	});
+	app.use(ElementPlus)
+	app.use(VFormRender)
+	app.mount("#app");
 </script>
 </body>
 </html>`
@@ -64,26 +61,24 @@ export const generateCode = function(formJson, codeType= 'vue') {
     <el-button type="primary" @click="submitForm">Submit</el-button>
   </div>
 </template>
-<script>
-  export default {
-    data() {
-      return {
-        formJson: ${formJsonStr},
-        formData: {},
-        optionData: {}
-      }
-    },
-    methods: {
-      submitForm() {
-        this.$refs.vFormRef.getFormData().then(formData => {
-          // Form Validation OK
-          alert( JSON.stringify(formData) )
-        }).catch(error => {
-          // Form Validation failed
-          this.$message.error(error)
-        })
-      }
-    }
+
+<script setup>
+  import { ref, reactive } from 'vue'
+  import { ElMessage } from 'element-plus'
+
+  const formJson = reactive(${formJsonStr})
+  const formData = reactive({})
+  const optionData = reactive({})
+  const vFormRef = ref(null)
+
+  const submitForm = () => {
+    vFormRef.value.getFormData().then(formData => {
+      // Form Validation OK
+      alert( JSON.stringify(formData) )
+    }).catch(error => {
+      // Form Validation failed
+      ElMessage.error(error)
+    })
   }
 </script>`
 

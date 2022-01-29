@@ -4,7 +4,7 @@
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
     <el-input ref="fieldEditor" v-model="fieldModel"
               :disabled="field.options.disabled" :readonly="field.options.readonly"
-              :size="field.options.size" class="hide-spin-button"
+              :size="widgetSize" class="hide-spin-button"
               :type="inputType"
               :show-password="field.options.showPassword"
               :placeholder="field.options.placeholder"

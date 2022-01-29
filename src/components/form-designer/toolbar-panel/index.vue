@@ -647,11 +647,15 @@
   }
 
   .left-toolbar {
+    display: flex;
+    margin-top: 4px;
     float: left;
     font-size: 16px;
   }
 
   .right-toolbar {
+    display: flex;
+    margin-top: 5px;
     float: right;
 
     :deep(.el-button--text) {

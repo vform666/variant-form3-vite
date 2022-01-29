@@ -3,7 +3,7 @@
                      :parent-widget="parentWidget" :parent-list="parentList" :index-of-parent-list="indexOfParentList"
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
     <el-color-picker ref="fieldEditor" v-model="fieldModel"
-                     :size="field.options.size"
+                     :size="widgetSize"
                      :disabled="field.options.disabled"
                      @change="handleChangeEvent">
     </el-color-picker>

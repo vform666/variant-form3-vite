@@ -5,7 +5,7 @@
     <div class="full-width-input">
       <el-cascader ref="fieldEditor" :options="field.options.optionItems" v-model="fieldModel"
                    :disabled="field.options.disabled"
-                   :size="field.options.size"
+                   :size="widgetSize"
                    :clearable="field.options.clearable"
                    :filterable="field.options.filterable"
                    :placeholder="field.options.placeholder || i18nt('render.hint.selectPlaceholder')"

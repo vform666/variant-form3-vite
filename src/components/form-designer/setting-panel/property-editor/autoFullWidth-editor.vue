@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.autoFullWidth')">
-    <el-checkbox v-model="optionModel.autoFullWidth"></el-checkbox>
+    <el-switch v-model="optionModel.autoFullWidth"></el-switch>
   </el-form-item>
 </template>
 

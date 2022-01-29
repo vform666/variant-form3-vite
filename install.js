@@ -62,10 +62,9 @@ const install = (app) => {
   })
 }
 
-// if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时主动调用install方法！！ */
-//   window.axios = axios
-//   install(window.Vue);
-// }
+if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时赋值axios！！ */
+  window.axios = axios
+}
 
 export default {
   install,
