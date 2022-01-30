@@ -817,12 +817,10 @@ export function createDesigner(vueInstance) {
     },
 
     emitEvent(evtName, evtData) {  //用于兄弟组件发射事件
-      //this.vueInstance.$emit(evtName, evtData)
       eventBus.$emit(evtName, evtData)
     },
 
     handleEvent(evtName, callback) {  //用于兄弟组件接收事件
-      //this.vueInstance.$on(evtName, (data) => callback(data))
       eventBus.$on(evtName, (data) => callback(data))
     },
 

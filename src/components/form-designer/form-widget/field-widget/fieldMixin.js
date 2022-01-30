@@ -88,12 +88,6 @@ export default {
     },
 
     initEventHandler() {
-      // eventBus.$on('setFormData', (newFormData) => {
-      //   console.log('formModel of globalModel----------', this.globalModel.formModel)
-      //   if (!this.subFormItemFlag) {
-      //     this.setValue(newFormData[this.field.options.name])
-      //   }
-      // })
       this.on$('setFormData', (newFormData) => {
         console.log('formModel of globalModel----------', this.globalModel.formModel)
         if (!this.subFormItemFlag) {
@@ -101,14 +95,6 @@ export default {
         }
       })
 
-      // eventBus.$on('field-value-changed', (values) => {
-      //   if (!!this.subFormItemFlag) {
-      //     let subFormData = this.formModel[this.subFormName]
-      //     this.handleOnChangeForSubForm(values[0], values[1], subFormData, this.subFormRowId)
-      //   } else {
-      //     this.handleOnChange(values[0], values[1])
-      //   }
-      // })
       this.on$('field-value-changed', (values) => {
         if (!!this.subFormItemFlag) {
           let subFormData = this.formModel[this.subFormName]
@@ -118,12 +104,6 @@ export default {
         }
       })
 
-      /* 监听重新加载选项事件 */
-      // eventBus.$on('reloadOptionItems', (widgetNames) => {
-      //   if ((widgetNames.length === 0) || (widgetNames.indexOf(this.field.options.name) > -1)) {
-      //     this.initOptionItems(true)
-      //   }
-      // })
       this.on$('reloadOptionItems', (widgetNames) => {
         if ((widgetNames.length === 0) || (widgetNames.indexOf(this.field.options.name) > -1)) {
           this.initOptionItems(true)
@@ -308,15 +288,11 @@ export default {
     //--------------------- 事件处理 begin ------------------//
 
     emitFieldDataChange(newValue, oldValue) {
-      //this.$emit('field-value-changed', [newValue, oldValue])
-      //eventBus.$emit('field-value-changed', [newValue, oldValue])  //此处应该加事件触发组件判断，非本组件（其他组件）触发的事件应该跳过，否则会出现事件无限循环！！
-
       this.emit$('field-value-changed', [newValue, oldValue])
 
-      // /* 必须用dispatch向指定父组件派发消息！！ */
+      /* 必须用dispatch向指定父组件派发消息！！ */
       this.dispatch('VFormRender', 'fieldChange',
           [this.field.options.name, newValue, oldValue, this.subFormName, this.subFormRowIndex])
-      // eventBus.$emit('fieldChange', [this.field.options.name, newValue, oldValue, this.subFormName, this.subFormRowIndex])
     },
 
     syncUpdateFormModel(value) {
@@ -559,12 +535,10 @@ export default {
     },
 
     setUploadHeader(name, value) {
-      //this.$set(this.uploadHeaders, name, value)
       this.uploadHeaders[name] = value
     },
 
     setUploadData(name, value) {
-      //this.$set(this.uploadData, name, value)
       this.uploadData[name] = value
     },
 

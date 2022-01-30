@@ -221,15 +221,12 @@
                   }
                 })
 
-                //this.$set(this.formDataModel, subFormName, [subFormDataRow])  //
                 this.formDataModel[subFormName] = [subFormDataRow]
               } else {
-                //this.$set(this.formDataModel, subFormName, [])  //
                 this.formDataModel[subFormName] = []
               }
             } else {
               let initialValue = this.formData[subFormName]
-              //this.$set(this.formDataModel, subFormName, deepClone(initialValue))
               this.formDataModel[subFormName] = deepClone(initialValue)
             }
           } else if ((wItem.type === 'grid-col') || (wItem.type === 'table-cell')) {
@@ -247,21 +244,16 @@
           }
         } else if (!!wItem.formItemFlag) {
           if (!this.formData.hasOwnProperty(wItem.options.name)) {
-            //this.formDataModel[wItem.options.name] = '' //这种写法不支持对象属性响应式更新，必须用$set方法！！
-            //this.$set(this.formDataModel, wItem.options.name, wItem.options.defaultValue)  //设置字段默认值
             this.formDataModel[wItem.options.name] = wItem.options.defaultValue
           } else {
             let initialValue = this.formData[wItem.options.name]
-            //this.$set(this.formDataModel, wItem.options.name, deepClone(initialValue))
             this.formDataModel[wItem.options.name] = deepClone(initialValue)
           }
         }
       },
 
       addFieldChangeEventHandler() {
-        //eventBus.$off('fieldChange')  //移除原有事件监听
         this.off$('fieldChange')  //移除原有事件监听
-        //eventBus.$on('fieldChange', (fieldName, newValue, oldValue, subFormName, subFormRowIndex) => {
         this.on$('fieldChange', (fieldName, newValue, oldValue, subFormName, subFormRowIndex) => {
           this.handleFieldDataChange(fieldName, newValue, oldValue, subFormName, subFormRowIndex)
           this.$emit('formChange', fieldName, newValue, oldValue, this.formDataModel, subFormName, subFormRowIndex)
@@ -269,9 +261,7 @@
       },
 
       addFieldValidateEventHandler() {
-        //eventBus.$off('fieldValidation')  //移除原有事件监听
         this.off$('fieldValidation')  //移除原有事件监听
-        //eventBus.$on('fieldValidation', (fieldName) => {
         this.on$('fieldValidation', (fieldName) => {
           this.$refs.renderForm.validateField(fieldName)
         })
@@ -366,10 +356,8 @@
             this.clearFormDataModel()  //上行代码有问题，会导致表单校验失败，故保留原对象引用只清空对象属性！！
             this.buildFormModel(newFormJsonObj.widgetList)
 
-            //this.$set(this.formJsonObj, 'formConfig', newFormJsonObj.formConfig)
             this.formJsonObj['formConfig'] = newFormJsonObj.formConfig
             this._provided.formConfig = newFormJsonObj.formConfig  //强制更新provide的formConfig对象
-            //this.$set(this.formJsonObj, 'widgetList', newFormJsonObj.widgetList)
             this.formJsonObj['widgetList'] = newFormJsonObj.widgetList
 
             this.initFormObject()

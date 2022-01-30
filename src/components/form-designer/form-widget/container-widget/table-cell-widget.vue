@@ -226,12 +226,10 @@
       },
 
       mergeLeftCol() {
-        //this.designer.mergeTableColumn(this.colArray, this.colIndex, true)
         this.designer.mergeTableCol(this.rowArray, this.colArray, this.rowIndex, this.colIndex, true, this.widget)
       },
 
       mergeRightCol() {
-        //this.designer.mergeTableColumn(this.colArray, this.colIndex, false)
         this.designer.mergeTableCol(this.rowArray, this.colArray, this.rowIndex, this.colIndex, false, this.widget)
       },
 

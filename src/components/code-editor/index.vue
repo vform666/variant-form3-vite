@@ -78,11 +78,6 @@
 
       //编辑时同步数据
       this.aceEditor.getSession().on('change',(ev)=>{
-        /*
-        //this.$emit('update:value', this.aceEditor.getValue())  // 触发更新事件, 实现.sync双向绑定！！
-        this.$emit('input', this.aceEditor.getValue())
-        */
-
         this.$emit('update:modelValue', this.aceEditor.getValue())
       })
     },
