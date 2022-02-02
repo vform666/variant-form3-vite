@@ -15,23 +15,6 @@ export default defineConfig({
     //添加jsx/tsx支持
     vueJsx({}),
 
-    //解决引入commonjs模块后打包出现的{'default' is not exported by XXX}错误!!
-    // commonjs(),
-    // commonjs({
-    //   //exclude: ['node_modules/vue/dist/*.js'],
-    //   requireReturnsDefault: true
-    // }),
-
-    // commonjs({requireReturnsDefault: (id) => {
-    //     //console.log('aaa', id)
-    //     if (!!id && id.indexOf('/sortablejs/') > -1) {
-    //       return false
-    //     } else {
-    //       return (!!id && id.indexOf('/axios/') > -1)
-    //     }
-    //   }
-    // }),
-
     /* 开启externalGlobals后，
        报错：TypeError: Cannot read properties of null (reading 'nodeType')，不知何故？？ */
     // externalGlobals({
@@ -72,8 +55,9 @@ export default defineConfig({
     minify: false,
     commonjsOptions: {
       exclude: [
-          'lib/vuedraggable/dist/vuedraggable.umd.js,',  //引号前的逗号不能删，不知何故？？
-        'vue/dist/*.js'],
+        'lib/vuedraggable/dist/vuedraggable.umd.js,',  //引号前的逗号不能删，不知何故？？
+        //'vue/dist/*.js'
+      ],
       include: []
       //requireReturnsDefault: true
     },

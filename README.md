@@ -98,7 +98,7 @@
      <el-button type="primary" @click="submitForm">Submit</el-button>
    </div>
  </template>
- <script>
+ <script setup>
    import { ref, reactive } from 'vue'
    import { ElMessage } from 'element-plus'
  
