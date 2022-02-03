@@ -401,11 +401,16 @@
     cursor: pointer;
   }
 
-  div.external-link a {
-    font-size: 13px;
-    text-decoration: none;
-    margin-right: 10px;
-    color: #606266;
+  div.external-link {
+    display: flex;
+    align-items: center;
+
+    a {
+      font-size: 13px;
+      text-decoration: none;
+      margin-right: 10px;
+      color: #606266;
+    }
   }
 
   .el-header.toolbar-header {
