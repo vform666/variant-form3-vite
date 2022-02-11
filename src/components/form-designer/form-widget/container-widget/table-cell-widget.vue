@@ -287,14 +287,7 @@
       border: 1px dashed #336699;
       margin: 3px;
 
-      //min-height: 36px;
       height: 100%;
-
-      /*position: absolute;*/
-      /*top: 0;*/
-      /*right: 0;*/
-      /*bottom: 0;*/
-      /*left: 0;*/
     }
 
     .table-cell-action{
@@ -306,6 +299,9 @@
       line-height: 28px;
       background: $--color-primary;
       z-index: 999;
+
+      display: flex;
+      align-items: center;
 
       i {
         font-size: 14px;

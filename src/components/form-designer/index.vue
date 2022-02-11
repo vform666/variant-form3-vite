@@ -72,7 +72,7 @@
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config"
   import i18n, { changeLocale } from "@/utils/i18n"
   import axios from 'axios'
-  import SvgIcon from "@/components/svg-icon/index";
+  import SvgIcon from "@/components/svg-icon/index"
 
   export default {
     name: "VFormDesigner",
@@ -123,12 +123,13 @@
       return {
         vFormVersion: VARIANT_FORM_VERSION,
         curLangName: '',
+        curLocale: '',
 
         vsCodeFlag: false,
         caseName: '',
 
-        docUrl: 'https://www.vform666.com/document.html',
-        gitUrl: 'https://github.com/vform666/variant-form',
+        docUrl: 'https://www.vform666.com/document3.html',
+        gitUrl: 'https://github.com/vform666/variant-form3-vite',
         chatUrl: 'https://www.vform666.com/chat-group.html',
         subScribeUrl: 'https://www.vform666.com/subscribe.html',
 
@@ -225,14 +226,14 @@
       },
 
       initLocale() {
-        let curLocale = localStorage.getItem('v_form_locale')
+        this.curLocale = localStorage.getItem('v_form_locale')
         if (!!this.vsCodeFlag) {
-          curLocale = curLocale || 'en-US'
+          this.curLocale = this.curLocale || 'en-US'
         } else {
-          curLocale = curLocale || 'zh-CN'
+          this.curLocale = this.curLocale || 'zh-CN'
         }
-        this.curLangName = this.i18nt('application.' + curLocale)
-        this.changeLanguage(curLocale)
+        this.curLangName = this.i18nt('application.' + this.curLocale)
+        this.changeLanguage(this.curLocale)
       },
 
       loadFieldListFromServer() {
