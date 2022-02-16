@@ -61,7 +61,7 @@
         <template #footer>
           <div class="dialog-footer">
             <el-button size="large" type="primary" @click="saveOptions">{{i18nt('designer.hint.confirm')}}</el-button>
-            <el-button size="large" type="" @click="showImportDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
+            <el-button size="large" @click="showImportDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
           </div>
         </template>
       </el-dialog>
@@ -75,7 +75,7 @@
         <template #footer>
           <div class="dialog-footer">
             <el-button size="large" type="primary" @click="saveCascaderOptions">{{i18nt('designer.hint.confirm')}}</el-button>
-            <el-button size="large" type="" @click="showImportCascaderDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
+            <el-button size="large" @click="showImportCascaderDialogFlag = false">{{i18nt('designer.hint.cancel')}}</el-button>
           </div>
         </template>
       </el-dialog>

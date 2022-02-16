@@ -13,7 +13,7 @@
         <el-button :type="layoutType === 'H5' ? 'info': ''" @click="changeLayoutType('H5')">
           {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
       </el-button-group>
-      <el-button type="" style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
+      <el-button style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
         <svg-icon icon-class="node-tree" /></el-button>
     </div>
 
@@ -60,7 +60,7 @@
             <el-button type="primary" @click="resetForm">{{i18nt('designer.hint.resetForm')}}</el-button>
             <el-button type="primary" @click="setFormDisabled">{{i18nt('designer.hint.disableForm')}}</el-button>
             <el-button type="primary" @click="setFormEnabled">{{i18nt('designer.hint.enableForm')}}</el-button>
-            <el-button type="" @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
+            <el-button @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
           </div>
         </template>
       </el-dialog>
@@ -93,7 +93,7 @@
             <el-button type="primary" class="copy-json-btn" :data-clipboard-text="jsonRawContent" @click="copyFormJson">
               {{i18nt('designer.hint.copyJson')}}</el-button>
             <el-button @click="saveFormJson">{{i18nt('designer.hint.saveFormJson')}}</el-button>
-            <el-button type="" @click="showExportJsonDialogFlag = false">
+            <el-button @click="showExportJsonDialogFlag = false">
               {{i18nt('designer.hint.closePreview')}}</el-button>
           </div>
         </template>
@@ -120,7 +120,7 @@
               {{i18nt('designer.hint.copyHtmlCode')}}</el-button>
             <el-button @click="saveVueCode">{{i18nt('designer.hint.saveVueCode')}}</el-button>
             <el-button @click="saveHtmlCode">{{i18nt('designer.hint.saveHtmlCode')}}</el-button>
-            <el-button type="" @click="showExportCodeDialogFlag = false">
+            <el-button @click="showExportCodeDialogFlag = false">
               {{i18nt('designer.hint.closePreview')}}</el-button>
           </div>
         </template>
@@ -140,7 +140,7 @@
             <el-button type="primary" class="copy-form-data-json-btn" :data-clipboard-text="formDataRawJson" @click="copyFormDataJson">
               {{i18nt('designer.hint.copyFormData')}}</el-button>
             <el-button @click="saveFormData">{{i18nt('designer.hint.saveFormData')}}</el-button>
-            <el-button type="" @click="showFormDataDialogFlag = false">
+            <el-button @click="showFormDataDialogFlag = false">
               {{i18nt('designer.hint.closePreview')}}</el-button>
           </div>
         </template>
@@ -167,7 +167,7 @@
               {{i18nt('designer.hint.copyVue3SFC')}}</el-button>
             <el-button @click="saveV2SFC">{{i18nt('designer.hint.saveVue2SFC')}}</el-button>
             <el-button @click="saveV3SFC">{{i18nt('designer.hint.saveVue3SFC')}}</el-button>
-            <el-button type="" @click="showExportSFCDialogFlag = false">
+            <el-button @click="showExportSFCDialogFlag = false">
               {{i18nt('designer.hint.closePreview')}}</el-button>
           </div>
         </template>

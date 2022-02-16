@@ -38,9 +38,9 @@
       <el-row v-for="(subFormRowId, sfrIdx) in rowIdData" class="sub-form-row" :key="subFormRowId">
         <div class="sub-form-action-column hide-label">
           <div class="action-button-column">
-            <el-button :disabled="actionDisabled" circle type="" icon="el-icon-circle-plus-outline" @click="insertSubFormRow(sfrIdx)"
+            <el-button :disabled="actionDisabled" circle icon="el-icon-circle-plus-outline" @click="insertSubFormRow(sfrIdx)"
                        :title="i18nt('render.hint.insertSubFormRow')"></el-button>
-            <el-button :disabled="actionDisabled" circle type="" icon="el-icon-delete" @click="deleteSubFormRow(sfrIdx)"
+            <el-button :disabled="actionDisabled" circle icon="el-icon-delete" @click="deleteSubFormRow(sfrIdx)"
                        :title="i18nt('render.hint.deleteSubFormRow')"></el-button>
             <span v-if="widget.options.showRowNumber" class="row-number-span">#{{sfrIdx+1}}</span>
           </div>
@@ -64,11 +64,11 @@
 
 <script>
   import emitter from '@/utils/emitter'
-  import i18n from "../../../utils/i18n"
-  import {deepClone, generateId} from "../../../utils/util"
-  import refMixin from "../../../components/form-render/refMixin"
+  import i18n from '@/utils/i18n'
+  import {deepClone, generateId} from '@/utils/util'
+  import refMixin from '../../../components/form-render/refMixin'
   import ContainerItemWrapper from './container-item-wrapper'
-  import containerItemMixin from "./containerItemMixin"
+  import containerItemMixin from './containerItemMixin'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
   import eventBus from "@/utils/event-bus"
 

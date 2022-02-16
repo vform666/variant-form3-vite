@@ -39,20 +39,6 @@ export const containers = [
     }
   },
 
-  /*
-  {
-    type: 'section',
-    category: 'container',
-    icon: 'section',
-    widgetList: [],
-    options: {
-      name: '',
-      hidden: false,
-      customClass: '',  //自定义css类名
-    }
-  },
-  */
-
   {
     type: 'grid-col',
     category: 'container',
