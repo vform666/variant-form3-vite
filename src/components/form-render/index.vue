@@ -360,8 +360,10 @@
             this._provided.formConfig = newFormJsonObj.formConfig  //强制更新provide的formConfig对象
             this.formJsonObj['widgetList'] = newFormJsonObj.widgetList
 
-            this.initFormObject()
-            this.handleOnMounted()
+            this.$nextTick(() => {
+              this.initFormObject()
+              this.handleOnMounted()
+            })
           } else {
             this.$message.error('Set form json failed.')
           }
