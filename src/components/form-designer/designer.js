@@ -50,7 +50,7 @@ export function createDesigner(vueInstance) {
       steps: [],
     },
 
-    initDesigner() {
+    initDesigner(resetFormJson) {
       this.widgetList = []
       this.formConfig = deepClone(defaultFormConfig)
 
@@ -61,7 +61,9 @@ export function createDesigner(vueInstance) {
           "color:#333"
       )
 
-      this.initHistoryData()
+      if (!resetFormJson) {
+        this.initHistoryData()
+      }
     },
 
     clearDesigner(skipHistoryChange) {
@@ -149,7 +151,6 @@ export function createDesigner(vueInstance) {
       if (!!evt.draggedContext && !!evt.draggedContext.element) {
         let wgCategory = evt.draggedContext.element.category
         let wgType = evt.draggedContext.element.type + ''
-        //console.log('wgType======', wgType)
         if (!!evt.to) {
           if ((evt.to.className === 'sub-form-table') && (wgCategory === 'container')) {
             //this.$message.info(this.vueInstance.i18nt('designer.hint.onlyFieldWidgetAcceptable'))
@@ -165,7 +166,6 @@ export function createDesigner(vueInstance) {
       if (!!evt.draggedContext && !!evt.draggedContext.element) {
         let wgCategory = evt.draggedContext.element.category
         let wgType = evt.draggedContext.element.type + ''
-        //console.log('wgType======', wgType)
         if (!!evt.to) {
           if ((evt.to.className === 'sub-form-table') && (wgType === 'slot')) {
             //this.$message.info(this.vueInstance.i18nt('designer.hint.onlyFieldWidgetAcceptable'))
@@ -714,7 +714,7 @@ export function createDesigner(vueInstance) {
       let newWidget = deepClone(origin)
       let tempId = generateId()
       newWidget.id = newWidget.type.replace(/-/g, '') + tempId
-      console.log('test id===', newWidget.id)
+      //console.log('test id===', newWidget.id)
       newWidget.options.name = newWidget.id
       newWidget.options.label = newWidget.type.toLowerCase()
 
@@ -865,8 +865,6 @@ export function createDesigner(vueInstance) {
     },
 
     emitHistoryChange() {
-      //console.log('------------', 'Form history changed!')
-
       if (this.historyData.index === this.historyData.maxStep - 1) {
         this.historyData.steps.shift()
       } else {
@@ -883,8 +881,6 @@ export function createDesigner(vueInstance) {
       if (this.historyData.index < this.historyData.steps.length - 1) {
         this.historyData.steps = this.historyData.steps.slice(0, this.historyData.index + 1)
       }
-
-      console.log('history', this.historyData.index)
     },
 
     saveCurrentHistoryStep() {
@@ -900,7 +896,6 @@ export function createDesigner(vueInstance) {
       if (this.historyData.index !== 0) {
         this.historyData.index--
       }
-      console.log('undo', this.historyData.index)
 
       this.widgetList = deepClone(this.historyData.steps[this.historyData.index].widgetList)
       this.formConfig = deepClone(this.historyData.steps[this.historyData.index].formConfig)
@@ -910,7 +905,6 @@ export function createDesigner(vueInstance) {
       if (this.historyData.index !== (this.historyData.steps.length - 1)) {
         this.historyData.index++
       }
-      console.log('redo', this.historyData.index)
 
       this.widgetList = deepClone(this.historyData.steps[this.historyData.index].widgetList)
       this.formConfig = deepClone(this.historyData.steps[this.historyData.index].formConfig)

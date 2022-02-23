@@ -114,6 +114,8 @@
             generateSFCButton: true,  //是否显示生成SFC按钮
 
             presetCssCode: '',  //设计器预设CSS样式代码
+
+            resetFormJson: false,  //是否在设计器初始化时将表单内容重置为空
           }
         }
       },

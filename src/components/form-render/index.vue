@@ -357,7 +357,7 @@
             this.buildFormModel(newFormJsonObj.widgetList)
 
             this.formJsonObj['formConfig'] = newFormJsonObj.formConfig
-            this._provided.formConfig = newFormJsonObj.formConfig  //强制更新provide的formConfig对象
+            // this._provided.formConfig = newFormJsonObj.formConfig  //强制更新provide的formConfig对象
             this.formJsonObj['widgetList'] = newFormJsonObj.widgetList
 
             this.$nextTick(() => {

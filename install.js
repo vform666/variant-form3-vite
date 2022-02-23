@@ -60,10 +60,12 @@ const install = (app) => {
   components.forEach(component => {
     app.component(component.name, component)
   })
+
+  window.axios = axios
 }
 
 if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时赋值axios！！ */
-  window.axios = axios
+  //window.axios = axios
 }
 
 export default {

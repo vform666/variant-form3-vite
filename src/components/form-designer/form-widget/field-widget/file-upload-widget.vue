@@ -185,16 +185,15 @@
       },
 
       handleFileUpload(res, file, fileList) {
-        if (!!this.field.options.onUploadSuccess) {
-          let mountFunc = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
-          mountFunc.call(this, res, file, fileList)
-        } else {
-          if (file.status === 'success') {
-            //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
-            this.updateUploadFieldModelAndEmitDataChange(fileList)
-            this.fileList = deepClone(fileList)
+        if (file.status === 'success') {
+          //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
+          this.updateUploadFieldModelAndEmitDataChange(fileList)
+          this.fileList = deepClone(fileList)
+          this.uploadBtnHidden = fileList.length >= this.field.options.limit
 
-            this.uploadBtnHidden = fileList.length >= this.field.options.limit
+          if (!!this.field.options.onUploadSuccess) {
+            let mountFunc = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
+            mountFunc.call(this, res, file, fileList)
           }
         }
       },
@@ -202,23 +201,33 @@
       handleFileRemove(file, fileList) {
         this.fileList = deepClone(fileList)  //this.fileList = fileList
         this.updateUploadFieldModelAndEmitDataChange(fileList)
-
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
+
+        if (!!this.field.options.onFileRemove) {
+          let customFn = new Function('file', 'fileList', this.field.options.onFileRemove)
+          customFn.call(this, file, fileList)
+        }
       },
 
       removeUploadFile(fileName) {
         let foundIdx = -1
+        let foundFile = null
         this.fileList.forEach((file,idx) => {
           if (file.name === fileName) {
             foundIdx = idx
+            foundFile = file
           }
         })
 
         if (foundIdx >= 0) {
           this.fileList.splice(foundIdx, 1)
           this.updateUploadFieldModelAndEmitDataChange(this.fileList)
-
           this.uploadBtnHidden = this.fileList.length >= this.field.options.limit
+
+          if (!!this.field.options.onFileRemove) {
+            let customFn = new Function('file', 'fileList', this.field.options.onFileRemove)
+            customFn.call(this, foundFile, this.fileList)
+          }
         }
       },
 

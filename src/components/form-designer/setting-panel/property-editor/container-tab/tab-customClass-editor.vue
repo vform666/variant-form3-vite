@@ -25,10 +25,11 @@
                        icon="el-icon-minus" class="col-delete-button"></el-button>
           </li>
         </template>
-        <div>
-          <el-button type="text" @click="addTabPane(selectedWidget)">{{i18nt('designer.setting.addTabPane')}}</el-button>
-        </div>
       </draggable>
+
+      <div>
+        <el-button type="text" @click="addTabPane(selectedWidget)">{{i18nt('designer.setting.addTabPane')}}</el-button>
+      </div>
     </el-form-item>
   </div>
 </template>
