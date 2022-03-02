@@ -93,8 +93,12 @@
 
       rules: Array,
     },
-    inject: ['formConfig'],
+    inject: ['getFormConfig'],
     computed: {
+      formConfig() {
+        return this.getFormConfig()
+      },
+
       selected() {
         return !!this.designer && this.field.id === this.designer.selectedId
       },

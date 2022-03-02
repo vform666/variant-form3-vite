@@ -180,14 +180,6 @@
 
     },
     created() {
-      // eventBus.$on('editEventHandler', (eventName, eventParams) => {
-      //   this.editEventHandler(eventName, eventParams)
-      // })
-
-      // eventBus.$on('editEventHandler', (eventParams) => {
-      //   this.editEventHandler(eventParams[0], eventParams[1])
-      // })
-
       this.on$('editEventHandler', (eventParams) => {
         //debugger
         this.editEventHandler(eventParams[0], eventParams[1])

@@ -55,7 +55,6 @@
     components: {
       FormItemWrapper,
     },
-    inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],
     data() {
       return {
         oldFieldValue: null, //field组件change之前的值

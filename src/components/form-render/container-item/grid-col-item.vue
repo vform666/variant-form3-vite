@@ -55,7 +55,7 @@
       },
 
     },
-    inject: ['refList', 'globalModel', 'formConfig', 'previewState'],
+    inject: ['refList', 'globalModel', 'getFormConfig', 'previewState'],
     data() {
       return {
         layoutProps: {
@@ -70,6 +70,10 @@
       }
     },
     computed: {
+      formConfig() {
+        return this.getFormConfig()
+      },
+
       customClass() {
         return this.widget.options.customClass || ''
       },

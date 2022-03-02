@@ -7,7 +7,6 @@ export default {
   methods: {
     editEventHandler(eventName, eventParams) {
       this.dispatch('SettingPanel', 'editEventHandler', [eventName, [...eventParams]])
-      // eventBus.$emit('editEventHandler', [eventName, [...eventParams]])
     },
 
   }

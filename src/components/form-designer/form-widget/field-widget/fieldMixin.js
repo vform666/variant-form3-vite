@@ -3,9 +3,13 @@ import FormValidators from '@/utils/validators'
 import eventBus from "@/utils/event-bus"
 
 export default {
-  inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel', 'getOptionData'],
+  inject: ['refList', 'getFormConfig', 'globalOptionData', 'globalModel', 'getOptionData'],
 
   computed: {
+    formConfig() {
+      return this.getFormConfig()
+    },
+
     widgetSize() {
       return this.field.options.size || 'default'
     },

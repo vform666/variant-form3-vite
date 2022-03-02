@@ -60,7 +60,6 @@
     components: {
       FormItemWrapper,
     },
-    inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],
     data() {
       return {
         oldFieldValue: null, //field组件change之前的值
@@ -180,8 +179,12 @@
       handlePictureRemove(file, fileList) {
         this.fileList = deepClone(fileList)  //this.fileList = fileList
         this.updateUploadFieldModelAndEmitDataChange(fileList)
-
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
+
+        if (!!this.field.options.onFileRemove) {
+          let customFn = new Function('file', 'fileList', this.field.options.onFileRemove)
+          customFn.call(this, file, fileList)
+        }
       },
 
       handelUploadError(err, file, fileList) {
