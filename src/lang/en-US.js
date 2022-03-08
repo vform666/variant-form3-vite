@@ -190,6 +190,7 @@ export default {
       rows: 'Rows',
       labelHidden: 'Hide Label',
       required: 'Required',
+      requiredHint: 'Failure Hint',
       validation: 'Validation',
       validationHelp: 'Regular expressions supported',
       validationHint: 'Validation Hint',

@@ -200,6 +200,89 @@ export function traverseAllWidgets(widgetList, handler) {
   })
 }
 
+function handleWidgetForTraverse(widget, handler) {
+  if (!!widget.category) {
+    traverseFieldWidgetsOfContainer(widget, handler)
+  } else if (widget.formItemFlag) {
+    handler(widget)
+  }
+}
+
+/**
+ * 遍历容器内的字段组件
+ * @param con
+ * @param handler
+ */
+export function traverseFieldWidgetsOfContainer(con, handler) {
+  if (con.type === 'grid') {
+    con.cols.forEach(col => {
+      col.widgetList.forEach(cw => {
+        handleWidgetForTraverse(cw, handler)
+      })
+    })
+  } else if (con.type === 'table') {
+    con.rows.forEach(row => {
+      row.cols.forEach(cell => {
+        cell.widgetList.forEach(cw => {
+          handleWidgetForTraverse(cw, handler)
+        })
+      })
+    })
+  } else if (con.type === 'tab') {
+    con.tabs.forEach(tab => {
+      tab.widgetList.forEach(cw => {
+        handleWidgetForTraverse(cw, handler)
+      })
+    })
+  } else if (con.type === 'sub-form') {
+    con.widgetList.forEach(cw => {
+      handleWidgetForTraverse(cw, handler)
+    })
+  } else if (con.category === 'container') {  //自定义容器
+    con.widgetList.forEach(cw => {
+      handleWidgetForTraverse(cw, handler)
+    })
+  }
+}
+
+/**
+ * 获取所有字段组件
+ * @param widgetList
+ * @returns {[]}
+ */
+export function getAllFieldWidgets(widgetList) {
+  let result = []
+  let handlerFn = (w) => {
+    result.push({
+      type: w.type,
+      name: w.options.name,
+      field: w
+    })
+  }
+  traverseFieldWidgets(widgetList, handlerFn)
+
+  return result
+}
+
+/**
+ * 获取所有容器组件
+ * @param widgetList
+ * @returns {[]}
+ */
+export function getAllContainerWidgets(widgetList) {
+  let result = []
+  let handlerFn = (w) => {
+    result.push({
+      type: w.type,
+      name: w.options.name,
+      container: w
+    })
+  }
+  traverseContainWidgets(widgetList, handlerFn)
+
+  return result
+}
+
 export function copyToClipboard(content, clickEvent, $message, successMsg, errorMsg) {
   const clipboard = new Clipboard(clickEvent.target, {
     text: () => content

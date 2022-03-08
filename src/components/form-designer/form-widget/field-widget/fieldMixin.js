@@ -34,6 +34,13 @@ export default {
   methods: {
 
     //--------------------- 组件内部方法 begin ------------------//
+    getPropName() {
+      if (this.subFormItemFlag && !this.designState) {
+        return this.subFormName + "." + this.subFormRowIndex + "." + this.field.options.name + ""
+      } else {
+        return this.field.options.name
+      }
+    },
 
     initFieldModel() {
       if (!this.field.formItemFlag) {
@@ -201,7 +208,7 @@ export default {
           required: true,
           //trigger: ['blur', 'change'],
           trigger: ['blur'],  /* 去掉change事件触发校验，change事件触发时formModel数据尚未更新，导致radio/checkbox必填校验出错！！ */
-          message: this.i18nt('render.hint.fieldRequired'),
+          message: this.field.options.requiredHint || this.i18nt('render.hint.fieldRequired'),
         })
       }
 
@@ -320,8 +327,7 @@ export default {
       this.oldFieldValue = deepClone(value)  /* oldFieldValue需要在initFieldModel()方法中赋初值!! */
 
       /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
-      this.dispatch('VFormRender', 'fieldValidation', [this.field.options.name])
-      // eventBus.$emit('fieldValidation', [this.field.options.name])
+      this.dispatch('VFormRender', 'fieldValidation', [this.getPropName()])
     },
 
     handleFocusCustomEvent(event) {
@@ -342,6 +348,9 @@ export default {
 
     handleInputCustomEvent(value) {
       this.syncUpdateFormModel(value)
+
+      /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
+      this.dispatch('VFormRender', 'fieldValidation', [this.getPropName()])
 
       if (!!this.field.options.onInput) {
         let customFn = new Function('value', this.field.options.onInput)

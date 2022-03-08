@@ -76,7 +76,7 @@ export const loadExtension = function (app) {
     {label: 'info', value: 'info'},
     {label: 'error', value: 'error'},
   ]
-  PERegister.registerCPEditor(app, 'alert-type', 'alert-type-editor',
+  PERegister.registerCPEditor(app, 'type', 'alert-type-editor',
       PEFactory.createSelectEditor('type', 'extension.setting.alertType',
           {optionItems: typeOptions}))
 

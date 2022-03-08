@@ -1,4 +1,4 @@
-import {generateId} from "@/utils/util";
+import { traverseFieldWidgetsOfContainer } from "@/utils/util";
 
 export default {
   computed: {
@@ -14,6 +14,9 @@ export default {
     },
 
   },
+  mounted() {
+    this.callSetHidden()
+  },
 
   methods: {
     unregisterFromRefList() {  //销毁容器组件时注销组件ref
@@ -23,11 +26,33 @@ export default {
       }
     },
 
+    /* 主动触发setHidden()方法，以清空被隐藏容器内字段组件的校验规则！！ */
+    callSetHidden() {
+      if (this.widget.options.hidden === true) {
+        this.setHidden(true)
+      }
+    },
+
     //--------------------- 以下为组件支持外部调用的API方法 begin ------------------//
     /* 提示：用户可自行扩充这些方法！！！ */
 
     setHidden(flag) {
       this.widget.options.hidden = flag
+
+      /* 容器被隐藏后，需要同步清除容器内部字段组件的校验规则 */
+      let clearRulesFn = (fieldWidget) => {
+        let fwName = fieldWidget.options.name
+        let fwRef = this.getWidgetRef(fwName)
+        if (flag && !!fwRef && !!fwRef.clearFieldRules) {
+          fwRef.clearFieldRules()
+        }
+
+        if (!flag && !!fwRef && !!fwRef.buildFieldRules) {
+          fwRef.buildFieldRules()
+        }
+      }
+
+      traverseFieldWidgetsOfContainer(this.widget, clearRulesFn)
     },
 
     activeTab(tabIndex) { //tabIndex从0计数

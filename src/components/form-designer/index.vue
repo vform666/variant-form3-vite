@@ -68,7 +68,8 @@
   import SettingPanel from './setting-panel/index'
   import VFormWidget from './form-widget/index'
   import {createDesigner} from "@/components/form-designer/designer"
-  import {addWindowResizeHandler, deepClone, getQueryParam} from "@/utils/util"
+  import {addWindowResizeHandler, deepClone, getQueryParam, getAllContainerWidgets,
+    getAllFieldWidgets} from "@/utils/util"
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config"
   import i18n, { changeLocale } from "@/utils/i18n"
   import axios from 'axios'
@@ -243,7 +244,8 @@
           return
         }
 
-        axios.get(this.fieldListApi.URL).then(res => {
+        let headers = this.fieldListApi.headers || {}
+        axios.get(this.fieldListApi.URL, {'headers': headers}).then(res => {
           let labelKey = this.fieldListApi.labelKey || 'label'
           let nameKey = this.fieldListApi.nameKey || 'name'
 
@@ -338,6 +340,22 @@
        */
       generateSFC() {
         this.$refs.toolbarRef.generateSFC()
+      },
+
+      /**
+       * 获取所有字段组件
+       * @returns {*[]}
+       */
+      getFieldWidgets() {
+        return getAllFieldWidgets(this.designer.widgetList)
+      },
+
+      /**
+       * 获取所有容器组件
+       * @returns {*[]}
+       */
+      getContainerWidgets() {
+        return getAllContainerWidgets(this.designer.widgetList)
       },
 
       //TODO: 增加更多方法！！

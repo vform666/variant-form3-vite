@@ -2,7 +2,6 @@
 function _broadcast(componentName, eventName, params) {
   this.$children.forEach(function (child) {
     let name = child.$options.componentName;
-
     if (name === componentName) {
       //child.$emit.apply(child, [eventName].concat(params));
       if (!!child.emit$) {
@@ -72,7 +71,28 @@ export default {
     },
 
     broadcast: function broadcast(componentName, eventName, params) {
-      _broadcast.call(this, componentName, eventName, params);
+      /* Vue3移除了$children属性，_broadcast方法已不能使用！！ */
+      //_broadcast.call(this, componentName, eventName, params);
+
+      if (!!this.widgetRefList) {  //FormRender只需遍历自身的widgetRefList属性
+        Object.keys(this.widgetRefList).forEach(refName => {
+          let cmpName = this.widgetRefList[refName].$options.componentName
+          if (cmpName === componentName) {
+            let foundRef = this.widgetRefList[refName]
+            foundRef.emit$.call(foundRef, eventName, params)
+          }
+        })
+      }
+
+      if (!!this.refList) {  //其他组件遍历inject的refList属性
+        Object.keys(this.refList).forEach(refName => {
+          let cmpName = this.refList[refName].$options.componentName
+          if (cmpName === componentName) {
+            let foundRef = this.refList[refName]
+            foundRef.emit$.call(foundRef, eventName, params)
+          }
+        })
+      }
     }
   }
 };
