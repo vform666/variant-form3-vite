@@ -171,7 +171,7 @@ export default {
       eventSetting: '事件属性',
       uniqueName: '唯一名称',
       editNameHelp: '修改名称后需按回车确认',
-      label: '字段标签',
+      label: '标签',
       displayType: '显示类型',
       defaultValue: '默认值',
       placeholder: '占位内容',
@@ -301,7 +301,7 @@ export default {
 
       widgetName: '组件唯一名称',
       formSize: '全局组件大小',
-      labelPosition: '字段标签位置',
+      labelPosition: '标签位置',
       topPosition: '顶部',
       leftPosition: '左边',
       labelAlign: '字段标签对齐',

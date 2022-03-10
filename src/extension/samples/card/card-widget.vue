@@ -97,6 +97,14 @@
     outline: 2px solid $--color-primary !important;
   }
 
+  .card-container {
+    margin: 3px;
+
+    .form-widget-list {
+      min-height: 28px;
+    }
+  }
+
   :deep(.el-card__header) {
     padding: 10px 12px;
   }
