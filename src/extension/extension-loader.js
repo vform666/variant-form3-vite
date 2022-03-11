@@ -76,9 +76,13 @@ export const loadExtension = function (app) {
     {label: 'info', value: 'info'},
     {label: 'error', value: 'error'},
   ]
-  PERegister.registerCPEditor(app, 'alert-type', 'alert-type-editor',
+  // PERegister.registerCPEditor(app, 'alert-type', 'alert-type-editor',
+  //     PEFactory.createSelectEditor('type', 'extension.setting.alertType',
+  //         {optionItems: typeOptions}))
+  /* type属性映射已存在，无须再注册，故只需注册属性编辑器即可！！ */
+  app.component('alert-type-editor',
       PEFactory.createSelectEditor('type', 'extension.setting.alertType',
-          {optionItems: typeOptions}))
+      {optionItems: typeOptions}))
 
   PERegister.registerCPEditor(app, 'alert-description', 'alert-description-editor',
       PEFactory.createInputTextEditor('description', 'extension.setting.description'))

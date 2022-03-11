@@ -6,8 +6,14 @@
       <template #header>
         <div class="clear-fix">
           <span>{{widget.options.label}}</span>
-          <i v-if="widget.options.showFold" class="float-right"
-             :class="[!widget.options.folded ? 'el-icon-arrow-down' : 'el-icon-arrow-up']" @click="toggleCard"></i>
+          <i v-if="widget.options.showFold" class="float-right"  @click="toggleCard">
+            <template v-if="!widget.options.folded">
+              <el-icon><ArrowDown /></el-icon>
+            </template>
+            <template v-else>
+              <el-icon><ArrowUp /></el-icon>
+            </template>
+          </i>
         </div>
       </template>
       <template v-if="!!widget.widgetList && (widget.widgetList.length > 0)">
@@ -43,6 +49,7 @@
   import ContainerItemWrapper from '@/components/form-render/container-item/container-item-wrapper'
   import containerItemMixin from "@/components/form-render/container-item/containerItemMixin"
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
+  import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 
   export default {
     name: "card-item",
@@ -51,6 +58,8 @@
     components: {
       ContainerItemWrapper,
       ...FieldComponents,
+      ArrowDown,
+      ArrowUp
     },
     props: {
       widget: Object,
