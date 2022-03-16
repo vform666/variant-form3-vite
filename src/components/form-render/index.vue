@@ -41,8 +41,9 @@
   import emitter from '@/utils/emitter'
   import './container-item/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
-  import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml, getAllContainerWidgets,
-    getAllFieldWidgets} from "@/utils/util"
+  import {
+    generateId, deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml, getAllContainerWidgets,
+    getAllFieldWidgets, traverseFieldWidgets} from "@/utils/util"
   import i18n, { changeLocale } from "@/utils/i18n"
   import eventBus from "@/utils/event-bus"
 
@@ -92,6 +93,7 @@
         },
         widgetRefList: {},
         subFormRefList: {},
+        formId: null,  //表单唯一Id，用于区分页面上的多个v-form-render组件！！
       }
     },
     computed: {
@@ -145,6 +147,7 @@
     },
     methods: {
       initFormObject() {
+        this.formId = 'vfRender' + generateId()
         this.insertCustomStyleAndScriptNode()
         this.addFieldChangeEventHandler()
         this.addFieldValidateEventHandler()
@@ -167,11 +170,11 @@
 
       insertCustomStyleAndScriptNode() {
         if (!!this.formConfig && !!this.formConfig.cssCode) {
-          insertCustomCssToHead(this.formConfig.cssCode)
+          insertCustomCssToHead(this.formConfig.cssCode, this.formId)
         }
 
         if (!!this.formConfig && !!this.formConfig.functions) {
-          insertGlobalFunctionsToHtml(this.formConfig.functions)
+          insertGlobalFunctionsToHtml(this.formConfig.functions, this.formId)
         }
       },
 
@@ -298,14 +301,61 @@
         let foundW = this.getWidgetRef(widgetName)
         if (!!foundW) {
           foundW.setDisabled(disabledFlag)
+        } else { //没找到，可能是子表单中的组件
+          this.findWidgetOfSubFormAndSetDisabled(widgetName, disabledFlag)
         }
+      },
+
+      findWidgetOfSubFormAndSetDisabled(widgetName, disabledFlag) {
+        this.findWidgetNameInSubForm(widgetName).forEach(wn => {
+          let sw = this.getWidgetRef(wn)
+          if (!!sw) {
+            sw.setDisabled(disabledFlag)
+          }
+        })
       },
 
       findWidgetAndSetHidden(widgetName, hiddenFlag) {
         let foundW = this.getWidgetRef(widgetName)
         if (!!foundW) {
           foundW.setHidden(hiddenFlag)
+        } else { //没找到，可能是子表单中的组件
+          this.findWidgetOfSubFormAndSetHidden(widgetName, hiddenFlag)
         }
+      },
+
+      findWidgetOfSubFormAndSetHidden(widgetName, hiddenFlag) {
+        this.findWidgetNameInSubForm(widgetName).forEach(wn => {
+          let sw = this.getWidgetRef(wn)
+          if (!!sw) {
+            sw.setHidden(hiddenFlag)
+          }
+        })
+      },
+
+      findWidgetNameInSubForm(widgetName) {
+        let result = []
+        let subFormName = null
+        let handlerFn = (field, parent) => {
+          if (!!field.options && (field.options.name === widgetName)) {
+            subFormName = parent.options.name
+          }
+        }
+        traverseFieldWidgets(this.widgetList, handlerFn)
+
+        if (!!subFormName) {
+          let subFormRef = this.getWidgetRef(subFormName)
+          if (!!subFormRef) {
+            let rowIds = subFormRef.getRowIdData()
+            if (!!rowIds && (rowIds.length > 0)) {
+              rowIds.forEach(rid => {
+                result.push( widgetName + '@row' + rid)
+              })
+            }
+          }
+        }
+
+        return result
       },
 
       //--------------------- 以下为组件支持外部调用的API方法 begin ------------------//
@@ -496,8 +546,14 @@
         this.$refs.renderForm.clearValidate(props)
       },
 
+      /* 验证表单，通过返回true，不通过返回false */
       validateForm() {
-        //
+        let result = null
+        this.$refs['renderForm'].validate((valid) => {
+          result = valid
+        })
+
+        return result
       },
 
       validateFields() {

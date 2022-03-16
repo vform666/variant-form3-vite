@@ -146,6 +146,10 @@
         this.rowIdData.splice(rowIndex, 1)
       },
 
+      getRowIdData() {
+        return this.rowIdData
+      },
+
       initFieldSchemaData() {  //初始化fieldSchemaData！！！
         if (this.widget.type !== 'sub-form') {
           return
