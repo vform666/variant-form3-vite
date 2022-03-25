@@ -4,6 +4,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteSvgIcons from 'vite-plugin-svg-icons'
 import { resolve } from 'path'
 import commonjs from '@rollup/plugin-commonjs'
+import visualizer from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,6 +17,9 @@ export default defineConfig({
     //解决引入commonjs模块后打包出现的{'default' is not exported by XXX}错误!!
     commonjs({requireReturnsDefault: true}),  /* 配置requireReturnsDefault属性，
     解决打包后引入VForm出现的"Axios is not a constructor"错！！ */
+
+    //可视化Bundle
+    visualizer(),
 
     viteSvgIcons({
       // Specify the icon folder to be cached

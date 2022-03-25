@@ -37,6 +37,7 @@ VFormRender.install = function (app) {
 
   app.use(ContainerItems)
 
+  registerIcon(app)
   app.component('svg-icon', SvgIcon)
   app.component(VFormRender.name, VFormRender)
 }
@@ -54,6 +55,7 @@ const install = (app) => {
   app.use(ContainerWidgets)
   app.use(ContainerItems)
 
+  registerIcon(app)
   app.component('draggable', Draggable)
   app.component('svg-icon', SvgIcon)
 

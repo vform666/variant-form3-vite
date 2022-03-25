@@ -85,7 +85,7 @@
                  :show-close="true" custom-class="drag-dialog small-padding-dialog"
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-alert type="info" :closable="false" :title="'form.' + eventParamsMap[curEventName]"></el-alert>
-        <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode"></code-editor>
+        <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode" ref="ecEditor"></code-editor>
         <el-alert type="info" :closable="false" title="}"></el-alert>
         <template #footer>
           <div class="dialog-footer">
@@ -118,7 +118,7 @@
       <el-dialog :title="i18nt('designer.setting.globalFunctions')" v-model="showEditFunctionsDialogFlag"
                  :show-close="true" custom-class="drag-dialog small-padding-dialog"
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-        <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode"></code-editor>
+        <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode" ref="gfEditor"></code-editor>
         <template #footer>
           <div class="dialog-footer">
             <el-button @click="showEditFunctionsDialogFlag = false">
@@ -271,6 +271,21 @@
       },
 
       saveGlobalFunctions() {
+        const codeHints = this.$refs.gfEditor.getEditorAnnotations()
+        let syntaxErrorFlag = false
+        if (!!codeHints && (codeHints.length > 0)) {
+          codeHints.forEach((chItem) => {
+            if (chItem.type === 'error') {
+              syntaxErrorFlag = true
+            }
+          })
+
+          if (syntaxErrorFlag) {
+            this.$message.error(this.i18nt('designer.setting.syntaxCheckWarning'))
+            return
+          }
+        }
+
         this.designer.formConfig.functions = this.functionsCode
         insertGlobalFunctionsToHtml(this.functionsCode)
         this.showEditFunctionsDialogFlag = false
@@ -283,6 +298,21 @@
       },
 
       saveFormEventHandler() {
+        const codeHints = this.$refs.ecEditor.getEditorAnnotations()
+        let syntaxErrorFlag = false
+        if (!!codeHints && (codeHints.length > 0)) {
+          codeHints.forEach((chItem) => {
+            if (chItem.type === 'error') {
+              syntaxErrorFlag = true
+            }
+          })
+
+          if (syntaxErrorFlag) {
+            this.$message.error(this.i18nt('designer.setting.syntaxCheckWarning'))
+            return
+          }
+        }
+
         this.formConfig[this.curEventName] = this.formEventHandlerCode
         this.showFormEventDialogFlag = false
       },

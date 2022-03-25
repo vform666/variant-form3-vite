@@ -319,6 +319,7 @@ export default {
       formModelName: 'Model Name',
       formRefName: 'Ref Name',
       formRulesName: 'Rules Name',
+      syntaxCheckWarning: 'Syntax error in the javascript codes, please check again!',
 
     }
 

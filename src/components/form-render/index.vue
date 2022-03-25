@@ -170,11 +170,13 @@
 
       insertCustomStyleAndScriptNode() {
         if (!!this.formConfig && !!this.formConfig.cssCode) {
-          insertCustomCssToHead(this.formConfig.cssCode, this.formId)
+          insertCustomCssToHead(this.formConfig.cssCode,
+              !!this.previewState ? '' : this.formId)
         }
 
         if (!!this.formConfig && !!this.formConfig.functions) {
-          insertGlobalFunctionsToHtml(this.formConfig.functions, this.formId)
+          insertGlobalFunctionsToHtml(this.formConfig.functions,
+              !!this.previewState ? '' : this.formId)
         }
       },
 

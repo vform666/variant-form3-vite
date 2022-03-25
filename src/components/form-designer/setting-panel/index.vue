@@ -76,7 +76,7 @@
                  :show-close="true" custom-class="drag-dialog small-padding-dialog"
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-alert type="info" :closable="false" :title="eventHeader"></el-alert>
-        <code-editor :mode="'javascript'" :readonly="false" v-model="eventHandlerCode"></code-editor>
+        <code-editor :mode="'javascript'" :readonly="false" v-model="eventHandlerCode" ref="ecEditor"></code-editor>
         <el-alert type="info" :closable="false" title="}"></el-alert>
         <template #footer>
           <div class="dialog-footer">
@@ -276,6 +276,21 @@
       },
 
       saveEventHandler() {
+        const codeHints = this.$refs.ecEditor.getEditorAnnotations()
+        let syntaxErrorFlag = false
+        if (!!codeHints && (codeHints.length > 0)) {
+          codeHints.forEach((chItem) => {
+            if (chItem.type === 'error') {
+              syntaxErrorFlag = true
+            }
+          })
+
+          if (syntaxErrorFlag) {
+            this.$message.error(this.i18nt('designer.setting.syntaxCheckWarning'))
+            return
+          }
+        }
+
         this.selectedWidget.options[this.curEventName] = this.eventHandlerCode
         this.showWidgetEventDialogFlag = false
       },
