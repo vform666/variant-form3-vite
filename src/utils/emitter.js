@@ -51,7 +51,6 @@ export default {
     },
 
     dispatch: function dispatch(componentName, eventName, params) {
-      //debugger
       let parent = this.$parent || this.$root;
       let name = parent.$options.componentName;
 
@@ -63,9 +62,12 @@ export default {
         }
       }
       if (parent) {
-        //parent.$emit.apply(parent, [eventName].concat(params));
         if (!!parent.emit$) {
           parent.emit$.call(parent, eventName, params)
+
+          if (componentName === 'VFormRender') {
+            parent.$emit(eventName, params)  //执行原生$emit，以便可以用@进行声明式事件处理！！
+          }
         }
       }
     },
