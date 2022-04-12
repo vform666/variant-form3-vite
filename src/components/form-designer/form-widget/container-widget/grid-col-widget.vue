@@ -43,16 +43,16 @@
 </template>
 
 <script>
-  //import Draggable from 'vuedraggable'
   import i18n from "@/utils/i18n";
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
+  import refMixinDesign from "@/components/form-designer/refMixinDesign"
 
   export default {
     name: "GridColWidget",
     componentName: "GridColWidget",
-    mixins: [i18n],
+    mixins: [i18n, refMixinDesign],
+    inject: ['refList'],
     components: {
-      //Draggable,
       ...FieldComponents,
     },
     props: {
@@ -173,6 +173,7 @@
 
     },
     created() {
+      this.initRefList()
       this.initLayoutProps()
     },
     methods: {

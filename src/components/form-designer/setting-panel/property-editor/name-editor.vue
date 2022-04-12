@@ -7,10 +7,10 @@
       </span>
     </template>
     <template v-if="!!selectedWidget.category || noFieldList">
-      <el-input type="text" v-model="optionModel.name" @change="updateWidgetNameAndRef"></el-input>
+      <el-input type="text" v-model="optionModel.name" :readonly="widgetNameReadonly" @change="updateWidgetNameAndRef"></el-input>
     </template>
     <template v-else>
-      <el-select v-model="optionModel.name" allow-create filterable @change="updateWidgetNameAndRef"
+      <el-select v-model="optionModel.name" allow-create filterable :disabled="widgetNameReadonly" @change="updateWidgetNameAndRef"
                  :title="i18nt('designer.setting.editNameHelp')">
         <el-option v-for="(sf, sfIdx) in serverFieldList" :key="sfIdx" :label="sf.label" :value="sf.name"></el-option>
       </el-select>
@@ -30,7 +30,7 @@
       selectedWidget: Object,
       optionModel: Object,
     },
-    inject: ['serverFieldList'],
+    inject: ['serverFieldList', 'getDesignerConfig'],
     data() {
       return {
         nameRequiredRule: [{required: true, message: 'name required'}],
@@ -39,6 +39,10 @@
     computed: {
       noFieldList() {
         return !this.serverFieldList || (this.serverFieldList.length <= 0)
+      },
+
+      widgetNameReadonly() {
+        return !!this.getDesignerConfig().widgetNameReadonly
       },
 
     },
@@ -52,19 +56,18 @@
         }
 
         if (!!this.designer.formWidget) {
-          //检查newName是否已存在！！
-          let foundRef = this.designer.formWidget.getWidgetRef(newName)
+          let foundRef = this.designer.formWidget.getWidgetRef(newName) // 检查newName是否已存在！！
           if (!!foundRef) {
             this.selectedWidget.options.name = oldName
             this.$message.info(this.i18nt('designer.hint.duplicateName') + newName)
             return
           }
 
-          let fieldWidget = this.designer.formWidget.getWidgetRef(oldName)
-          if (!!fieldWidget && !!fieldWidget.registerToRefList) {
-            fieldWidget.registerToRefList(oldName)  //注册组件新的ref名称并删除老的ref！！
+          let widgetInDesign = this.designer.formWidget.getWidgetRef(oldName)
+          if (!!widgetInDesign && !!widgetInDesign.registerToRefList) {
+            widgetInDesign.registerToRefList(oldName)  //注册组件新的ref名称并删除老的ref！！
             let newLabel = this.getLabelByFieldName(newName)
-            this.designer.updateSelectedWidgetNameAndRef(this.selectedWidget, newName, newLabel)
+            this.designer.updateSelectedWidgetNameAndLabel(this.selectedWidget, newName, newLabel)
           }
         }
       },

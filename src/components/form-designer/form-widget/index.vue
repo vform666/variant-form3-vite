@@ -158,12 +158,17 @@
         return this.formModel
       },
 
-      getWidgetRef(widgetName, showError) {
+      getWidgetRef(widgetName, showError = false) {
         let foundRef = this.widgetRefList[widgetName]
         if (!foundRef && !!showError) {
           this.$message.error(this.i18nt('designer.hint.refNotFound') + widgetName)
         }
         return foundRef
+      },
+
+      getSelectedWidgetRef() {
+        let wName = this.designer.selectedWidgetName
+        return this.getWidgetRef(wName)
       },
 
     }

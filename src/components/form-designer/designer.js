@@ -100,7 +100,8 @@ export function createDesigner(vueInstance) {
     getImportTemplate() {
       return {
         widgetList: [],
-        formConfig: deepClone(this.formConfig)
+        // formConfig: deepClone(this.formConfig)
+        formConfig: deepClone(defaultFormConfig)
       }
     },
 
@@ -133,9 +134,8 @@ export function createDesigner(vueInstance) {
       }
     },
 
-    updateSelectedWidgetNameAndRef(selectedWidget, newName, newLabel) {
+    updateSelectedWidgetNameAndLabel(selectedWidget, newName, newLabel) {
       this.selectedWidgetName = newName
-      //selectedWidget.options.name = newName  //此行多余
       if (!!newLabel && (Object.keys(selectedWidget.options).indexOf('label') > -1)) {
         selectedWidget.options.label = newLabel
       }

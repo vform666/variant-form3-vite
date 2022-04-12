@@ -107,12 +107,15 @@
             externalLink: true,  //是否显示GitHub、文档等外部链接
             formTemplates: true,  //是否显示表单模板
             eventCollapse: true,  //是否显示组件事件属性折叠面板
+            widgetNameReadonly: false,  //禁止修改组件名称
+
             clearDesignerButton: true,  //是否显示清空设计器按钮
             previewFormButton: true,  //是否显示预览表单按钮
             importJsonButton: true,  //是否显示导入JSON按钮
             exportJsonButton: true,  //是否显示导出JSON器按钮
             exportCodeButton: true,  //是否显示导出代码按钮
             generateSFCButton: true,  //是否显示生成SFC按钮
+
             toolbarMaxWidth: 420,  //设计器工具按钮栏最大宽度（单位像素）
             toolbarMinWidth: 300,  //设计器工具按钮栏最小宽度（单位像素）
 
@@ -361,6 +364,14 @@
         return !!widgetList ? getAllContainerWidgets(widgetList) : getAllContainerWidgets(this.designer.widgetList)
       },
 
+      getWidgetRef(widgetName, showError = false) {
+        return this.$refs['formRef'].getWidgetRef(widgetName, showError)
+      },
+
+      getSelectedWidgetRef() {
+        return this.$refs['formRef'].getSelectedWidgetRef()
+      },
+
       //TODO: 增加更多方法！！
 
     }
@@ -368,6 +379,16 @@
 </script>
 
 <style lang="scss" scoped>
+  .el-container.main-container {
+    background: #fff;
+
+    ::v-deep aside {  /* 防止aside样式被外部样式覆盖！！ */
+      margin: 0;
+      padding: 0;
+      background: inherit;
+    }
+  }
+
   .el-container.full-height {
     height: 100%;
     overflow-y: hidden;
