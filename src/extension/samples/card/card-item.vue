@@ -6,7 +6,7 @@
       <template #header>
         <div class="clear-fix">
           <span>{{widget.options.label}}</span>
-          <i v-if="widget.options.showFold" class="float-right"  @click="toggleCard">
+          <i v-if="widget.options.showFold" class="float-right" @click="toggleCard">
             <template v-if="!widget.options.folded">
               <el-icon><ArrowDown /></el-icon>
             </template>

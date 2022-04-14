@@ -123,6 +123,10 @@
         return this.aceEditor.getSession().getAnnotations()
       },
 
+      setValue(newValue) {
+        this.aceEditor.getSession().setValue(newValue)
+      },
+
     }
   }
 </script>

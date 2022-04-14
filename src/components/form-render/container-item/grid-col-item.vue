@@ -32,10 +32,10 @@
 </template>
 
 <script>
+  import emitter from '@/utils/emitter'
   import i18n from "../../../utils/i18n"
   import refMixin from "../../../components/form-render/refMixin"
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
-  import emitter from "@/utils/emitter";
 
   export default {
     name: "GridColItem",

@@ -543,6 +543,14 @@ export default {
       this.enableOptionOfList(this.field.options.optionItems, optionValue)
     },
 
+    /**
+     * 返回选择项
+     * @returns {*}
+     */
+    getOptionItems() {
+      return this.field.options.optionItems
+    },
+
     setUploadHeader(name, value) {
       this.uploadHeaders[name] = value
     },

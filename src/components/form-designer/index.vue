@@ -69,7 +69,7 @@
   import VFormWidget from './form-widget/index'
   import {createDesigner} from "@/components/form-designer/designer"
   import {addWindowResizeHandler, deepClone, getQueryParam, getAllContainerWidgets,
-    getAllFieldWidgets} from "@/utils/util"
+    getAllFieldWidgets, traverseAllWidgets} from "@/utils/util"
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config"
   import i18n, { changeLocale } from "@/utils/i18n"
   import axios from 'axios'
@@ -170,7 +170,6 @@
       })
 
       this.loadCase()
-
       this.loadFieldListFromServer()
     },
     methods: {
@@ -364,6 +363,24 @@
         return !!widgetList ? getAllContainerWidgets(widgetList) : getAllContainerWidgets(this.designer.widgetList)
       },
 
+      /**
+       * 升级表单json，以补充最新的组件属性
+       * @param formJson
+       */
+      upgradeFormJson(formJson) {
+        if (!formJson.widgetList || !formJson.formConfig) {
+          this.$message.error('Invalid form json!')
+          return
+        }
+
+        traverseAllWidgets(formJson.widgetList, (w) => {
+          this.designer.upgradeWidgetConfig(w)
+        })
+        this.designer.upgradeFormConfig(formJson.formConfig)
+
+        return formJson
+      },
+
       getWidgetRef(widgetName, showError = false) {
         return this.$refs['formRef'].getWidgetRef(widgetName, showError)
       },
@@ -382,7 +399,7 @@
   .el-container.main-container {
     background: #fff;
 
-    ::v-deep aside {  /* 防止aside样式被外部样式覆盖！！ */
+    :deep(aside) {  /* 防止aside样式被外部样式覆盖！！ */
       margin: 0;
       padding: 0;
       background: inherit;

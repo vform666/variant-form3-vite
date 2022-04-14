@@ -22,7 +22,7 @@ export function createDesigner(vueInstance) {
     labelAlign: 'label-left-align',
     cssCode: '',
     customClass: '',
-    functions: '',
+    functions: '',  //全局函数
     layoutType: 'PC',
     jsonVersion: 3,
 
@@ -636,6 +636,33 @@ export function createDesigner(vueInstance) {
       }
 
       return Object.keys(originalWidget.options).indexOf(configName) > -1
+    },
+
+    upgradeWidgetConfig(oldWidget) {
+      let newWidget = null
+      if (!!oldWidget.category) {
+        newWidget = this.getContainerByType(oldWidget.type)
+      } else {
+        newWidget = this.getFieldWidgetByType(oldWidget.type)
+      }
+
+      if (!newWidget || !newWidget.options) {
+        return
+      }
+
+      Object.keys(newWidget.options).forEach(ck => {
+        if (!oldWidget.hasOwnProperty(ck)) {
+          oldWidget.options[ck] = deepClone(newWidget.options[ck])
+        }
+      })
+    },
+
+    upgradeFormConfig(oldFormConfig) {
+      Object.keys(this.formConfig).forEach(fc => {
+        if (!oldFormConfig.hasOwnProperty(fc)) {
+          oldFormConfig[fc] = deepClone(this.formConfig[fc])
+        }
+      })
     },
 
     cloneGridCol(widget, parentWidget) {
