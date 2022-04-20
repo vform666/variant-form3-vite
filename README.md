@@ -157,7 +157,7 @@ Github仓库：<a href="https://github.com/vform666/variant-form3-vite" target="
 
 Gitee仓库：<a href="https://gitee.com/vdpadmin/variant-form3-vite" target="_blank">https://gitee.com/vdpadmin/variant-form3-vite</a>
 
-更新日志：<a href="https://www.vform666.com/pages/changelog/" target="_blank">https://www.vform666.com/pages/changelog/</a>
+更新日志：<a href="https://www.vform666.com/changelog.html" target="_blank">https://www.vform666.com/changelog.html</a>
 
 技术交流群：微信搜索“vformAdmin”，或者扫如下二维码加群
 

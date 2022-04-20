@@ -139,7 +139,7 @@
         docUrl: 'https://www.vform666.com/document3.html',
         gitUrl: 'https://github.com/vform666/variant-form3-vite',
         chatUrl: 'https://www.vform666.com/chat-group.html',
-        subScribeUrl: 'https://www.vform666.com/subscribe.html',
+        subScribeUrl: 'https://www.vform666.com/pages/pro/',
 
         scrollerHeight: 0,
 
