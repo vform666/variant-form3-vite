@@ -702,6 +702,7 @@ export const basicFields = [
       label: '',
       columnWidth: '200px',
       size: '',
+      displayStyle: 'block',
       disabled: false,
       hidden: false,
       type: '',
@@ -765,7 +766,7 @@ export const advancedFields = [
       showFileList: true,
       limit: 3,
       fileMaxSize: 5, //MB
-      fileTypes: ['jpeg', 'png'],
+      fileTypes: ['jpg', 'jpeg', 'png'],
       //headers: [],
       //-------------------
       customClass: '',  //自定义css类名
