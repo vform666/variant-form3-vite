@@ -8,6 +8,9 @@
 ### 立即体验VForm 3
 [在线Demo](http://120.92.142.115:81/vform3/)
  
+### 适合Vue 2的版本看这里
+[点此查看](https://gitee.com/vdpadmin/variant-form)
+ 
 ### 友情链接
 [Fantastic-admin](https://hooray.gitee.io/fantastic-admin/) —— 一款开箱即用的 Vue 中后台管理系统框架（支持Vue2/Vue3）
  
