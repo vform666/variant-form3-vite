@@ -8,7 +8,7 @@ export const generateCode = function(formJson, codeType= 'vue') {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 	<title>VForm Demo</title>
-	<link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+	<link rel="stylesheet" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-plus/2.0.4/index.min.css" />
 	<link rel="stylesheet" href="https://ks3-cn-beijing.ksyun.com/vform3/render.style.css?t=20220129">
 	<style type="text/css">
 	</style>
@@ -21,8 +21,8 @@ export const generateCode = function(formJson, codeType= 'vue') {
 	  <el-button type="primary" @click="submitForm">Submit</el-button>
   </div>
 
-<script src="//unpkg.com/vue@next"></script>
-<script src="//unpkg.com/element-plus"></script>
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.30/vue.global.min.js"></script>
+<script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-plus/2.0.4/index.full.min.js"></script>
 <script src="https://ks3-cn-beijing.ksyun.com/vform3/render.umd.js?t=20220129"></script>
 <script>
   const { createApp } = Vue;
