@@ -1,13 +1,3 @@
-export const DESIGNER_OPTIONS = {
-  showLanguageMenu: true,
-  showGetSourceURL: true,
-  showGithubURL: true,
-  showDocumentURL: true,
-  showChatGroup: true,
-  //
-
-}
-
 export const VARIANT_FORM_VERSION = '3.0.7'
 
 //export const MOCK_CASE_URL = 'https://www.fastmock.site/mock/2de212e0dc4b8e0885fea44ab9f2e1d0/vform/'

@@ -540,7 +540,7 @@
         let wNameList = Object.keys(this.widgetRefList)
         wNameList.forEach(wName => {
           let foundW = this.getWidgetRef(wName)
-          if (!!foundW && !!foundW.resetField) {
+          if (!!foundW && !foundW.subFormItemFlag && !!foundW.resetField) { // 跳过子表单字段！！
             foundW.resetField()
           }
         })

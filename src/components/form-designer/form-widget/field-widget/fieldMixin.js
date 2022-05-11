@@ -316,7 +316,9 @@ export default {
       if (!!this.subFormItemFlag) {
         let subFormData = this.formModel[this.subFormName] || [{}]
         let subFormDataRow = subFormData[this.subFormRowIndex]
-        subFormDataRow[this.field.options.name] = value
+        if (!!subFormDataRow) { // 重置表单后subFormDataRow为undefined，应跳过！！
+          subFormDataRow[this.field.options.name] = value
+        }
       } else {
         this.formModel[this.field.options.name] = value
       }
