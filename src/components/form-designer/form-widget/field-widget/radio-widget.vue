@@ -2,7 +2,7 @@
   <form-item-wrapper :designer="designer" :field="field" :rules="rules" :design-state="designState"
                      :parent-widget="parentWidget" :parent-list="parentList" :index-of-parent-list="indexOfParentList"
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
-    <el-radio-group ref="fieldEditor" v-model="fieldModel"
+    <el-radio-group ref="fieldEditor" v-model="fieldModel" :class="{'radio-group-block': field.options.displayStyle === 'block'}"
                     :disabled="field.options.disabled" :size="widgetSize"
                     @change="handleChangeEvent">
       <template v-if="!!field.options.buttonStyle">
@@ -100,5 +100,9 @@
 
 <style lang="scss" scoped>
   @import "../../../../styles/global.scss"; /* form-item-wrapper已引入，还需要重复引入吗？ */
+
+  .radio-group-block {
+    display: block !important;
+  }
 
 </style>
