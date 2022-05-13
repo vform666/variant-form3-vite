@@ -289,8 +289,8 @@
     .form-widget-list {
       border: 1px dashed #336699;
       margin: 3px;
-
-      height: 100%;
+      min-height: 28px;
+      //height: 100%;
     }
 
     .table-cell-action{
