@@ -13,14 +13,16 @@
                    tag="transition-group" :component-data="{name: 'fade'}"
                    handle=".drag-handler" @end="onDragEnd" @add="onDragAdd" @update="onDragUpdate" :move="checkMove">
           <template #item="{ element: widget, index }">
-            <template v-if="'container' === widget.category">
-              <component :is="getWidgetName(widget)" :widget="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
-                                :index-of-parent-list="index" :parent-widget="null"></component>
-            </template>
-            <template v-else>
-              <component :is="getWidgetName(widget)" :field="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
-                            :index-of-parent-list="index" :parent-widget="null" :design-state="true"></component>
-            </template>
+            <div class="transition-group-el">
+              <template v-if="'container' === widget.category">
+                <component :is="getWidgetName(widget)" :widget="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
+                                  :index-of-parent-list="index" :parent-widget="null"></component>
+              </template>
+              <template v-else>
+                <component :is="getWidgetName(widget)" :field="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
+                              :index-of-parent-list="index" :parent-widget="null" :design-state="true"></component>
+              </template>
+            </div>
           </template>
         </draggable>
       </div>
