@@ -15,7 +15,7 @@
         <img src="../../assets/vform-logo.png" @click="openHome">
         <span class="bold">VForm 3</span> {{i18nt('application.productTitle')}} <span class="version-span">Ver {{vFormVersion}}</span></div>
       <div class="float-right external-link">
-        <el-dropdown v-if="showLink('languageMenu')" @command="handleLanguageChanged">
+        <el-dropdown v-if="showLink('languageMenu')" :hide-timeout="2000" @command="handleLanguageChanged">
           <span class="el-dropdown-link">{{curLangName}}<svg-icon icon-class="el-arrow-down" /></span>
           <template #dropdown>
             <el-dropdown-menu>
