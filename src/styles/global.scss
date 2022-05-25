@@ -24,6 +24,13 @@ $--color-primary: #409EFF;
   }
 }
 
+.el-form-item {
+
+  .el-rate{
+    margin-top: 8px;
+  }
+}
+
 .el-form-item--medium {
   .el-radio {
     line-height: 36px !important;

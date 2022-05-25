@@ -8,3 +8,4 @@ dist-ssr
 /stats.html
 *.iml
 /package-lock.json
+/lib/vuedraggable/dist_bak/
