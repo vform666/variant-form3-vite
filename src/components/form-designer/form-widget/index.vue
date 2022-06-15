@@ -49,7 +49,7 @@
       formConfig: Object,
       optionData: { //prop传入的选项数据
         type: Object,
-        default: () => {}
+        default: () => ({})
       },
     },
     provide() {
