@@ -66,6 +66,7 @@
             <el-button @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
             <el-button v-if="false" @click="testLoadForm">Test Load</el-button>
             <el-button v-if="false" @click="testSetFormJson">Test SFJ</el-button>
+            <el-button v-if="false" @click="testSetFormData">Test SFD</el-button>
           </div>
         </template>
       </el-dialog>
@@ -638,6 +639,13 @@
         })
       },
 
+      testSetFormData() {
+        let testFD = {
+          "input89263": "899668"
+        }
+        this.$refs.preForm.setFormData(testFD)
+      },
+
       handleFormChange(fieldName, newValue, oldValue, formModel) {
         /*
         console.log('---formChange start---')
@@ -647,6 +655,8 @@
         console.log('formModel', formModel)
         console.log('---formChange end---')
         */
+
+        console.log('formModel', formModel)
       },
 
       testOnAppendButtonClick(clickedWidget) {
@@ -777,6 +787,8 @@
     //border-width: 10px;
     box-shadow: 0 0 1px 10px #495060;
     height: calc(100vh - 175px);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .form-render-wrapper.pad-layout {
@@ -786,6 +798,8 @@
     //border-width: 10px;
     box-shadow: 0 0 1px 10px #495060;
     height: calc(100vh - 175px);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .node-tree-drawer {
