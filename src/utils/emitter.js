@@ -66,7 +66,7 @@ export default {
           parent.emit$.call(parent, eventName, params)
 
           if (componentName === 'VFormRender') {
-            parent.$emit(eventName, params)  //执行原生$emit，以便可以用@进行声明式事件处理！！
+            parent.$emit(eventName, ...params)  //执行原生$emit，以便可以用@进行声明式事件处理！！
           }
         }
       }
