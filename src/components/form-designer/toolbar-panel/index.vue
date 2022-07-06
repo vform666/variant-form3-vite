@@ -46,12 +46,12 @@
     <div v-if="showPreviewDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.preview')" v-model="showPreviewDialogFlag"
                  :show-close="true" :close-on-click-modal="false" :close-on-press-escape="false" center
-                 :destroy-on-close="true" custom-class="drag-dialog small-padding-dialog" width="75%"
+                 :destroy-on-close="true" :append-to-body="true" custom-class="drag-dialog small-padding-dialog" width="75%"
                  :fullscreen="(layoutType === 'H5') || (layoutType === 'Pad')">
         <div>
           <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : (layoutType === 'Pad' ? 'pad-layout' : '')]">
             <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData" :preview-state="true"
-                         :option-data="testOptionData"
+                         :option-data="testOptionData"  @myEmitTest="onMyEmitTest"
                          @appendButtonClick="testOnAppendButtonClick" @buttonClick="testOnButtonClick"
                          @formChange="handleFormChange">
             </VFormRender>
@@ -665,6 +665,10 @@
 
       testOnButtonClick(button) {
         console.log('test', button)
+      },
+
+      onMyEmitTest(aaa) {
+        console.log('-----', aaa)
       },
 
       findWidgetById(wId) {

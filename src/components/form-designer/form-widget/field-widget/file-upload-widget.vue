@@ -22,10 +22,10 @@
         <div class="upload-file-list">
           <span class="upload-file-name" :title="file.name">{{file.name}}</span>
           <a :href="file.url" download="">
-            <span class="el-icon-download file-action" title="i18nt('render.hint.downloadFile')">
+            <span class="el-icon-download file-action" :title="i18nt('render.hint.downloadFile')">
               <svg-icon icon-class="el-download" />
             </span></a>
-          <span class="file-action" title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
+          <span class="file-action" :title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
             @click="removeUploadFile(file.name)"><svg-icon icon-class="el-delete" /></span>
         </div>
       </template>

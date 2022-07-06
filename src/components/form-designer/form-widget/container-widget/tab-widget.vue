@@ -112,6 +112,10 @@
     .form-widget-list {
       min-height: 28px;
     }
+
+    :deep(.el-tabs__content) {
+      min-height: 28px;
+    }
   }
 
   .tab-container.selected {

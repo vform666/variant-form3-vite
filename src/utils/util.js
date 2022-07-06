@@ -126,28 +126,28 @@ export const loadRemoteScript = function(srcPath, callback) {  /*加载远程js�
   }
 }
 
-export function traverseFieldWidgets(widgetList, handler) {
+export function traverseFieldWidgets(widgetList, handler, parent = null) {
   widgetList.map(w => {
     if (w.formItemFlag) {
-      handler(w)
+      handler(w, parent)
     } else if (w.type === 'grid') {
       w.cols.map(col => {
-        traverseFieldWidgets(col.widgetList, handler)
+        traverseFieldWidgets(col.widgetList, handler, w)
       })
     } else if (w.type === 'table') {
       w.rows.map(row => {
         row.cols.map(cell => {
-          traverseFieldWidgets(cell.widgetList, handler)
+          traverseFieldWidgets(cell.widgetList, handler, w)
         })
       })
     } else if (w.type === 'tab') {
       w.tabs.map(tab => {
-        traverseFieldWidgets(tab.widgetList, handler)
+        traverseFieldWidgets(tab.widgetList, handler, w)
       })
     } else if (w.type === 'sub-form') {
-      traverseFieldWidgets(w.widgetList, handler)
+      traverseFieldWidgets(w.widgetList, handler, w)
     } else if (w.category === 'container') {  //自定义容器
-      traverseFieldWidgets(w.widgetList, handler)
+      traverseFieldWidgets(w.widgetList, handler, w)
     }
   })
 }
