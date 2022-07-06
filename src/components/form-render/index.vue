@@ -484,7 +484,19 @@
       getFieldValue(fieldName) { //单个字段获取值
         let fieldRef = this.getWidgetRef(fieldName)
         if (!!fieldRef && !!fieldRef.getValue) {
-          fieldRef.getValue()
+          return fieldRef.getValue()
+        }
+
+        if (!fieldRef) { //如果是子表单字段
+          let result = []
+          this.findWidgetNameInSubForm(fieldName).forEach(wn => {
+            let sw = this.getWidgetRef(wn)
+            if (!!sw && !!sw.getValue) {
+              result.push( sw.getValue() )
+            }
+          })
+
+          return result
         }
       },
 
@@ -492,6 +504,15 @@
         let fieldRef = this.getWidgetRef(fieldName)
         if (!!fieldRef && !!fieldRef.setValue) {
           fieldRef.setValue(fieldValue)
+        }
+
+        if (!fieldRef) { //如果是子表单字段
+          this.findWidgetNameInSubForm(fieldName).forEach(wn => {
+            let sw = this.getWidgetRef(wn)
+            if (!!sw && !!sw.setValue) {
+              sw.setValue(fieldValue)
+            }
+          })
         }
       },
 
