@@ -10,7 +10,7 @@
                :multiple="field.options.multipleSelect" :file-list="fileList"
                :show-file-list="field.options.showFileList" :class="{'hideUploadDiv': uploadBtnHidden}"
                :limit="field.options.limit" :on-exceed="handleFileExceed" :before-upload="beforeFileUpload"
-               :on-success="handleFileUpload" :on-error="handelUploadError" :on-remove="handleFileRemove">
+               :on-success="handleFileUpload" :on-error="handleUploadError">
       <template #tip>
         <div class="el-upload__tip"
              v-if="!!field.options.uploadTip">{{field.options.uploadTip}}</div>
@@ -21,12 +21,12 @@
       <template #file="{ file }">
         <div class="upload-file-list">
           <span class="upload-file-name" :title="file.name">{{file.name}}</span>
-          <a :href="file.url" download="">
+          <a :href="file.url" download="" target="_blank">
             <span class="el-icon-download file-action" :title="i18nt('render.hint.downloadFile')">
               <svg-icon icon-class="el-download" />
             </span></a>
           <span class="file-action" :title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
-            @click="removeUploadFile(file.name)"><svg-icon icon-class="el-delete" /></span>
+            @click="removeUploadFile(file.name, file.url, file.uid)"><svg-icon icon-class="el-delete" /></span>
         </div>
       </template>
     </el-upload>
@@ -80,7 +80,7 @@
     data() {
       return {
         oldFieldValue: null, //field组件change之前的值
-        fieldModel: null,
+        fieldModel: [],
         rules: [],
 
         uploadHeaders: {},
@@ -127,15 +127,8 @@
 
     methods: {
       handleFileExceed() {
-        let uploadLimit = this.field.options.limit  /* 此行不能注释，下一行ES6模板字符串需要用到！！ */
+        let uploadLimit = this.field.options.limit
         this.$message.warning( this.i18nt('render.hint.uploadExceed').replace('${uploadLimit}', uploadLimit) )
-      },
-
-      updateUploadFieldModelAndEmitDataChange(fileList) {
-        let oldValue = deepClone(this.fieldModel)
-        this.fieldModel = deepClone(fileList)
-        this.syncUpdateFormModel(this.fieldModel)
-        this.emitFieldDataChange(this.fieldModel, oldValue)
       },
 
       beforeFileUpload(file) {
@@ -183,36 +176,63 @@
         return true
       },
 
+      updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, defaultResult) {
+        let oldValue = deepClone(this.fieldModel)
+        if (!!customResult && !!customResult.name && !!customResult.url) {
+          this.fieldModel.push({
+            name: customResult.name,
+            url: customResult.url
+          })
+        } else if (!!defaultResult && !!defaultResult.name && !!defaultResult.url) {
+          this.fieldModel.push({
+            name: defaultResult.name,
+            url: defaultResult.url
+          })
+        } else {
+          this.fieldModel = deepClone(fileList)
+        }
+
+        this.syncUpdateFormModel(this.fieldModel)
+        this.emitFieldDataChange(this.fieldModel, oldValue)
+      },
+
       handleFileUpload(res, file, fileList) {
         if (file.status === 'success') {
-          //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
-          this.updateUploadFieldModelAndEmitDataChange(fileList)
-          this.fileList = deepClone(fileList)
-          this.uploadBtnHidden = fileList.length >= this.field.options.limit
-
+          let customResult = null
           if (!!this.field.options.onUploadSuccess) {
             let mountFunc = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
-            mountFunc.call(this, res, file, fileList)
+            customResult = mountFunc.call(this, res, file, fileList)
           }
+
+          this.updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, res)
+          this.fileList = deepClone(fileList)
+          this.uploadBtnHidden = fileList.length >= this.field.options.limit
         }
       },
 
-      handleFileRemove(file, fileList) {
-        this.fileList = deepClone(fileList)  //this.fileList = fileList
-        this.updateUploadFieldModelAndEmitDataChange(fileList)
-        this.uploadBtnHidden = fileList.length >= this.field.options.limit
+      // handleFileRemove(file, fileList) {
+      //   this.fileList = deepClone(fileList)  //this.fileList = fileList
+      //   this.updateUploadFieldModelAndEmitDataChange(fileList)
+      //   this.uploadBtnHidden = fileList.length >= this.field.options.limit
+      //
+      //   if (!!this.field.options.onFileRemove) {
+      //     let customFn = new Function('file', 'fileList', this.field.options.onFileRemove)
+      //     customFn.call(this, file, fileList)
+      //   }
+      // },
 
-        if (!!this.field.options.onFileRemove) {
-          let customFn = new Function('file', 'fileList', this.field.options.onFileRemove)
-          customFn.call(this, file, fileList)
-        }
+      updateFieldModelAndEmitDataChangeForRemove(deletedFileIdx, fileList) {
+        let oldValue = deepClone(this.fieldModel)
+        this.fieldModel.splice(deletedFileIdx, 1)
+        this.syncUpdateFormModel(this.fieldModel)
+        this.emitFieldDataChange(this.fieldModel, oldValue)
       },
 
-      removeUploadFile(fileName) {
+      removeUploadFile(fileName, fileUrl, fileUid) {
         let foundIdx = -1
         let foundFile = null
-        this.fileList.forEach((file,idx) => {
-          if (file.name === fileName) {
+        this.fileList.forEach((file, idx) => {
+          if ((file.name === fileName) && ((file.url === fileUrl) || (!!fileUid && file.uid === fileUid))) {
             foundIdx = idx
             foundFile = file
           }
@@ -220,7 +240,7 @@
 
         if (foundIdx >= 0) {
           this.fileList.splice(foundIdx, 1)
-          this.updateUploadFieldModelAndEmitDataChange(this.fileList)
+          this.updateFieldModelAndEmitDataChangeForRemove(foundIdx, this.fileList)
           this.uploadBtnHidden = this.fileList.length >= this.field.options.limit
 
           if (!!this.field.options.onFileRemove) {
@@ -230,7 +250,7 @@
         }
       },
 
-      handelUploadError(err, file, fileList) {
+      handleUploadError(err, file, fileList) {
         if (!!this.field.options.onUploadError) {
           let customFn = new Function('error', 'file', 'fileList', this.field.options.onUploadError)
           customFn.call(this, err, file, fileList)

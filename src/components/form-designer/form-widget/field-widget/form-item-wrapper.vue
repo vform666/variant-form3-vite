@@ -10,9 +10,9 @@
 
 <template>
   <div class="field-wrapper" :class="{'design-time-bottom-margin': !!this.designer}">
-    <el-form-item v-if="!!field.formItemFlag" :label="label" :label-width="labelWidth + 'px'"
+    <el-form-item v-if="!!field.formItemFlag && (!field.options.hidden || (designState === true))"
+                  :label="label" :label-width="labelWidth + 'px'"
                   :title="field.options.labelTooltip"
-                  v-show="!field.options.hidden || (designState === true)"
                   :rules="rules" :prop="getPropName()"
                   :class="[selected ? 'selected' : '', labelAlign, customClass, field.options.required ? 'required' : '']"
                   @click.stop="selectField(field)">
@@ -333,14 +333,17 @@
 
   :deep(.label-left-align) .el-form-item__label {
     text-align: left;
+    justify-content: flex-start !important;
   }
 
   :deep(.label-center-align) .el-form-item__label {
     text-align: center;
+    justify-content: center !important;
   }
 
   :deep(.label-right-align) .el-form-item__label {
     text-align: right;
+    justify-content: flex-end !important;
   }
 
 

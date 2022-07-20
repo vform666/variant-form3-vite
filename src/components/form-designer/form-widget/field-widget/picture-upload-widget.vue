@@ -10,13 +10,23 @@
                list-type="picture-card" :class="{'hideUploadDiv': uploadBtnHidden}"
                :limit="field.options.limit" :on-exceed="handlePictureExceed"
                :before-upload="beforePictureUpload"
-               :on-success="handlePictureUpload" :on-error="handelUploadError" :on-remove="handlePictureRemove">
+               :on-success="handlePictureUpload" :on-error="handleUploadError"
+               :before-remove="handleBeforeRemove" :on-remove="handlePictureRemove">
       <template #tip>
         <div class="el-upload__tip"
              v-if="!!field.options.uploadTip">{{field.options.uploadTip}}</div>
       </template>
       <div class="uploader-icon"><svg-icon icon-class="el-plus" /></div>
     </el-upload>
+
+    <div v-if="showPreviewDialogFlag" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
+      <el-dialog title="" v-model="showPreviewDialogFlag"
+                 append-to-body width="60%"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :close-on-click-modal="true" :close-on-press-escape="true" :destroy-on-close="true">
+        <img :src="previewUrl" style="width: 100%" alt="" />
+      </el-dialog>
+    </div>
   </form-item-wrapper>
 </template>
 
@@ -63,7 +73,7 @@
     data() {
       return {
         oldFieldValue: null, //field组件change之前的值
-        fieldModel: null,
+        fieldModel: [],
         rules: [],
 
         uploadHeaders: {},
@@ -75,8 +85,11 @@
           //authorization: '',  //又拍云上传签名
         },
         fileList: [],  //上传文件列表
+        fileListBeforeRemove: [],  //删除前的文件列表
         uploadBtnHidden: false,
 
+        previewUrl: '',
+        showPreviewDialogFlag: false,
       }
     },
     computed: {
@@ -107,15 +120,8 @@
 
     methods: {
       handlePictureExceed() {
-        let uploadLimit = this.field.options.limit  /* 此行不能注释，下一行ES6模板字符串需要用到！！ */
+        let uploadLimit = this.field.options.limit
         this.$message.warning( this.i18nt('render.hint.uploadExceed').replace('${uploadLimit}', uploadLimit) )
-      },
-
-      updateUploadFieldModelAndEmitDataChange(fileList) {
-        let oldValue = deepClone(this.fieldModel)
-        this.fieldModel = deepClone(fileList)
-        this.syncUpdateFormModel(this.fieldModel)
-        this.emitFieldDataChange(this.fieldModel, oldValue)
       },
 
       beforePictureUpload(file) {
@@ -162,23 +168,64 @@
         return true
       },
 
+      updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, defaultResult) {
+        let oldValue = deepClone(this.fieldModel)
+        if (!!customResult && !!customResult.name && !!customResult.url) {
+          this.fieldModel.push({
+            name: customResult.name,
+            url: customResult.url
+          })
+        } else if (!!defaultResult && !!defaultResult.name && !!defaultResult.url) {
+          this.fieldModel.push({
+            name: defaultResult.name,
+            url: defaultResult.url
+          })
+        } else {
+          this.fieldModel = deepClone(fileList)
+        }
+
+        this.syncUpdateFormModel(this.fieldModel)
+        this.emitFieldDataChange(this.fieldModel, oldValue)
+      },
+
       handlePictureUpload(res, file, fileList) {
         if (file.status === 'success') {
-          //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
-          this.updateUploadFieldModelAndEmitDataChange(fileList)
-          this.fileList = deepClone(fileList)
-          this.uploadBtnHidden = fileList.length >= this.field.options.limit
-
+          let customResult = null
           if (!!this.field.options.onUploadSuccess) {
             let customFn = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
-            customFn.call(this, res, file, fileList)
+            customResult = customFn.call(this, res, file, fileList)
           }
+
+          this.updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, res)
+          this.fileList = deepClone(fileList)
+          this.uploadBtnHidden = fileList.length >= this.field.options.limit
         }
       },
 
+      updateFieldModelAndEmitDataChangeForRemove(file, fileList) {
+        let oldValue = deepClone(this.fieldModel)
+        let foundFileIdx = -1
+        this.fileListBeforeRemove.map((fi, idx) => {  /* 跟element-ui不同，element-plus删除文件时this.fileList数组对应元素已被删除！！ */
+          if ((fi.name === file.name) && ((fi.url === file.url) || (!!fi.uid && fi.uid === file.uid))) {  /* 这个判断有问题？？ */
+            foundFileIdx = idx
+          }
+        })
+        if (foundFileIdx > -1) {
+          this.fieldModel.splice(foundFileIdx, 1)
+        }
+
+        this.syncUpdateFormModel(this.fieldModel)
+        this.emitFieldDataChange(this.fieldModel, oldValue)
+      },
+
+      handleBeforeRemove(file, fileList) {
+        /* 保留删除之前的文件列表！！ */
+        this.fileListBeforeRemove = deepClone(fileList)
+      },
+
       handlePictureRemove(file, fileList) {
+        this.updateFieldModelAndEmitDataChangeForRemove(file, fileList)
         this.fileList = deepClone(fileList)  //this.fileList = fileList
-        this.updateUploadFieldModelAndEmitDataChange(fileList)
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
 
         if (!!this.field.options.onFileRemove) {
@@ -187,7 +234,7 @@
         }
       },
 
-      handelUploadError(err, file, fileList) {
+      handleUploadError(err, file, fileList) {
         if (!!this.field.options.onUploadError) {
           let customFn = new Function('error', 'file', 'fileList', this.field.options.onUploadError)
           customFn.call(this, err, file, fileList)
