@@ -66,7 +66,8 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
           'element-plus': 'ElementPlus',
-        }
+        },
+        assetFileNames: `render.style.css`
       }
     }
   }
