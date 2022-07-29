@@ -442,7 +442,7 @@
         } else if (!!widgetNames && Array.isArray(widgetNames)) {
           eventParams = [...widgetNames]
         }
-        this.broadcast('FieldWidget', 'reloadOptionItems', [eventParams])
+        this.broadcast('FieldWidget', 'reloadOptionItems', eventParams)
       },
 
       getFormData(needValidation = true) {
@@ -532,7 +532,10 @@
             if (!!foundW.widget && (foundW.widget.type === 'sub-form')) {
               foundW.disableSubForm()
             } else {
-              !!foundW.setDisabled && foundW.setDisabled(true)
+              //!!foundW.setDisabled && foundW.setDisabled(true)
+              if (!!foundW.setDisabled) {
+                foundW.setDisabled(true)
+              }
             }
           }
         })
@@ -546,7 +549,10 @@
             if (!!foundW.widget && (foundW.widget.type === 'sub-form')) {
               foundW.enableSubForm()
             } else {
-              !!foundW.setDisabled && foundW.setDisabled(false)
+              //!!foundW.setDisabled && foundW.setDisabled(false)
+              if (!!foundW.setDisabled) {
+                foundW.setDisabled(false)
+              }
             }
           }
         })
