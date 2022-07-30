@@ -10,23 +10,46 @@
                list-type="picture-card" :class="{'hideUploadDiv': uploadBtnHidden}"
                :limit="field.options.limit" :on-exceed="handlePictureExceed"
                :before-upload="beforePictureUpload"
-               :on-success="handlePictureUpload" :on-error="handleUploadError"
-               :before-remove="handleBeforeRemove" :on-remove="handlePictureRemove">
+               :on-preview="handlePictureCardPreview"
+               :on-success="handlePictureUpload" :on-error="handleUploadError" >
+      <template #file="{ file }">
+        <el-image
+          ref="imageRef"
+          style="width: 100%; height: 100%"
+          :src="file.url"
+          :preview-src-list="previewList"
+          :initial-index="previewIndex"
+          fit="cover"
+          preview-teleported
+        />
+        <!-- 上传成功状态 -->
+        <label class="el-upload-list__item-status-label">
+          <i class="el-icon--upload-success" style="color: #FFF"><svg-icon class="" icon-class="el-check" /></i>
+        </label>
+        <!-- 图片操作按钮 -->
+        <span class="el-upload-list__item-actions">
+          <!-- 预览 -->
+          <span
+            class="el-upload-list__item-preview"
+            @click="handlePictureCardPreview(file)"
+          >
+            <svg-icon icon-class="el-zoom-in" />
+          </span>
+          <!-- 删除 -->
+          <span
+            class="el-upload-list__item-delete"
+            @click="handlePictureRemove(file)"
+          >
+            <svg-icon icon-class="el-delete" />
+          </span>
+        </span>
+      </template>
       <template #tip>
         <div class="el-upload__tip"
              v-if="!!field.options.uploadTip">{{field.options.uploadTip}}</div>
       </template>
       <div class="uploader-icon"><svg-icon icon-class="el-plus" /></div>
     </el-upload>
-
-    <div v-if="showPreviewDialogFlag" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
-      <el-dialog title="" v-model="showPreviewDialogFlag"
-                 append-to-body width="60%"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
-                 :close-on-click-modal="true" :close-on-press-escape="true" :destroy-on-close="true">
-        <img :src="previewUrl" style="width: 100%" alt="" />
-      </el-dialog>
-    </div>
   </form-item-wrapper>
 </template>
 
@@ -88,12 +111,13 @@
         fileListBeforeRemove: [],  //删除前的文件列表
         uploadBtnHidden: false,
 
-        previewUrl: '',
-        showPreviewDialogFlag: false,
+        previewIndex: 1,  // 初始预览图像索引
       }
     },
     computed: {
-
+      previewList() {
+        return this.fileList.map(el => el.url);
+      }
     },
     beforeCreate() {
       /* 这里不能访问方法和属性！！ */
@@ -202,7 +226,7 @@
         }
       },
 
-      updateFieldModelAndEmitDataChangeForRemove(file, fileList) {
+      updateFieldModelAndEmitDataChangeForRemove(file) {
         let oldValue = deepClone(this.fieldModel)
         let foundFileIdx = -1
         this.fileListBeforeRemove.map((fi, idx) => {  /* 跟element-ui不同，element-plus删除文件时this.fileList数组对应元素已被删除！！ */
@@ -218,14 +242,17 @@
         this.emitFieldDataChange(this.fieldModel, oldValue)
       },
 
-      handleBeforeRemove(file, fileList) {
+      handleBeforeRemove(fileList) {
         /* 保留删除之前的文件列表！！ */
         this.fileListBeforeRemove = deepClone(fileList)
       },
 
-      handlePictureRemove(file, fileList) {
-        this.updateFieldModelAndEmitDataChangeForRemove(file, fileList)
-        this.fileList = deepClone(fileList)  //this.fileList = fileList
+      handlePictureRemove(file) {
+        this.handleBeforeRemove(this.fileList) // 由于自定义了 #file slot，需要手动调用 handleBeforeRemove，并移除 @before-remove 和 @remove
+        this.fileList.splice(this.fileList.indexOf(file), 1) // 删除所点击的文件
+        this.updateFieldModelAndEmitDataChangeForRemove(file)
+        // this.fileList = deepClone(fileList  // 由于是在自身进行的操作，故不需要重新赋值
+        let fileList = deepClone(this.fileList); // 进行深拷贝，避免用户自定义函数对 fileList 进行修改时，影响组件内的数据
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
 
         if (!!this.field.options.onFileRemove) {
@@ -246,6 +273,13 @@
           })
         }
       },
+      
+      handlePictureCardPreview({ url }) {
+        // 设置图片索引为当前点击的图片
+        this.previewIndex = this.previewList.indexOf(url)
+        // 模拟点击 <el-image> 组件下的 img 标签（点击事件被绑定在的每张 img 上）
+        this.$refs['imageRef'].$el.children[0].click()
+      }
 
     }
   }
@@ -282,3 +316,5 @@
   }
 
 </style>
+
+
