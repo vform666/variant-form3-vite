@@ -67,6 +67,7 @@
             <el-button v-if="false" @click="testLoadForm">Test Load</el-button>
             <el-button v-if="false" @click="testSetFormJson">Test SFJ</el-button>
             <el-button v-if="false" @click="testSetFormData">Test SFD</el-button>
+            <el-button v-if="false" @click="testReloadOptionData">Test ROD</el-button>
           </div>
         </template>
       </el-dialog>
@@ -258,7 +259,13 @@
             {label: '01', value: 1},
             {label: '22', value: 2},
             {label: '333', value: 3},
-          ]
+          ],
+
+          'select001': [
+            {label: '辣椒', value: 1},
+            {label: '菠萝', value: 2},
+            {label: '丑橘子', value: 3},
+          ],
         },
 
       }
@@ -644,6 +651,15 @@
           "input89263": "899668"
         }
         this.$refs.preForm.setFormData(testFD)
+      },
+
+      testReloadOptionData() {
+        this.testOptionData['select001'].push({
+          label: 'aaa',
+          value: 888
+        })
+
+        this.$refs.preForm.reloadOptionData()
       },
 
       handleFormChange(fieldName, newValue, oldValue, formModel) {
