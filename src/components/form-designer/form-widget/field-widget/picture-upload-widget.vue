@@ -8,9 +8,8 @@
                :with-credentials="field.options.withCredentials"
                :multiple="field.options.multipleSelect" :file-list="fileList" :show-file-list="field.options.showFileList"
                list-type="picture-card" :class="{'hideUploadDiv': uploadBtnHidden}"
-               :limit="field.options.limit" :on-exceed="handlePictureExceed" :on-preview="handlePicturePreview"
-               :before-upload="beforePictureUpload"
-               :on-preview="handlePictureCardPreview"
+               :limit="field.options.limit" :on-exceed="handlePictureExceed"
+               :before-upload="beforePictureUpload" :on-preview="handlePictureCardPreview"
                :on-success="handlePictureUpload" :on-error="handleUploadError" >
       <template #file="{ file }">
         <el-image
@@ -148,11 +147,6 @@
         this.$message.warning( this.i18nt('render.hint.uploadExceed').replace('${uploadLimit}', uploadLimit) )
       },
 
-      handlePicturePreview(file) {
-        this.previewUrl = file.url
-        this.showPreviewDialogFlag = true
-      },
-
       beforePictureUpload(file) {
         let fileTypeCheckResult = false
         if (!!this.field.options && !!this.field.options.fileTypes) {
@@ -256,7 +250,6 @@
         this.handleBeforeRemove(this.fileList) // 由于自定义了 #file slot，需要手动调用 handleBeforeRemove，并移除 @before-remove 和 @remove
         this.fileList.splice(this.fileList.indexOf(file), 1) // 删除所点击的文件
         this.updateFieldModelAndEmitDataChangeForRemove(file)
-        // this.fileList = deepClone(fileList  // 由于是在自身进行的操作，故不需要重新赋值
         let fileList = deepClone(this.fileList); // 进行深拷贝，避免用户自定义函数对 fileList 进行修改时，影响组件内的数据
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
 
@@ -278,7 +271,7 @@
           })
         }
       },
-      
+
       handlePictureCardPreview({ url }) {
         // 设置图片索引为当前点击的图片
         this.previewIndex = this.previewList.indexOf(url)
