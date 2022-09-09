@@ -9,6 +9,8 @@
                    :clearable="field.options.clearable"
                    :filterable="field.options.filterable"
                    :placeholder="field.options.placeholder || i18nt('render.hint.selectPlaceholder')"
+                   :show-all-levels="showFullPath"
+                   :props="{ checkStrictly: field.options.checkStrictly, multiple: field.options.multiple, expandTrigger: 'hover' }"
                    @focus="handleFocusCustomEvent" @blur="handleBlurCustomEvent"
                    @change="handleChangeEvent">
       </el-cascader>
@@ -63,6 +65,9 @@
       }
     },
     computed: {
+      showFullPath() {
+        return (this.field.options.showAllLevels === undefined) || !!this.field.options.showAllLevels
+      },
 
     },
     beforeCreate() {

@@ -35,8 +35,8 @@ export const generateCode = function(formJson, codeType= 'vue') {
         }
       },
       methods: {
-        submitForm: function() {
-          this.$refs.vFormRef.getFormData().then( function(formData) {
+        submitForm() {
+          this.$refs.vFormRef.getFormData().then( (formData) => {
             // Form Validation OK
             alert( JSON.stringify(formData) )
           }).catch( function(error) {

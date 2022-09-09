@@ -19,7 +19,7 @@
     </el-radio-group>
     <el-checkbox-group v-else-if="(selectedWidget.type === 'checkbox') || ((selectedWidget.type === 'select') && selectedWidget.options.multiple)"
                     v-model="optionModel.defaultValue" @change="emitDefaultValueChange">
-      <draggable tag="ul" :list="optionModel.optionItems" item-key="value"
+      <draggable tag="ul" :list="optionModel.optionItems" item-key="id"
                  v-bind="{group:'optionsGroup', ghostClass: 'ghost', handle: '.drag-option'}">
         <template #item="{ element: option, index: idx }">
           <li>
@@ -85,7 +85,6 @@
 </template>
 
 <script>
-  //import Draggable from 'vuedraggable'
   import CodeEditor from '@/components/code-editor/index'
   import i18n from "@/utils/i18n";
 
@@ -93,7 +92,6 @@
     name: "OptionItemsSetting",
     mixins: [i18n],
     components: {
-      //Draggable,
       CodeEditor,
     },
     props: {
