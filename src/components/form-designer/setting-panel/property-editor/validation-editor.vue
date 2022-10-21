@@ -6,7 +6,7 @@
           <svg-icon icon-class="el-info" /></el-tooltip>
       </span>
     </template>
-    <el-select v-model="optionModel.validation" filterable allow-create default-first-option>
+    <el-select v-model="optionModel.validation" filterable clearable allow-create default-first-option>
       <el-option v-for="(fv, fvIdx) in fieldValidators"
                  :key="fvIdx"
                  :label="fv.label"
@@ -18,10 +18,14 @@
 
 <script>
   import i18n from "@/utils/i18n"
+  import SvgIcon from "@/components/svg-icon/index";
 
   export default {
     name: "validation-editor",
     mixins: [i18n],
+    components: {
+      SvgIcon
+    },
     props: {
       designer: Object,
       selectedWidget: Object,

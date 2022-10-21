@@ -4,7 +4,6 @@ import VFormRender from '@/components/form-render/index.vue'
 import ContainerItems from '@/components/form-render/container-item/index'
 
 import {registerIcon} from '@/utils/el-icons'
-import SvgIcon from '@/components/svg-icon'  //svg组件
 import 'virtual:svg-icons-register'
 import '@/iconfont/iconfont.css'
 
@@ -17,7 +16,6 @@ VFormRender.install = function (app) {
 
   app.use(ContainerItems)
   registerIcon(app)
-  app.component('svg-icon', SvgIcon)
   app.component(VFormRender.name, VFormRender)
 }
 
@@ -31,7 +29,6 @@ const install = (app) => {
 
   app.use(ContainerItems)
   registerIcon(app)
-  app.component('svg-icon', SvgIcon)
   components.forEach(component => {
     app.component(component.name, component)
   })

@@ -27,6 +27,7 @@
   import emitter from '@/utils/emitter'
   import i18n, {translate} from "@/utils/i18n";
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
+  import SvgIcon from "@/components/svg-icon/index";
 
   export default {
     name: "input-widget",
@@ -60,6 +61,7 @@
     },
     components: {
       FormItemWrapper,
+      SvgIcon,
     },
     data() {
       return {

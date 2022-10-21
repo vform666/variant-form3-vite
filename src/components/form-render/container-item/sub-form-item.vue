@@ -70,7 +70,7 @@
   import ContainerItemWrapper from './container-item-wrapper'
   import containerItemMixin from './containerItemMixin'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
-  import eventBus from "@/utils/event-bus"
+  import SvgIcon from "@/components/svg-icon/index";
 
   export default {
     name: "sub-form-item",
@@ -79,6 +79,7 @@
     components: {
       ContainerItemWrapper,
       ...FieldComponents,
+      SvgIcon,
     },
     props: {
       widget: Object,

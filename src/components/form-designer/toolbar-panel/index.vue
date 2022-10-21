@@ -201,6 +201,7 @@
   import loadBeautifier from "@/utils/beautifierLoader"
   import { saveAs } from 'file-saver'
   import axios from 'axios'
+  import SvgIcon from "@/components/svg-icon/index";
 
   export default {
     name: "ToolbarPanel",
@@ -209,6 +210,7 @@
       VFormRender,
       CodeEditor,
       Clipboard,
+      SvgIcon,
     },
     props: {
       designer: Object
