@@ -383,6 +383,10 @@
         return this.$refs['renderForm']
       },
 
+      getFormRef() {
+        return this
+      },
+
       getWidgetRef(widgetName, showError = false) {
         let foundRef = this.widgetRefList[widgetName]
         if (!foundRef && !!showError) {
