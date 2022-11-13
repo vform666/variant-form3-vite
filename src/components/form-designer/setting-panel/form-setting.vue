@@ -82,7 +82,7 @@
 
     <div v-if="showFormEventDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.editFormEventHandler')" v-model="showFormEventDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-alert type="info" :closable="false" :title="'form.' + eventParamsMap[curEventName]"></el-alert>
         <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode" ref="ecEditor"></code-editor>
@@ -100,7 +100,7 @@
 
     <div v-if="showEditFormCssDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.formCss')" v-model="showEditFormCssDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <code-editor :mode="'css'" :readonly="false" v-model="formCssCode"></code-editor>
         <template #footer>
@@ -116,7 +116,7 @@
 
     <div v-if="showEditFunctionsDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.globalFunctions')" v-model="showEditFunctionsDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode" ref="gfEditor"></code-editor>
         <template #footer>

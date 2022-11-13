@@ -53,7 +53,7 @@
 
     <div v-if="showImportDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-form-item>
           <el-input type="textarea" rows="10" v-model="optionLines"></el-input>
@@ -69,7 +69,7 @@
 
     <div v-if="showImportCascaderDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportCascaderDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog"
+                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <code-editor v-model="cascaderOptions" mode="json" :readonly="false"></code-editor>
         <template #footer>
