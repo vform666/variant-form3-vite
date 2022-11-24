@@ -17,7 +17,7 @@
                    icon="el-icon-minus" class="col-delete-button"></el-button>
       </li>
       <div>
-        <el-button type="text" @click="addNewCol(selectedWidget)">{{i18nt('designer.setting.addColumn')}}</el-button>
+        <el-button link type="primary" @click="addNewCol(selectedWidget)">{{i18nt('designer.setting.addColumn')}}</el-button>
       </div>
     </el-form-item>
   </div>

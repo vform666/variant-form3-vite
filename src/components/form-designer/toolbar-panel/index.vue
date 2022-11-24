@@ -1,9 +1,9 @@
 <template>
   <div class="toolbar-container">
     <div class="left-toolbar">
-      <el-button type="text" :disabled="undoDisabled" :title="i18nt('designer.toolbar.undoHint')" @click="undoHistory">
+      <el-button link type="primary" :disabled="undoDisabled" :title="i18nt('designer.toolbar.undoHint')" @click="undoHistory">
         <svg-icon icon-class="undo" /></el-button>
-      <el-button type="text" :disabled="redoDisabled" :title="i18nt('designer.toolbar.redoHint')" @click="redoHistory">
+      <el-button link type="primary" :disabled="redoDisabled" :title="i18nt('designer.toolbar.redoHint')" @click="redoHistory">
         <svg-icon icon-class="redo" /></el-button>
       <el-button-group style="margin-left: 20px">
         <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
@@ -25,17 +25,17 @@
 
     <div class="right-toolbar" :style="{width: toolbarWidth + 'px'}">
       <div class="right-toolbar-con">
-        <el-button v-if="showToolButton('clearDesignerButton')" type="text" @click="clearFormWidget">
+        <el-button v-if="showToolButton('clearDesignerButton')" link type="primary" @click="clearFormWidget">
           <svg-icon icon-class="el-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
-        <el-button v-if="showToolButton('previewFormButton')" type="text" @click="previewForm">
+        <el-button v-if="showToolButton('previewFormButton')" link type="primary" @click="previewForm">
           <svg-icon icon-class="el-view" />{{i18nt('designer.toolbar.preview')}}</el-button>
-        <el-button v-if="showToolButton('importJsonButton')" type="text" @click="importJson">
+        <el-button v-if="showToolButton('importJsonButton')" link type="primary" @click="importJson">
           {{i18nt('designer.toolbar.importJson')}}</el-button>
-        <el-button v-if="showToolButton('exportJsonButton')" type="text" @click="exportJson">
+        <el-button v-if="showToolButton('exportJsonButton')" link type="primary" @click="exportJson">
           {{i18nt('designer.toolbar.exportJson')}}</el-button>
-        <el-button v-if="showToolButton('exportCodeButton')" type="text" @click="exportCode">
+        <el-button v-if="showToolButton('exportCodeButton')" link type="primary" @click="exportCode">
           {{i18nt('designer.toolbar.exportCode')}}</el-button>
-        <el-button v-if="showToolButton('generateSFCButton')" type="text" @click="generateSFC">
+        <el-button v-if="showToolButton('generateSFCButton')" link type="primary" @click="generateSFC">
           <svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button>
         <template v-for="(idx, slotName) in $slots">
           <slot :name="slotName"></slot>
@@ -46,7 +46,7 @@
     <div v-if="showPreviewDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.preview')" v-model="showPreviewDialogFlag"
                  :show-close="true" :close-on-click-modal="false" :close-on-press-escape="false" center
-                 :destroy-on-close="true" :append-to-body="true" custom-class="drag-dialog small-padding-dialog" width="75%"
+                 :destroy-on-close="true" :append-to-body="true" class="drag-dialog small-padding-dialog" width="75%"
                  :fullscreen="(layoutType === 'H5') || (layoutType === 'Pad')">
         <div>
           <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : (layoutType === 'Pad' ? 'pad-layout' : '')]">
@@ -75,7 +75,7 @@
 
     <div v-if="showImportJsonDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.importJson')" v-model="showImportJsonDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog" :append-to-body="true" center
+                 :show-close="true" class="drag-dialog small-padding-dialog" :append-to-body="true" center
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-alert type="info" :title="i18nt('designer.hint.importJsonHint')" show-icon class="alert-padding"></el-alert>
         <code-editor :mode="'json'" :readonly="false" v-model="importTemplate"></code-editor>
@@ -92,7 +92,7 @@
 
     <div v-if="showExportJsonDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.exportJson')" v-model="showExportJsonDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog" center append-to-body
+                 :show-close="true" class="drag-dialog small-padding-dialog" center append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <code-editor :mode="'json'" :readonly="true" v-model="jsonContent"></code-editor>
         <template #footer>
@@ -109,7 +109,7 @@
 
     <div v-if="showExportCodeDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.exportCode')" v-model="showExportCodeDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog" center append-to-body
+                 :show-close="true" class="drag-dialog small-padding-dialog" center append-to-body
                  width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeCodeTab">
           <el-tab-pane label="Vue" name="vue">
@@ -136,7 +136,7 @@
 
     <div v-if="showFormDataDialogFlag" class="" v-drag="['.nested-drag-dialog.el-dialog', '.nested-drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.hint.exportFormData')" v-model="showFormDataDialogFlag"
-                 :show-close="true" custom-class="nested-drag-dialog dialog-title-light-bg" center
+                 :show-close="true" class="nested-drag-dialog dialog-title-light-bg" center
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true"
                  :append-to-body="true">
         <div style="border: 1px solid #DCDFE6">
@@ -156,7 +156,7 @@
 
     <div v-if="showExportSFCDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.generateSFC')" v-model="showExportSFCDialogFlag" append-to-body
-                 v-if="showExportSFCDialogFlag" :show-close="true" custom-class="drag-dialog small-padding-dialog" center
+                 v-if="showExportSFCDialogFlag" :show-close="true" class="drag-dialog small-padding-dialog" center
                  width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeSFCTab">
           <el-tab-pane label="Vue2" name="vue2">
@@ -220,7 +220,7 @@
       return {
         designerConfig: this.getDesignerConfig(),
 
-        toolbarWidth: 420,
+        toolbarWidth: 460,
         showPreviewDialogFlag: false,
         showImportJsonDialogFlag: false,
         showExportJsonDialogFlag: false,
@@ -307,7 +307,7 @@
 
     },
     mounted() {
-      let maxTBWidth = this.designerConfig.toolbarMaxWidth || 420
+      let maxTBWidth = this.designerConfig.toolbarMaxWidth || 460
       let minTBWidth = this.designerConfig.toolbarMinWidth || 300
       let newTBWidth = window.innerWidth - 260 - 300 - 320 - 80
       this.toolbarWidth = newTBWidth >= maxTBWidth ? maxTBWidth : (newTBWidth <= minTBWidth ? minTBWidth : newTBWidth)
@@ -719,9 +719,10 @@
 </script>
 
 <style lang="scss" scoped>
-  div.toolbar-container {
-    //min-width: 728px;  /* 解决工具按钮栏换行的问题！！ */
-    /* 上一行css有问题，当窗口宽度不足时会把按钮挤出到右边的属性设置区，弃之！ */
+  .toolbar-container:after {
+    display: block;
+    content: "";
+    clear: both;
   }
 
   .left-toolbar {
@@ -733,8 +734,8 @@
 
   .right-toolbar {
     display: flex;
-    margin-top: 5px;
     float: right;
+    line-height: 42px;
     text-align: right;
     overflow: hidden;
 

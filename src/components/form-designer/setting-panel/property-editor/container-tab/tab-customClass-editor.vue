@@ -19,7 +19,7 @@
             <!-- span style="margin-right: 12px">{{tpIdx + 1}}</span -->
             <el-checkbox v-model="tpItem.options.active" disabled @change="(evt) => onTabPaneActiveChange(evt, tpItem)"
                          style="margin-right: 8px">{{i18nt('designer.setting.paneActive')}}</el-checkbox>
-            <el-input type="text" v-model="tpItem.options.label" style="width: 155px"></el-input>
+            <el-input link type="primary" v-model="tpItem.options.label" style="width: 155px"></el-input>
             <i class="iconfont icon-drag drag-option"></i>
             <el-button circle plain size="small" type="danger" @click="deleteTabPane(selectedWidget, tpIdx)"
                        icon="el-icon-minus" class="col-delete-button"></el-button>
@@ -28,7 +28,7 @@
       </draggable>
 
       <div>
-        <el-button type="text" @click="addTabPane(selectedWidget)">{{i18nt('designer.setting.addTabPane')}}</el-button>
+        <el-button link type="primary" @click="addTabPane(selectedWidget)">{{i18nt('designer.setting.addTabPane')}}</el-button>
       </div>
     </el-form-item>
   </div>

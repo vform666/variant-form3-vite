@@ -1,6 +1,6 @@
 <template>
   <el-container class="panel-container">
-    <el-tabs :active-name="activeTab" style="height: 100%; overflow: hidden">
+    <el-tabs v-model="activeTab" style="height: 100%; overflow: hidden">
       <el-tab-pane :label="i18nt('designer.hint.widgetSetting')" name="1">
         <el-scrollbar class="setting-scrollbar" :style="{height: scrollerHeight}">
 
@@ -73,7 +73,7 @@
 
     <div v-if="showWidgetEventDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.editWidgetEventHandler')" v-model="showWidgetEventDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
+                 :show-close="true" class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-alert type="info" :closable="false" :title="eventHeader"></el-alert>
         <code-editor :mode="'javascript'" :readonly="false" v-model="eventHandlerCode" ref="ecEditor"></code-editor>

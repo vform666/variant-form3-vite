@@ -77,7 +77,7 @@
             </el-popover>
             <div class="bottom clear-fix">
               <span class="ft-title">#{{idx+1}} {{ft.title}}</span>
-              <el-button type="text" class="right-button" @click="loadFormTemplate(ft.jsonUrl)">
+              <el-button link type="primary" class="right-button" @click="loadFormTemplate(ft.jsonUrl)">
                 {{i18nt('designer.hint.loadFormTemplate')}}</el-button>
             </div>
           </el-card>

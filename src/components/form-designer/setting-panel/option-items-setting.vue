@@ -41,19 +41,19 @@
       </el-cascader>
     </div>
     <div v-if="(selectedWidget.type === 'cascader')">
-      <el-button type="text" @click="importCascaderOptions">{{i18nt('designer.setting.importOptions')}}</el-button>
-      <el-button type="text" @click="resetDefault">{{i18nt('designer.setting.resetDefault')}}</el-button>
+      <el-button link type="primary" @click="importCascaderOptions">{{i18nt('designer.setting.importOptions')}}</el-button>
+      <el-button link type="primary" @click="resetDefault">{{i18nt('designer.setting.resetDefault')}}</el-button>
     </div>
 
     <div v-if="(selectedWidget.type === 'radio') || (selectedWidget.type === 'checkbox') || (selectedWidget.type === 'select')">
-      <el-button type="text" @click="addOption">{{i18nt('designer.setting.addOption')}}</el-button>
-      <el-button type="text" @click="importOptions">{{i18nt('designer.setting.importOptions')}}</el-button>
-      <el-button type="text" @click="resetDefault">{{i18nt('designer.setting.resetDefault')}}</el-button>
+      <el-button link type="primary" @click="addOption">{{i18nt('designer.setting.addOption')}}</el-button>
+      <el-button link type="primary" @click="importOptions">{{i18nt('designer.setting.importOptions')}}</el-button>
+      <el-button link type="primary" @click="resetDefault">{{i18nt('designer.setting.resetDefault')}}</el-button>
     </div>
 
     <div v-if="showImportDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
+                 :show-close="true" class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-form-item>
           <el-input type="textarea" rows="10" v-model="optionLines"></el-input>
@@ -69,7 +69,7 @@
 
     <div v-if="showImportCascaderDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportCascaderDialogFlag"
-                 :show-close="true" custom-class="drag-dialog small-padding-dialog" append-to-body
+                 :show-close="true" class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <code-editor v-model="cascaderOptions" mode="json" :readonly="false"></code-editor>
         <template #footer>
