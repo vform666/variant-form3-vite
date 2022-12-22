@@ -6,6 +6,7 @@
               :disabled="field.options.disabled" :readonly="field.options.readonly"
               :size="widgetSize" class="hide-spin-button"
               :type="inputType"
+              :value="field.options.value"
               :show-password="field.options.showPassword"
               :placeholder="field.options.placeholder"
               :clearable="field.options.clearable"
