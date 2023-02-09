@@ -47,7 +47,7 @@
         </el-header>
         <el-main class="form-widget-main">
           <el-scrollbar class="container-scroll-bar" :style="{height: scrollerHeight}">
-            <v-form-widget :designer="designer" :form-config="designer.formConfig">
+            <v-form-widget :designer="designer" :form-config="designer.formConfig" ref="formRef">
             </v-form-widget>
           </el-scrollbar>
         </el-main>
@@ -284,6 +284,7 @@
           }
 
           if (modifiedFlag) {
+            this.$refs.formRef.clearWidgetRefList()
             this.designer.emitHistoryChange()
           }
         }
