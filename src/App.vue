@@ -1,7 +1,13 @@
 <template>
   <el-config-provider :locale="elLocale">
   <div id="app">
-    <VFormDesigner />
+    <VFormDesigner ref="vfDesignerRef" :global-dsv="globalDsv">
+      <!--
+      <template #customToolButtons>
+        <el-button type="text" @click="doTest">测试btn</el-button>
+      </template>
+      -->
+    </VFormDesigner>
   </div>
   </el-config-provider>
 </template>
@@ -19,14 +25,17 @@ export default {
   },
   data() {
     return {
-      formJson: {"widgetList":[],"formConfig":{"modelName":"formData","refName":"vForm","rulesName":"rules","labelWidth":80,"labelPosition":"left","size":"","labelAlign":"label-left-align","cssCode":"","customClass":"","functions":"","layoutType":"PC","onFormCreated":"","onFormMounted":"","onFormDataChange":"","onFormValidate":""}},
-      formData: {},
-      optionData: {},
-
       elLocaleMap: {
         'zh-CN': zhCNLang,
         'en-US': enUSLang,
       },
+
+      //全局数据源变量
+      globalDsv: {
+        testApiHost: 'http://www.test.com/api',
+        testPort: 8080,
+      },
+
     }
   },
   computed: {
@@ -37,15 +46,11 @@ export default {
 
   },
   methods: {
-    submitForm() {
-      this.$refs.vFormRef.getFormData().then(formData => {
-        // Form Validation OK
-        alert( JSON.stringify(formData) )
-      }).catch(error => {
-        // Form Validation failed
-        this.$message.error(error)
-      })
+    doTest() {
+      let fieldList = this.$refs.vfDesignerRef.getFieldWidgets(null, true)
+      console.log('test', fieldList)
     }
+
   }
 }
 </script>

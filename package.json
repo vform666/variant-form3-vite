@@ -1,6 +1,6 @@
 {
   "name": "variant-form3",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "private": false,
   "scripts": {
     "serve": "vite",
@@ -14,7 +14,7 @@
     "axios": "^0.24.0",
     "clipboard": "^2.0.8",
     "core-js": "^3.6.5",
-    "element-plus": "^2.0.4",
+    "element-plus": "^2.2.22",
     "file-saver": "^2.0.5",
     "mitt": "^3.0.0",
     "sortablejs": "1.14.0",

@@ -120,6 +120,10 @@
       designer: Object,
       selectedWidget: Object,
       formConfig: Object,
+      globalDsv: {
+        type: Object,
+        default: () => ({})
+      },
     },
     inject: ['getDesignerConfig'],
     data() {

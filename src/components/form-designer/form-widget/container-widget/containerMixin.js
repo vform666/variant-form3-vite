@@ -1,5 +1,5 @@
 export default {
-  inject: ['getFormConfig'],
+  inject: ['getFormConfig', 'getGlobalDsv'],
 
   computed: {
     formConfig() {

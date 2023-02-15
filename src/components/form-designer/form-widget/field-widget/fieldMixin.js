@@ -3,7 +3,7 @@ import FormValidators from '@/utils/validators'
 import eventBus from "@/utils/event-bus"
 
 export default {
-  inject: ['refList', 'getFormConfig', 'globalOptionData', 'globalModel', 'getOptionData'],
+  inject: ['refList', 'getFormConfig', 'getGlobalDsv', 'globalOptionData', 'globalModel', 'getOptionData'],
 
   computed: {
     formConfig() {
