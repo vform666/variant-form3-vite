@@ -184,6 +184,10 @@
         })
       },
 
+      deleteWidgetRef(widgetRefName) {
+        delete this.widgetRefList[widgetRefName]
+      },
+
     }
   }
 </script>

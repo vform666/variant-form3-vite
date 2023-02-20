@@ -92,6 +92,7 @@ export function createDesigner(vueInstance) {
       let modifiedFlag = false
 
       if (!!formJson && !!formJson.widgetList) {
+        this.formWidget.clearWidgetRefList()
         this.widgetList = formJson.widgetList
         modifiedFlag = true
       }

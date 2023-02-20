@@ -188,6 +188,7 @@
 
       removeFieldWidget() {
         if (!!this.parentList) {
+          const fieldRefName = this.designer.selectedWidgetName
           let nextSelected = null
           if (this.parentList.length === 1) {
             if (!!this.parentWidget) {
@@ -201,10 +202,9 @@
 
           this.$nextTick(() => {
             this.parentList.splice(this.indexOfParentList, 1)
-            //if (!!nextSelected) {
             this.designer.setSelected(nextSelected)
-            //}
 
+            this.designer.formWidget.deleteWidgetRef(fieldRefName)  //删除组件ref！！！
             this.designer.emitHistoryChange()
           })
         }
