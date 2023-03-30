@@ -9,7 +9,7 @@
 [在线Demo](http://120.92.142.115:81/vform3/)
  
 ### 立即体验VForm 3 Pro高级版（提供商业支持）
-[VForm 3 Pro Demo](https://vform666.com/pages/pro/)
+[VForm 3 Pro Demo](https://www.vform666.com/pro/)
 
 ### 视频教程集合：
 [B站观看](https://space.bilibili.com/626932375)
@@ -168,7 +168,7 @@ Gitee仓库：<a href="https://gitee.com/vdpadmin/variant-form3-vite" target="_b
 
 更新日志：<a href="https://www.vform666.com/changelog.html" target="_blank">https://www.vform666.com/changelog.html</a>
 
-订阅Pro版：<a href="https://www.vform666.com/pages/pro/" target="_blank">https://www.vform666.com/pages/pro/</a>
+订阅Pro版：<a href="https://www.vform666.com/pro/" target="_blank">https://www.vform666.com/pro/</a>
 
 技术交流群：扫如下二维码加群
 
