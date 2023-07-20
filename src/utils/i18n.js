@@ -1,9 +1,5 @@
 import { createI18n } from './smart-vue-i18n/index'
 
-import enLocaleElement from "element-plus/lib/locale/lang/en";
-import zhLocaleElement from "element-plus/lib/locale/lang/zh-cn";
-//import locale from "element-plus/lib/locale"
-
 import enLocale from "@/lang/en-US";
 import zhLocale from "@/lang/zh-CN";
 import enLocale_render from "@/lang/en-US_render";
@@ -16,7 +12,6 @@ const langResources = {
     something: {
       //...
     },
-    ...enLocaleElement,
     ...enLocale,
     ...enLocale_render,
     ...enLocale_extension
@@ -26,7 +21,6 @@ const langResources = {
     something: {
       //...
     },
-    ...zhLocaleElement,
     ...zhLocale,
     ...zhLocale_render,
     ...zhLocale_extension
