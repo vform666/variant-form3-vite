@@ -21,9 +21,8 @@
 [点此查看](https://gitee.com/vdpadmin/variant-form)
  
 ### 友情链接
+
 [Fantastic-admin](https://hooray.gitee.io/fantastic-admin/) —— 一款开箱即用的 Vue 中后台管理系统框架（支持Vue2/Vue3）
- 
-[REBUILD](https://getrebuild.com/) —— 高度可定制化的企业管理系统
 
 ### 功能一览
 ```
