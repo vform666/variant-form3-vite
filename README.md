@@ -43,7 +43,7 @@
 
 ### 安装依赖
 ```
-npm install --registry=https://registry.npm.taobao.org
+npm install --registry=https://registry.npmmirror.com
 ```
 
 ### 开发调试
