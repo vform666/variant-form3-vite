@@ -2,7 +2,7 @@
   <form-item-wrapper :designer="designer" :field="field" :rules="rules" :design-state="designState"
                      :parent-widget="parentWidget" :parent-list="parentList" :index-of-parent-list="indexOfParentList"
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
-    <el-date-picker ref="fieldEditor" :type="field.options.type" v-model="fieldModel"
+    <el-date-picker ref="fieldEditor" :key="field.options.type" :type="field.options.type" v-model="fieldModel"
                     :class="[!!field.options.autoFullWidth ? 'auto-full-width' : '']"
                     :readonly="field.options.readonly" :disabled="field.options.disabled"
                     :size="widgetSize"
@@ -63,6 +63,19 @@
     },
     computed: {
 
+    },
+    watch: {
+      'field.options.type': {
+        deep: true,
+        handler(val, oldVal){
+          if (val === 'dates' && oldVal !== 'dates'){
+            this.fieldModel = [this.fieldModel]
+          }
+          if (val !== 'dates' && oldVal === 'dates'){
+            this.fieldModel = this.fieldModel[0]
+          }
+        },
+      }
     },
     beforeCreate() {
       /* 这里不能访问方法和属性！！ */
