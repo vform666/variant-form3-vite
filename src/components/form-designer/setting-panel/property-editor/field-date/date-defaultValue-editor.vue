@@ -26,7 +26,7 @@
             this.optionModel.defaultValue = [this.optionModel.defaultValue]
           }
           if (val !== 'dates' && oldVal === 'dates'){
-            this.optionModel.defaultValue = this.optionModel.defaultValue[0]
+            this.optionModel.defaultValue = this.optionModel.defaultValue ? this.optionModel.defaultValue[0] : null
           }
         },
       }

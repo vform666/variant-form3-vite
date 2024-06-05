@@ -72,7 +72,7 @@
             this.fieldModel = [this.fieldModel]
           }
           if (val !== 'dates' && oldVal === 'dates'){
-            this.fieldModel = this.fieldModel[0]
+            this.fieldModel = this.fieldModel ? this.fieldModel[0] : null
           }
         },
       }
